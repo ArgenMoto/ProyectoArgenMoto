@@ -136,8 +136,7 @@ namespace Infraestructure.Migrations
                 {
                     VentaId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Fecha = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Cantidad = table.Column<int>(type: "int", nullable: false),
-                    Total = table.Column<int>(type: "int", nullable: false),
+                    TotalVenta = table.Column<int>(type: "int", nullable: false),
                     cliente = table.Column<int>(type: "int", nullable: false),
                     Vendedor = table.Column<int>(type: "int", nullable: false)
                 },
@@ -201,7 +200,7 @@ namespace Infraestructure.Migrations
                     Venta = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Producto = table.Column<int>(type: "int", nullable: false),
                     Cantidad = table.Column<int>(type: "int", nullable: false),
-                    PrecioTotalItem = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    PrecioTotalItem = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -230,6 +229,30 @@ namespace Infraestructure.Migrations
                     { 3, "Martínez", "34567890", "Luis" },
                     { 4, "Lopez", "45678901", "Marta" },
                     { 5, "Fernández", "56789012", "Carlos" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Documento",
+                columns: new[] { "DocumentoId", "Descripcion" },
+                values: new object[,]
+                {
+                    { 1, "Factura" },
+                    { 2, "Nota de Crédito" },
+                    { 3, "Nota de Débito" },
+                    { 4, "Recibo" },
+                    { 5, "Orden de Compra" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "MedioPago",
+                columns: new[] { "MedioPagoId", "Descripcion" },
+                values: new object[,]
+                {
+                    { 1, "Efectivo" },
+                    { 2, "Tarjeta de Crédito" },
+                    { 3, "Tarjeta de Débito" },
+                    { 4, "Transferencia Bancaria" },
+                    { 5, "PayPal" }
                 });
 
             migrationBuilder.InsertData(

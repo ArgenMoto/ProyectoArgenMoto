@@ -18,6 +18,7 @@ namespace Infraestructure.Persistense
         public DbSet<MedioPago> MedioPago { get; set; }
         public DbSet<Documento> Documento { get; set; }
         public DbSet<Vendedor> Vendedor { get; set; }
+        public DbSet<Item> Item { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Producto>(entity =>
@@ -144,8 +145,23 @@ namespace Infraestructure.Persistense
                     new Vendedor { VendedorId = 4, Nombre = "Sofía", Puesto = "Vendedora" },
                     new Vendedor { VendedorId = 5, Nombre = "Miguel", Puesto = "Vendedor" }
                 );
+
+                modelBuilder.Entity<Documento>().HasData(
+                    new Documento { DocumentoId = 1, Descripcion = "Factura" },
+                    new Documento { DocumentoId = 2, Descripcion = "Nota de Crédito" },
+                    new Documento { DocumentoId = 3, Descripcion = "Nota de Débito" },
+                    new Documento { DocumentoId = 4, Descripcion = "Recibo" },
+                    new Documento { DocumentoId = 5, Descripcion = "Orden de Compra" }
+                );
+
+                modelBuilder.Entity<MedioPago>().HasData(
+                    new MedioPago { MedioPagoId = 1, Descripcion = "Efectivo" },
+                    new MedioPago { MedioPagoId = 2, Descripcion = "Tarjeta de Crédito" },
+                    new MedioPago { MedioPagoId = 3, Descripcion = "Tarjeta de Débito" },
+                    new MedioPago { MedioPagoId = 4, Descripcion = "Transferencia Bancaria" },
+                    new MedioPago { MedioPagoId = 5, Descripcion = "PayPal" }
+                );
             });
         }
-
     }
 }

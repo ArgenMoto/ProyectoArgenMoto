@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infraestructure.Migrations
 {
     [DbContext(typeof(ArgenMotoDbContext))]
-    [Migration("20240922220155_init")]
+    [Migration("20240924181034_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -102,6 +102,33 @@ namespace Infraestructure.Migrations
                     b.HasKey("DocumentoId");
 
                     b.ToTable("Documento", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            DocumentoId = 1,
+                            Descripcion = "Factura"
+                        },
+                        new
+                        {
+                            DocumentoId = 2,
+                            Descripcion = "Nota de Crédito"
+                        },
+                        new
+                        {
+                            DocumentoId = 3,
+                            Descripcion = "Nota de Débito"
+                        },
+                        new
+                        {
+                            DocumentoId = 4,
+                            Descripcion = "Recibo"
+                        },
+                        new
+                        {
+                            DocumentoId = 5,
+                            Descripcion = "Orden de Compra"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Factura", b =>
@@ -149,8 +176,8 @@ namespace Infraestructure.Migrations
                     b.Property<int>("Cantidad")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("PrecioTotalItem")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("PrecioTotalItem")
+                        .HasColumnType("int");
 
                     b.Property<int>("ProductoId")
                         .HasColumnType("int")
@@ -184,6 +211,33 @@ namespace Infraestructure.Migrations
                     b.HasKey("MedioPagoId");
 
                     b.ToTable("MedioPago");
+
+                    b.HasData(
+                        new
+                        {
+                            MedioPagoId = 1,
+                            Descripcion = "Efectivo"
+                        },
+                        new
+                        {
+                            MedioPagoId = 2,
+                            Descripcion = "Tarjeta de Crédito"
+                        },
+                        new
+                        {
+                            MedioPagoId = 3,
+                            Descripcion = "Tarjeta de Débito"
+                        },
+                        new
+                        {
+                            MedioPagoId = 4,
+                            Descripcion = "Transferencia Bancaria"
+                        },
+                        new
+                        {
+                            MedioPagoId = 5,
+                            Descripcion = "PayPal"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.OrdenDeCompra", b =>
@@ -457,9 +511,6 @@ namespace Infraestructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("Cantidad")
-                        .HasColumnType("int");
-
                     b.Property<int>("ClienteId")
                         .HasColumnType("int")
                         .HasColumnName("cliente");
@@ -467,7 +518,7 @@ namespace Infraestructure.Migrations
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Total")
+                    b.Property<int>("TotalVenta")
                         .HasColumnType("int");
 
                     b.Property<int>("VendedorId")

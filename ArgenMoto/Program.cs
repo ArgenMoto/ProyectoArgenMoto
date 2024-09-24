@@ -17,51 +17,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
-var connectionStrings = new[]
+builder.Services.AddDbContext<ArgenMotoDbContext>(options =>
 {
-    builder.Configuration.GetConnectionString("DefaultConnection1"),
-    builder.Configuration.GetConnectionString("DefaultConnection2"),
-    builder.Configuration.GetConnectionString("DefaultConnection3"),
-    builder.Configuration.GetConnectionString("DefaultConnection4")
-};
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection2"));
+});
 
-string? selectedConnectionString = null;
-
-foreach (var connectionString in connectionStrings)
-{
-    try
-    {
-        // Intenta conectarte a la base de datos
-        var optionsBuilder = new DbContextOptionsBuilder<ArgenMotoDbContext>();
-        optionsBuilder.UseSqlServer(connectionString);
-
-        using (var context = new ArgenMotoDbContext(optionsBuilder.Options))
-        {
-            if (context.Database.CanConnect()) // Verifica si se puede conectar
-            {
-                selectedConnectionString = connectionString;
-                Console.WriteLine($"Conexión: {connectionString}");
-                break;
-            }
-        }
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine($"Error conectando con la cadena: {connectionString}. Error: {ex.Message}");
-    }
-}
-
-if (selectedConnectionString != null)
-{
-    builder.Services.AddDbContext<ArgenMotoDbContext>(options =>
-    {
-        options.UseSqlServer(selectedConnectionString);
-    });
-}
-else
-{
-    throw new Exception("No se pudo conectar a ninguna de las bases de datos.");
-}
 builder.Services.AddScoped<IProveedorQuery, ProveedorQuery>();
 builder.Services.AddScoped<IProveedorService, ProveedorServices>();
 builder.Services.AddScoped<IProveedorCommand, ProveedorCommand>();
@@ -77,6 +37,15 @@ builder.Services.AddScoped<IClienteCommand, ClienteCommand>();
 builder.Services.AddScoped<IProductoQuery, ProductoQuery>();
 builder.Services.AddScoped<IProductoService, ProductoServices>();
 builder.Services.AddScoped<IProductoCommand, ProductoCommand>();
+
+builder.Services.AddScoped<IItemCommand, ItemCommand>();
+builder.Services.AddScoped<IFacturaCommand, FacturaCommand>();
+
+builder.Services.AddScoped<IDocumentoQuery, DocumentoQuery>();
+builder.Services.AddScoped<IMedioPagoQuery, MedioPagoQuery>();
+
+builder.Services.AddScoped<IVentaCommand, VentaCommand>();
+builder.Services.AddScoped<IVentaService, VentaServices>();
 
 // Habilitar CORS
 builder.Services.AddCors(options =>
