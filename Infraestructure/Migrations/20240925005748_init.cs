@@ -236,11 +236,12 @@ namespace Infraestructure.Migrations
                 columns: new[] { "DocumentoId", "Descripcion" },
                 values: new object[,]
                 {
-                    { 1, "Factura" },
-                    { 2, "Nota de Crédito" },
-                    { 3, "Nota de Débito" },
-                    { 4, "Recibo" },
-                    { 5, "Orden de Compra" }
+                    { 1, "Factura A" },
+                    { 2, "Factura B" },
+                    { 3, "Nota de Crédito" },
+                    { 4, "Nota de Débito" },
+                    { 5, "Recibo" },
+                    { 6, "Orden de Compra" }
                 });
 
             migrationBuilder.InsertData(

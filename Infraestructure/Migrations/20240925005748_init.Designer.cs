@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infraestructure.Migrations
 {
     [DbContext(typeof(ArgenMotoDbContext))]
-    [Migration("20240924181034_init")]
+    [Migration("20240925005748_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -107,26 +107,31 @@ namespace Infraestructure.Migrations
                         new
                         {
                             DocumentoId = 1,
-                            Descripcion = "Factura"
+                            Descripcion = "Factura A"
                         },
                         new
                         {
                             DocumentoId = 2,
-                            Descripcion = "Nota de Crédito"
+                            Descripcion = "Factura B"
                         },
                         new
                         {
                             DocumentoId = 3,
-                            Descripcion = "Nota de Débito"
+                            Descripcion = "Nota de Crédito"
                         },
                         new
                         {
                             DocumentoId = 4,
-                            Descripcion = "Recibo"
+                            Descripcion = "Nota de Débito"
                         },
                         new
                         {
                             DocumentoId = 5,
+                            Descripcion = "Recibo"
+                        },
+                        new
+                        {
+                            DocumentoId = 6,
                             Descripcion = "Orden de Compra"
                         });
                 });
