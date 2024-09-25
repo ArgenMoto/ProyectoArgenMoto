@@ -1,5 +1,6 @@
 ﻿using Application.Interfaces.Services;
 using Application.Models;
+using Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,8 +17,10 @@ namespace ArgenMoto.Controllers
             _service = service;
         }
 
-        [HttpPost("ventas")]
+        [HttpPost("registro")]
+        [ProducesResponseType(typeof(VentaResponse), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
         public IActionResult RegistrarVenta(VentaRequest venta)
         {
             try
@@ -33,10 +36,20 @@ namespace ArgenMoto.Controllers
                     return new JsonResult(new { message = "Error en la creacion de la venta." }) { StatusCode = 400 };
                 }
             }
-
+            catch (ProductoNoDisponibleException ex)
+            {
+                return new JsonResult(new ErrorResponse { message = ex.Message }) { StatusCode = 404 };
+            }
+            catch (StockInsuficienteException ex)
+            {
+                return new JsonResult(new ErrorResponse { message = ex.Message }) { StatusCode = 400 };
+            }
             catch (Exception ex)
             {
-                if (ex.Message == "Cliente no encontrado, debe registrarlo")
+                if (ex.Message == "Cliente no encontrado, debe registrarlo"||
+                    ex.Message == "Vendedor no encontrado, debe registrarlo"||
+                    ex.Message == "Documento no encontrado."||
+                    ex.Message == "Medio de pago no encontrado.")
                 {
                     return new JsonResult(new ErrorResponse { message = ex.Message }) { StatusCode = 404 };
                 }

@@ -21,9 +21,10 @@ namespace Application.UseCase
         private readonly IFacturaCommand _facturaCommand;
         private readonly IDocumentoQuery _documentoQuery;
         private readonly IMedioPagoQuery _medioPagoQuery;
+        private readonly IVendedorQuery _vendedorQuery;
         public VentaServices(IClienteQuery clienteQuery, IVentaCommand ventaCommand,
             IProductoQuery productoQuery, IItemCommand itemCommand, IFacturaCommand facturaCommand, 
-            IDocumentoQuery documentoQuery, IMedioPagoQuery medioPagoQuery)
+            IDocumentoQuery documentoQuery, IMedioPagoQuery medioPagoQuery, IVendedorQuery vendedorQuery)
         {
             _clienteQuery = clienteQuery;
             _ventaCommand = ventaCommand;
@@ -32,15 +33,40 @@ namespace Application.UseCase
             _facturaCommand = facturaCommand;
             _documentoQuery = documentoQuery;
             _medioPagoQuery = medioPagoQuery;
+            _vendedorQuery = vendedorQuery;
         }
         public VentaResponse RegistrarVenta(VentaRequest venta)
         {
             var cliente = _clienteQuery.ClientesPorId(venta.ClienteId);
-
+            
+            //validamos si el cliente existe
             if (cliente == null)
             {
                 throw new Exception("Cliente no encontrado, debe registrarlo");
             }
+            //buscamos el vendedor
+            var vendedor = _vendedorQuery.VendedoresPorId(venta.VendedorId);
+            if (vendedor == null)
+            {
+                throw new Exception("Vendedor no encontrado, debe registrarlo");
+            }
+
+            // Validamos todos los productos y el stock antes de registrar en base de datos
+            foreach (var itemReq in venta.Items)
+            {
+                var producto = _productoQuery.ProductoPorId(itemReq.ProductoId);
+                if (producto == null)
+                {
+                    throw new ProductoNoDisponibleException($"Producto con ID {itemReq.ProductoId} no disponible.");
+                }
+                if (itemReq.Cantidad > producto.Stock)
+                {
+                    throw new StockInsuficienteException($"Stock insuficiente para el producto {producto.Nombre}.");
+                }
+            }
+
+            // Si todo esta validado, registramos en la base de datos. ¿porque? porque si falta
+            // stock de productos en la base de datos, no se completa la venta.
 
             var _venta = new Venta
             {
@@ -55,13 +81,11 @@ namespace Application.UseCase
             int totalVenta = 0;
             var itemsResponse = new List<ItemResponse>();
 
+            // Ahora registramos los ítems y ajustamos el stock
+
             foreach (var itemReq in venta.Items)
             {
                 var producto = _productoQuery.ProductoPorId(itemReq.ProductoId);
-                if (producto == null || itemReq.Cantidad > producto.Stock)
-                {
-                    throw new Exception("Producto no disponible o stock insuficiente.");
-                }
 
                 var precioTotalItem = itemReq.Cantidad * producto.PrecioUnitario;
 
@@ -75,33 +99,37 @@ namespace Application.UseCase
 
                 totalVenta += precioTotalItem;
                 _itemCommand.AgregarItem(item);
-                producto.Stock -= itemReq.Cantidad; // Actualizar stock
+                producto.Stock -= itemReq.Cantidad;
 
                 itemsResponse.Add(new ItemResponse
                 {
                     ProductoId = itemReq.ProductoId,
+                    ProductoNombre = producto.Nombre,
+                    PrecioUnitario = producto.PrecioUnitario,
                     Cantidad = itemReq.Cantidad,
                     PrecioTotalItem = precioTotalItem
                 });
-
             }
+
             _venta.TotalVenta = totalVenta;
             _ventaCommand.actualizarVenta(_venta);
 
-
-            var documento = _documentoQuery.DocumentoPorId(venta.DocumentoId); // Asegúrate de tener este método
+            var documento = _documentoQuery.DocumentoPorId(venta.DocumentoId);
             if (documento == null)
             {
                 throw new Exception("Documento no encontrado.");
             }
 
-            var medioPago = _medioPagoQuery.MedioPagoPorId(venta.MedioPagoId); // Asegúrate de tener este método
+            var medioPago = _medioPagoQuery.MedioPagoPorId(venta.MedioPagoId);
             if (medioPago == null)
             {
                 throw new Exception("Medio de pago no encontrado.");
             }
 
-            // Crear la factura automáticamente
+            // Crear la factura automáticamente esto puede ser una api aparte preguntando desde el front
+            // desea generar la factura si da ok consultamos por ventaId y generamos la factura devolviendo 
+            // datos de la factura en una clase facturaResponse,que tenga adentro
+            // la ventaResponse. ¿ se puede hacer? si se puede hacer. Es viable? si es viable.
             var factura = new Factura
             {
                 VentaId = _venta.VentaId,
@@ -113,14 +141,17 @@ namespace Application.UseCase
 
             _facturaCommand.registrarFactura(factura);
 
+            // Creaamos y devolvemos la venta
             VentaResponse ventaResponse = new VentaResponse
             {
                 VentaId = _venta.VentaId,
-                ClienteId = cliente.ClienteId,
-                VendedorId = _venta.VendedorId,
                 Fecha = _venta.Fecha,
-                TotalVenta = totalVenta,
-                Items = itemsResponse
+                ClienteId = cliente.ClienteId,
+                ClienteNombre = cliente.Nombre,
+                VendedorId = _venta.VendedorId,
+                VendedorNombre = vendedor.Nombre,
+                Items = itemsResponse,
+                TotalVenta = totalVenta
             };
 
             return ventaResponse;

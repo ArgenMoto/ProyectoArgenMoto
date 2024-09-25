@@ -147,11 +147,12 @@ namespace Infraestructure.Persistense
                 );
 
                 modelBuilder.Entity<Documento>().HasData(
-                    new Documento { DocumentoId = 1, Descripcion = "Factura" },
-                    new Documento { DocumentoId = 2, Descripcion = "Nota de Crédito" },
-                    new Documento { DocumentoId = 3, Descripcion = "Nota de Débito" },
-                    new Documento { DocumentoId = 4, Descripcion = "Recibo" },
-                    new Documento { DocumentoId = 5, Descripcion = "Orden de Compra" }
+                    new Documento { DocumentoId = 1, Descripcion = "Factura A" },
+                    new Documento { DocumentoId = 2, Descripcion = "Factura B" },
+                    new Documento { DocumentoId = 3, Descripcion = "Nota de Crédito" },
+                    new Documento { DocumentoId = 4, Descripcion = "Nota de Débito" },
+                    new Documento { DocumentoId = 5, Descripcion = "Recibo" },
+                    new Documento { DocumentoId = 6, Descripcion = "Orden de Compra" }
                 );
 
                 modelBuilder.Entity<MedioPago>().HasData(
