@@ -89,15 +89,23 @@ namespace Infraestructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Vendedor",
-                columns: table => new
-                {
-                    VendedorId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Puesto = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
+                 name: "Vendedor",
+                 columns: table => new
+                 {
+                     VendedorId = table.Column<int>(type: "int", nullable: false)
+                         .Annotation("SqlServer:Identity", "1, 1"),
+                     VendedorNombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                     VendedorApellido = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                     VendedorPuesto = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                     VendedorDni = table.Column<int>(type: "int", nullable: false),
+                     VendedorDomicilio = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                     VendedorLocalidad = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                     VendedorProvincia = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                     VendedorTelefono = table.Column<int>(type: "int", nullable: false),
+                     VendedorEmail = table.Column<string>(type: "nvarchar(max)", nullable: false)
+
+                 },
+                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Vendedor", x => x.VendedorId);
                 });
@@ -284,14 +292,14 @@ namespace Infraestructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "Vendedor",
-                columns: new[] { "VendedorId", "Nombre", "Puesto" },
+                columns: new[] { "VendedorId", "VendedorNombre", "VendedorApellido", "VendedorPuesto", "VendedorDni", "VendedorDomicilio", "VendedorLocalidad", "VendedorProvincia", "VendedorTelefono", "VendedorEmail" },
                 values: new object[,]
                 {
-                    { 1, "Pedro", "Vendedor Principal" },
-                    { 2, "Laura", "Vendedora" },
-                    { 3, "Andrés", "Vendedor" },
-                    { 4, "Sofía", "Vendedora" },
-                    { 5, "Miguel", "Vendedor" }
+                    {1,"Pedro", "Gomez","Vendedor Principal", 33456789, "Calle 30 2659", "Berazategui", "Buenos Aires", 1523467895, "pedro@gmail.com"},
+                    {2,"Laura","Rodriguez","Vendedora", 40256897,"Calle 132 4567", "Berazategui","Buenos Aires", 1547896321, "laura@gmail.com"},
+                    {3,"Andrés", "Gimenez","Vendedor", 38526478,"Calle 145 5047","Berazategui","Buenos Aires", 1578451236, "andres@gmail.com"},
+                    {4,"Sofía","Saucedo","Vendedora", 23456789,"Calle 38 4568", "Berazategui", "Buenos Aires", 1547526389, "sofia@gmail.com"},
+                    {5,"Miguel", "Souto","Vendedor ", 34568791,"Calle 33 2356", "Berazategui","Buenos Aires",1545678912, "miguel@gmail.com"}
                 });
 
             migrationBuilder.CreateIndex(

@@ -39,8 +39,15 @@ namespace Application.UseCase
 
             var _vendedor = new Vendedor
             {
-                Nombre = vendedor.Nombre,
-                Puesto = vendedor.Puesto,
+                VendedorNombre = vendedor.VendedorNombre,
+                VendedorApellido = vendedor.VendedorApellido,
+                VendedorPuesto = vendedor.VendedorPuesto,
+                VendedorDni = vendedor.VendedorDni,
+                VendedorDomicilio = vendedor.VendedorDomicilio,
+                VendedorLocalidad = vendedor.VendedorLocalidad,
+                VendedorProvincia = vendedor.VendedorProvincia,
+                VendedorTelefono = vendedor.VendedorTelefono,
+                VendedorEmail = vendedor.VendedorEmail,
             };
             _vendedorCommand.registrarVendedor(_vendedor);
             return _vendedor;
@@ -54,16 +61,30 @@ namespace Application.UseCase
 
                 throw new Exception("Vendedor no encontrado");
 
-            _vendedor.Nombre = vendedor.Nombre;
-            _vendedor.Puesto = vendedor.Puesto;
+            _vendedor.VendedorNombre = vendedor.VendedorNombre;
+            _vendedor.VendedorApellido = vendedor.VendedorApellido;
+            _vendedor.VendedorPuesto = vendedor.VendedorPuesto;
+            _vendedor.VendedorDni = vendedor.VendedorDni;
+            _vendedor.VendedorDomicilio = vendedor.VendedorDomicilio;
+            _vendedor.VendedorLocalidad = vendedor.VendedorLocalidad;
+            _vendedor.VendedorProvincia = vendedor.VendedorProvincia;
+            _vendedor.VendedorTelefono = vendedor.VendedorTelefono;
+            _vendedor.VendedorEmail = vendedor.VendedorEmail;
 
             _vendedorCommand.ModificarVendedor(_vendedor);
 
             VendedorResponse vendedorResponse = new VendedorResponse
             {
-                Id = id,
-                Nombre = vendedor.Nombre,
-                Puesto = vendedor.Puesto,
+                VendedorId = id,
+                VendedorNombre = vendedor.VendedorNombre,
+                VendedorApellido = vendedor.VendedorApellido,
+                VendedorPuesto = vendedor.VendedorPuesto,
+                VendedorDni = vendedor.VendedorDni,
+                VendedorDomicilio = vendedor.VendedorDomicilio,
+                VendedorLocalidad = vendedor.VendedorLocalidad,
+                VendedorProvincia = vendedor.VendedorProvincia,
+                VendedorTelefono = vendedor.VendedorTelefono,
+                VendedorEmail = vendedor.VendedorEmail
             };
 
             return vendedorResponse;

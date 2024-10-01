@@ -455,57 +455,122 @@ namespace Infraestructure.Migrations
                 });
 
             modelBuilder.Entity("Domain.Entities.Vendedor", b =>
-                {
-                    b.Property<int>("VendedorId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+            {
+                b.Property<int>("VendedorId")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VendedorId"));
+                SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VendedorId"));
 
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("VendedorNombre")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Puesto")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("VendedorApellido")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("VendedorId");
+                b.Property<string>("VendedorPuesto")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("Vendedor", (string)null);
+                b.Property<int>("VendedorDni")
+                    .IsRequired()
+                    .HasColumnType("int");
 
-                    b.HasData(
-                        new
-                        {
-                            VendedorId = 1,
-                            Nombre = "Pedro",
-                            Puesto = "Vendedor Principal"
-                        },
-                        new
-                        {
-                            VendedorId = 2,
-                            Nombre = "Laura",
-                            Puesto = "Vendedora"
-                        },
-                        new
-                        {
-                            VendedorId = 3,
-                            Nombre = "Andrés",
-                            Puesto = "Vendedor"
-                        },
-                        new
-                        {
-                            VendedorId = 4,
-                            Nombre = "Sofía",
-                            Puesto = "Vendedora"
-                        },
-                        new
-                        {
-                            VendedorId = 5,
-                            Nombre = "Miguel",
-                            Puesto = "Vendedor"
-                        });
-                });
+                b.Property<string>("VendedorDomicilio")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<string>("VendedorLocalidad")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<string>("VendedorProvincia")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<int>("VendedorTelefono")
+                    .IsRequired()
+                    .HasColumnType("int");
+
+                b.Property<string>("VendedorEmail")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
+
+                b.HasKey("VendedorId");
+
+                b.ToTable("Vendedor", (string)null);
+
+                b.HasData(
+                    new
+                    {
+                        VendedorId = 1,
+                        VendedorNombre = "Pedro",
+                        VendedorApellido = "Gomez",
+                        VendedorPuesto = "Vendedor Principal",
+                        VendedorDni = 33456789,
+                        VendedorDomicilio = "Calle 30 2659",
+                        VendedorLocalidad = "Berazategui",
+                        VendedorProvincia = "Buenos Aires",
+                        VendedorTelefono = 1523467895,
+                        VendedorEmail = "pedro@gmail.com"
+
+
+                    },
+                    new
+                    {
+                        VendedorId = 2,
+                        VendedorNombre = "Laura",
+                        VendedorApellido = "Rodriguez",
+                        VendedorPuesto = "Vendedora",
+                        VendedorDni = 40256897,
+                        VendedorDomicilio = "Calle 132 4567",
+                        VendedorLocalidad = "Berazategui",
+                        VendedorProvincia = "Buenos Aires",
+                        VendedorTelefono = 1547896321,
+                        VendedorEmail = "laura@gmail.com"
+                    },
+                    new
+                    {
+                        VendedorId = 3,
+                        VendedorNombre = "Andrés",
+                        VendedorApellido = "Gimenez",
+                        VendedorPuesto = "Vendedor",
+                        VendedorDni = 38526478,
+                        VendedorDomicilio = "Calle 145 5047",
+                        VendedorLocalidad = "Berazategui",
+                        VendedorProvincia = "Buenos Aires",
+                        VendedorTelefono = 1578451236,
+                        VendedorEmail = "andres@gmail.com"
+                    },
+                    new
+                    {
+                        VendedorId = 4,
+                        VendedorNombre = "Sofía",
+                        VendedorApellido = "Saucedo",
+                        VendedorPuesto = "Vendedora",
+                        VendedorDni = 23456789,
+                        VendedorDomicilio = "Calle 38 4568",
+                        VendedorLocalidad = "Berazategui",
+                        VendedorProvincia = "Buenos Aires",
+                        VendedorTelefono = 1547526389,
+                        VendedorEmail = "sofia@gmail.com"
+                    },
+                    new
+                    {
+                        VendedorId = 5,
+                        VendedorNombre = "Miguel",
+                        VendedorApellido = "Souto",
+                        VendedorPuesto = "Vendedor ",
+                        VendedorDni = 34568791,
+                        VendedorDomicilio = "Calle 33 2356",
+                        VendedorLocalidad = "Berazategui",
+                        VendedorProvincia = "Buenos Aires",
+                        VendedorTelefono = 1545678912,
+                        VendedorEmail = "miguel@gmail.com"
+                    });
+            });
 
             modelBuilder.Entity("Domain.Entities.Venta", b =>
                 {

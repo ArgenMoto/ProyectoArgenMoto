@@ -149,7 +149,7 @@ namespace Application.UseCase
                 ClienteId = cliente.ClienteId,
                 ClienteNombre = cliente.Nombre,
                 VendedorId = _venta.VendedorId,
-                VendedorNombre = vendedor.Nombre,
+                VendedorNombre = vendedor.VendedorNombre,
                 Items = itemsResponse,
                 TotalVenta = totalVenta
             };

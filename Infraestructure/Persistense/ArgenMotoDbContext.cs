@@ -139,12 +139,72 @@ namespace Infraestructure.Persistense
                 );
 
                 modelBuilder.Entity<Vendedor>().HasData(
-                    new Vendedor { VendedorId = 1, Nombre = "Pedro", Puesto = "Vendedor Principal" },
-                    new Vendedor { VendedorId = 2, Nombre = "Laura", Puesto = "Vendedora" },
-                    new Vendedor { VendedorId = 3, Nombre = "Andrés", Puesto = "Vendedor" },
-                    new Vendedor { VendedorId = 4, Nombre = "Sofía", Puesto = "Vendedora" },
-                    new Vendedor { VendedorId = 5, Nombre = "Miguel", Puesto = "Vendedor" }
-                );
+                    new Vendedor
+                    {
+                        VendedorId = 1,
+                        VendedorNombre = "Pedro",
+                        VendedorApellido = "Gomez",
+                        VendedorPuesto = "Vendedor Principal",
+                        VendedorDni = 33456789,
+                        VendedorDomicilio = "Calle 30 2659",
+                        VendedorLocalidad = "Berazategui",
+                        VendedorProvincia = "Buenos Aires",
+                        VendedorTelefono = 1523467895,
+                        VendedorEmail = "pedro@gmail.com"
+                    },
+                    new Vendedor
+                        {
+                        VendedorId = 2,
+                        VendedorNombre = "Laura",
+                        VendedorApellido = "Rodriguez",
+                        VendedorPuesto = "Vendedora",
+                        VendedorDni = 40256897,
+                        VendedorDomicilio = "Calle 132 4567",
+                        VendedorLocalidad = "Berazategui",
+                        VendedorProvincia = "Buenos Aires",
+                        VendedorTelefono = 1547896321,
+                        VendedorEmail = "laura@gmail.com"
+                        },
+                    new Vendedor
+                    {
+                        VendedorId = 3,
+                        VendedorNombre = "Andrés",
+                        VendedorApellido = "Gimenez",
+                        VendedorPuesto = "Vendedor",
+                        VendedorDni = 38526478,
+                        VendedorDomicilio = "Calle 145 5047",
+                        VendedorLocalidad = "Berazategui",
+                        VendedorProvincia = "Buenos Aires",
+                        VendedorTelefono = 1578451236,
+                        VendedorEmail = "andres@gmail.com"
+                    },
+                    new Vendedor
+                    {
+                        VendedorId = 4,
+                        VendedorNombre = "Sofía",
+                        VendedorApellido = "Saucedo",
+                        VendedorPuesto = "Vendedora",
+                        VendedorDni = 23456789,
+                        VendedorDomicilio = "Calle 38 4568",
+                        VendedorLocalidad = "Berazategui",
+                        VendedorProvincia = "Buenos Aires",
+                        VendedorTelefono = 1547526389,
+                        VendedorEmail = "sofia@gmail.com"
+                    },
+                    new Vendedor
+                    {
+                        VendedorId = 5,
+                        VendedorNombre = "Miguel",
+                        VendedorApellido = "Souto",
+                        VendedorPuesto = "Vendedor ",
+                        VendedorDni = 34568791,
+                        VendedorDomicilio = "Calle 33 2356",
+                        VendedorLocalidad = "Berazategui",
+                        VendedorProvincia = "Buenos Aires",
+                        VendedorTelefono = 1545678912,
+                        VendedorEmail = "miguel@gmail.com"
+                    }
+                    );
 
                 modelBuilder.Entity<Documento>().HasData(
                     new Documento { DocumentoId = 1, Descripcion = "Factura A" },
