@@ -465,14 +465,41 @@ namespace Infraestructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VendedorId"));
 
-                    b.Property<string>("Nombre")
+                    b.Property<string>("VendedorNombre")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Puesto")
+                    b.Property<string>("VendedorApellido")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("VendedorPuesto")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("VendedorDni")
+                        .IsRequired()
+                        .HasColumnType("int");
+
+                    b.Property<string>("VendedorDomicilio")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VendedorLocalidad")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VendedorProvincia")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("VendedorTelefono")
+                        .IsRequired()
+                        .HasColumnType("int");
+
+                    b.Property<string>("VendedorEmail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
                     b.HasKey("VendedorId");
 
                     b.ToTable("Vendedor", (string)null);
