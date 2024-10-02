@@ -61,12 +61,19 @@ namespace Infraestructure.Migrations
                     ProductoId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Marca = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Modelo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NumeroMotor = table.Column<string>(type: "int", nullable: false),
+                    NumeroChasis = table.Column<int>(type: "int", nullable: false),
+                    Cilindro = table.Column<int>(type: "int", nullable: false),
+                    Fecha = table.Column<int>(type: "int", nullable: false),
+                    Rubro = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PrecioUnitario = table.Column<int>(type: "int", nullable: false),
-                    Stock = table.Column<int>(type: "int", nullable: false),
-                    Imagen = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Rubro = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    StockMinimo = table.Column<int>(type: "int", nullable: false),
+                    StockMaximo = table.Column<int>(type: "int", nullable: false),
+                    StockActual = table.Column<int>(type: "int", nullable: false),
+                    Imagen = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -266,16 +273,18 @@ namespace Infraestructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "Producto",
-                columns: new[] { "ProductoId", "Descripcion", "Imagen", "Marca", "Nombre", "PrecioUnitario", "Rubro", "Stock" },
+                columns: new[] { "ProductoId", "Nombre", "Marca", "Descripcion", "Modelo", "NumeroMotor", "NumeroChasis", "Cilindro", "Fecha", "Rubro", "PrecioUnitario", "StockMinimo", "StockMaximo", "StockActual", "Imagen" },
                 values: new object[,]
+                
                 {
-                    { 1, "Motocicleta deportiva ligera y ágil.", "https://i.postimg.cc/rpJWcK0L/2023-Yamaha-MT07-A-EU-Cyan-Storm-360-Degrees-001-03.jpg", "Yamaha", "Yamaha MT-07", 150000, "Motocicleta", 5 },
-                    { 2, "Motocicleta naked para uso urbano y carretera.", "https://i.postimg.cc/50KCYTS7/honda-cb-500-f.jpg", "Honda", "Honda CB500F", 180000, "Motocicleta", 7 },
-                    { 3, "Motocicleta deportiva de baja cilindrada.", "https://i.postimg.cc/tJVY1TTJ/ninja400-KRT-1-1.jpg", "Kawasaki", "Kawasaki Ninja 400", 200000, "Motocicleta", 10 },
-                    { 4, "Motocicleta adventure de media cilindrada.", "https://i.postimg.cc/NjtkchJm/muo3kk8n0sjdherhbjzvqyytgylzz8hcmvkfdusy.jpg", "Suzuki", "Suzuki V-Strom 650", 160000, "Motocicleta", 8 },
-                    { 5, "Motocicleta adventure de alta gama.", "https://i.postimg.cc/W4WGgd2w/image.jpg", "BMW", "BMW R 1250 GS", 300000, "Motocicleta", 3 },
-                    { 6, "Motocicleta naked de alto rendimiento.", "https://i.postimg.cc/RCn7JC2w/Monster-821-MY18-Red-01-Model-Preview-1050x650.png", "Ducati", "Ducati Monster 821", 250000, "Motocicleta", 4 },
-                    { 7, "Motocicleta cruiser clásica.", "https://i.postimg.cc/X7SwfS0m/54c33236a8ad91156a9e611375b4d973-a18dd478b82157f1.png", "Harley-Davidson", "Harley-Davidson Iron 883", 400000, "Motocicleta", 2 }
+                    
+                    { 1, "Yamaha MT-07","Yamaha", "Motocicleta deportiva ligera y ágil.",  "MT-07", 123456, 789012, 689, 2024,"Motocicleta", 150000,  3, 100, 6,"https://i.postimg.cc/rpJWcK0L/2023-Yamaha-MT07-A-EU-Cyan-Storm-360-Degrees-001-03.jpg"},
+                    { 2, "Honda CB500F", "Honda", "Motocicleta naked para uso urbano y carretera.",  "CB500F", 223344, 334455, 500, 2024,"Motocicleta", 180000,  3, 100, 7, "https://i.postimg.cc/50KCYTS7/honda-cb-500-f.jpg"},
+                    { 3, "Kawasaki Ninja 400","Kawasaki", "Motocicleta deportiva de baja cilindrada.", "Ninja 400", 556677, 889900, 399, 2024, "Motocicleta",200000, 3, 100, 10 , "https://i.postimg.cc/tJVY1TTJ/ninja400-KRT-1-1.jpg"},
+                    { 4, "Suzuki V-Strom 650", "Suzuki", "Motocicleta adventure de media cilindrada.", "V-Strom 650", 998877, 665544, 645, 2024,"Motocicleta", 160000,  3, 100, 8, "https://i.postimg.cc/NjtkchJm/muo3kk8n0sjdherhbjzvqyytgylzz8hcmvkfdusy.jpg"},
+                    { 5, "BMW R 1250 GS", "BMW", "Motocicleta adventure de alta gama.", "R 1250 GS", 554433, 223344, 1254, 2024,"Motocicleta", 300000,  3, 100, 4 , "https://i.postimg.cc/W4WGgd2w/image.jpg"},
+                    { 6, "Ducati Monster 821", "Ducati","Motocicleta naked de alto rendimiento.", "Monster 821", 112233, 445566, 821, 2024,"Motocicleta", 250000, 3, 100, 4, "https://i.postimg.cc/RCn7JC2w/Monster-821-MY18-Red-01-Model-Preview-1050x650.png"},
+                    { 7, "Harley-Davidson Iron 883", "Harley-Davidson","Motocicleta cruiser clásica.",  "Iron 883", 778899, 123456, 883, 2024,"Motocicleta", 400000, 3, 100, 5 , "https://i.postimg.cc/X7SwfS0m/54c33236a8ad91156a9e611375b4d973-a18dd478b82157f1.png"}
                 });
 
             migrationBuilder.InsertData(

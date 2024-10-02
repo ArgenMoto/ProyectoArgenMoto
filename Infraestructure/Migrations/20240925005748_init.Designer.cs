@@ -285,114 +285,198 @@ namespace Infraestructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductoId"));
 
-                    b.Property<string>("Descripcion")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Imagen")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("Nombre")
+                           .IsRequired()
+                           .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Marca")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Nombre")
+                    b.Property<string>("Descripcion")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PrecioUnitario")
+                    b.Property<string>("Modelo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NumeroMotor")
+                         .IsRequired()
+                        .HasColumnType("int");
+
+                    b.Property<int>("NumeroChasis")
+                        .IsRequired()
+                        .HasColumnType("int");
+
+                    b.Property<int>("Cilindro")
+                        .IsRequired()
+                        .HasColumnType("int");
+
+                    b.Property<int>("Fecha")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("Rubro")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                       .IsRequired()
+                       .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Stock")
+                    b.Property<int>("PrecioUnitario")
+                        .IsRequired()
                         .HasColumnType("int");
+
+                    b.Property<int>("StockMinimo")
+                        .IsRequired()
+                        .HasColumnType("int");
+
+                    b.Property<int>("StockMaximo")
+                        .IsRequired()
+                        .HasColumnType("int");
+
+                    b.Property<int>("StockActual")
+                        .IsRequired()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Imagen")
+                       .IsRequired()
+                       .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ProductoId");
 
                     b.ToTable("Producto", (string)null);
 
                     b.HasData(
-                        new
-                        {
-                            ProductoId = 1,
-                            Descripcion = "Motocicleta deportiva ligera y ágil.",
-                            Imagen = "https://i.postimg.cc/rpJWcK0L/2023-Yamaha-MT07-A-EU-Cyan-Storm-360-Degrees-001-03.jpg",
-                            Marca = "Yamaha",
-                            Nombre = "Yamaha MT-07",
-                            PrecioUnitario = 150000,
-                            Rubro = "Motocicleta",
-                            Stock = 5
-                        },
-                        new
-                        {
-                            ProductoId = 2,
-                            Descripcion = "Motocicleta naked para uso urbano y carretera.",
-                            Imagen = "https://i.postimg.cc/50KCYTS7/honda-cb-500-f.jpg",
-                            Marca = "Honda",
-                            Nombre = "Honda CB500F",
-                            PrecioUnitario = 180000,
-                            Rubro = "Motocicleta",
-                            Stock = 7
-                        },
-                        new
-                        {
-                            ProductoId = 3,
-                            Descripcion = "Motocicleta deportiva de baja cilindrada.",
-                            Imagen = "https://i.postimg.cc/tJVY1TTJ/ninja400-KRT-1-1.jpg",
-                            Marca = "Kawasaki",
-                            Nombre = "Kawasaki Ninja 400",
-                            PrecioUnitario = 200000,
-                            Rubro = "Motocicleta",
-                            Stock = 10
-                        },
-                        new
-                        {
-                            ProductoId = 4,
-                            Descripcion = "Motocicleta adventure de media cilindrada.",
-                            Imagen = "https://i.postimg.cc/NjtkchJm/muo3kk8n0sjdherhbjzvqyytgylzz8hcmvkfdusy.jpg",
-                            Marca = "Suzuki",
-                            Nombre = "Suzuki V-Strom 650",
-                            PrecioUnitario = 160000,
-                            Rubro = "Motocicleta",
-                            Stock = 8
-                        },
-                        new
-                        {
-                            ProductoId = 5,
-                            Descripcion = "Motocicleta adventure de alta gama.",
-                            Imagen = "https://i.postimg.cc/W4WGgd2w/image.jpg",
-                            Marca = "BMW",
-                            Nombre = "BMW R 1250 GS",
-                            PrecioUnitario = 300000,
-                            Rubro = "Motocicleta",
-                            Stock = 3
-                        },
-                        new
-                        {
-                            ProductoId = 6,
-                            Descripcion = "Motocicleta naked de alto rendimiento.",
-                            Imagen = "https://i.postimg.cc/RCn7JC2w/Monster-821-MY18-Red-01-Model-Preview-1050x650.png",
-                            Marca = "Ducati",
-                            Nombre = "Ducati Monster 821",
-                            PrecioUnitario = 250000,
-                            Rubro = "Motocicleta",
-                            Stock = 4
-                        },
-                        new
-                        {
-                            ProductoId = 7,
-                            Descripcion = "Motocicleta cruiser clásica.",
-                            Imagen = "https://i.postimg.cc/X7SwfS0m/54c33236a8ad91156a9e611375b4d973-a18dd478b82157f1.png",
-                            Marca = "Harley-Davidson",
-                            Nombre = "Harley-Davidson Iron 883",
-                            PrecioUnitario = 400000,
-                            Rubro = "Motocicleta",
-                            Stock = 2
-                        });
+                       new
+                       {
+                           ProductoId = 1,
+                           Nombre = "Yamaha MT-07",
+                           Marca = "Yamaha",
+                           Descripcion = "Motocicleta deportiva ligera y ágil.",
+                           Modelo = "MT-07",
+                           NumeroMotor = 123456,
+                           NumeroChasis = 789012,
+                           Cilindro = 689,
+                           Fecha = 2024,
+                           Rubro = "Motocicleta",
+                           PrecioUnitario = 150000,
+                           StockMinimo = 3,
+                           StockMaximo = 100,
+                           StockActual = 6,
+                           Imagen = "https://i.postimg.cc/rpJWcK0L/2023-Yamaha-MT07-A-EU-Cyan-Storm-360-Degrees-001-03.jpg"
+                       },
+                       new
+                       {
+                           ProductoId = 2,
+                           Nombre = "Honda CB500F",
+                           Marca = "Honda",
+                           Descripcion = "Motocicleta naked para uso urbano y carretera.",
+                           Modelo = "CB500F",
+                           NumeroMotor = 223344,
+                           NumeroChasis = 334455,
+                           Cilindro = 500,
+                           Fecha = 2024,
+                           Rubro = "Motocicleta",
+                           PrecioUnitario = 180000,
+                           StockMinimo = 3,
+                           StockMaximo = 100,
+                           StockActual = 7,
+                           Imagen = "https://i.postimg.cc/50KCYTS7/honda-cb-500-f.jpg"
+                       },
+
+                      new
+                      {
+                          ProductoId = 3,
+                          Nombre = "Kawasaki Ninja 400",
+                          Marca = "Kawasaki",
+                          Descripcion = "Motocicleta deportiva de baja cilindrada.",
+                          Modelo = "Ninja 400",
+                          NumeroMotor = 556677,
+                          NumeroChasis = 889900,
+                          Cilindro = 399,
+                          Fecha = 2024,
+                          Rubro = "Motocicleta",
+                          PrecioUnitario = 200000,
+                          StockMinimo = 3,
+                          StockMaximo = 100,
+                          StockActual = 10,
+                          Imagen = "https://i.postimg.cc/tJVY1TTJ/ninja400-KRT-1-1.jpg"
+                      },
+
+                      new
+                      {
+                          ProductoId = 4,
+                          Nombre = "Suzuki V-Strom 650",
+                          Marca = "Suzuki",
+                          Descripcion = "Motocicleta adventure de media cilindrada.",
+                          Modelo = "V-Strom 650",
+                          NumeroMotor = 998877,
+                          NumeroChasis = 665544,
+                          Cilindro = 645,
+                          Fecha = 2024,
+                          Rubro = "Motocicleta",
+                          PrecioUnitario = 160000,
+                          StockMinimo = 3,
+                          StockMaximo = 100,
+                          StockActual = 8,
+                          Imagen = "https://i.postimg.cc/NjtkchJm/muo3kk8n0sjdherhbjzvqyytgylzz8hcmvkfdusy.jpg"
+                      },
+                      new
+                      {
+                          ProductoId = 5,
+                          Nombre = "BMW R 1250 GS",
+                          Marca = "BMW",
+                          Descripcion = "Motocicleta adventure de alta gama.",
+                          Modelo = "R 1250 GS",
+                          NumeroMotor = 554433,
+                          NumeroChasis = 223344,
+                          Cilindro = 1254,
+                          Fecha = 2024,
+                          Rubro = "Motocicleta",
+                          PrecioUnitario = 300000,
+                          StockMinimo = 3,
+                          StockMaximo = 100,
+                          StockActual = 4,
+                          Imagen = "https://i.postimg.cc/W4WGgd2w/image.jpg"
+                      },
+
+                      new
+                      {
+                          ProductoId = 6,
+                          Nombre = "Ducati Monster 821",
+                          Marca = "Ducati",
+                          Descripcion = "Motocicleta naked de alto rendimiento.",
+                          Modelo = "Monster 821",
+                          NumeroMotor = 112233,
+                          NumeroChasis = 445566,
+                          Cilindro = 821,
+                          Fecha = 2024,
+                          Rubro = "Motocicleta",
+                          PrecioUnitario = 250000,
+                          StockMinimo = 3,
+                          StockMaximo = 100,
+                          StockActual = 4,
+                          Imagen = "https://i.postimg.cc/RCn7JC2w/Monster-821-MY18-Red-01-Model-Preview-1050x650.png"
+                      },
+
+                      new
+                      {
+                          ProductoId = 7,
+                          Nombre = "Harley-Davidson Iron 883",
+                          Marca = "Harley-Davidson",
+                          Descripcion = "Motocicleta cruiser clásica.",
+                          Modelo = "Iron 883",
+                          NumeroMotor = 778899,
+                          NumeroChasis = 123456,
+                          Cilindro = 883,
+                          Fecha = 2024,
+                          Rubro = "Motocicleta",
+                          PrecioUnitario = 400000,
+                          StockMinimo = 3,
+                          StockMaximo = 100,
+                          StockActual = 5,
+                          Imagen = "https://i.postimg.cc/X7SwfS0m/54c33236a8ad91156a9e611375b4d973-a18dd478b82157f1.png"
+                      });
+
                 });
 
             modelBuilder.Entity("Domain.Entities.Proveedor", b =>
