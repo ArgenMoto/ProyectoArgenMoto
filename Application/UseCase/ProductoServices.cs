@@ -46,13 +46,20 @@ namespace Application.UseCase
             {
 
                 Nombre = producto.Nombre,
-                Descripcion = producto.Descripcion,
                 Marca = producto.Marca,
+                Descripcion = producto.Descripcion,
+                Modelo = producto.Modelo,
+                NumeroMotor = producto.NumeroMotor,
+                NumeroChasis = producto.NumeroChasis,
+                Cilindro = producto.Cilindro,
+                Fecha = producto.Fecha,
                 PrecioUnitario = producto.PrecioUnitario,
-                Stock = producto.Stock,
-                Imagen = producto.Imagen,
                 Rubro = producto.Rubro,
-            
+                StockMinimo = producto.StockMinimo,
+                StockMaximo = producto.StockMaximo,
+                StockActual = producto.StockActual,
+                Imagen = producto.Imagen
+
             };
 
             _productoCommand.RegistrarProducto(_producto);
@@ -68,12 +75,19 @@ namespace Application.UseCase
                 throw new Exception("Producto no encontrado");
 
             _producto.Nombre = producto.Nombre;
-            _producto.Descripcion = producto.Descripcion;
             _producto.Marca = producto.Marca;
+            _producto.Descripcion = producto.Descripcion;
+            _producto.Modelo = producto.Modelo;
+            _producto.NumeroMotor = producto.NumeroMotor;
+            _producto.NumeroChasis = producto.NumeroChasis;
+            _producto.Cilindro = producto.Cilindro;
+            _producto.Fecha = producto.Fecha;
             _producto.PrecioUnitario = producto.PrecioUnitario;
-            _producto.Stock = producto.Stock;
-            _producto.Imagen = producto.Imagen;
             _producto.Rubro = producto.Rubro;
+            _producto.StockMinimo = producto.StockMinimo;
+            _producto.StockMaximo = producto.StockMaximo;
+            _producto.StockActual = producto.StockActual;
+            _producto.Imagen = producto.Imagen;
 
 
             _productoCommand.ModificarProducto(_producto);
@@ -82,12 +96,19 @@ namespace Application.UseCase
             {
                 Id = id,
                 Nombre = producto.Nombre,
-                Descripcion = producto.Descripcion,
                 Marca = producto.Marca,
+                Descripcion = producto.Descripcion,
+                Modelo = producto.Modelo,
+                NumeroMotor = producto.NumeroMotor,
+                NumeroChasis = producto.NumeroChasis,
+                Cilindro = producto.Cilindro,
+                Fecha = producto.Fecha,
                 PrecioUnitario = producto.PrecioUnitario,
-                Stock = producto.Stock,
-                Imagen = producto.Imagen,
                 Rubro = producto.Rubro,
+                StockMinimo = producto.StockMinimo,
+                StockMaximo = producto.StockMaximo,
+                StockActual = producto.StockActual,
+                Imagen = producto.Imagen
             };
 
             return productoResponse;

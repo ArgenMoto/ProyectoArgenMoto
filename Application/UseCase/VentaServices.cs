@@ -59,7 +59,7 @@ namespace Application.UseCase
                 {
                     throw new ProductoNoDisponibleException($"Producto con ID {itemReq.ProductoId} no disponible.");
                 }
-                if (itemReq.Cantidad > producto.Stock)
+                if (itemReq.Cantidad > producto.StockActual)
                 {
                     throw new StockInsuficienteException($"Stock insuficiente para el producto {producto.Nombre}.");
                 }
@@ -99,7 +99,7 @@ namespace Application.UseCase
 
                 totalVenta += precioTotalItem;
                 _itemCommand.AgregarItem(item);
-                producto.Stock -= itemReq.Cantidad;
+                producto.StockActual -= itemReq.Cantidad;
 
                 itemsResponse.Add(new ItemResponse
                 {

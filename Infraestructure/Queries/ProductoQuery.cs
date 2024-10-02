@@ -21,7 +21,7 @@ namespace Infraestructure.Queries
         {
             List<Producto> result = new List<Producto>();
 
-            var productos = _context.Producto.ToList();
+          var productos = _context.Producto.ToList();
             return productos;
         }
         public Producto ProductoPorId(int id)

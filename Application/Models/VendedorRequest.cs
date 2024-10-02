@@ -18,4 +18,4 @@ namespace Application.Models
         public int VendedorTelefono { get; set; }
         public string VendedorEmail { get; set; }
     }
-    }
+}
