@@ -46,7 +46,12 @@ namespace Application.UseCase
                 
                 DNI = cliente.DNI,
                 Nombre = cliente.Nombre,
-                Apellido = cliente.Apellido,  
+                Apellido = cliente.Apellido, 
+                Domicilio=cliente.Domicilio,
+                Localidad= cliente.Localidad,
+                Provincia= cliente.Provincia,
+                Telefono= cliente.Telefono,
+                Email= cliente.Email,
             
             };
 
@@ -65,6 +70,11 @@ namespace Application.UseCase
             _cliente.DNI = cliente.DNI;
             _cliente.Nombre = cliente.Nombre;
             _cliente.Apellido = cliente.Apellido;
+            _cliente.Domicilio = cliente.Domicilio;
+            _cliente.Localidad = cliente.Localidad;
+            _cliente.Provincia= cliente.Provincia;
+            _cliente.Telefono = cliente.Telefono;
+            _cliente.Email= cliente.Email;
 
             _clienteCommand.ModificarCliente(_cliente);
 
@@ -74,6 +84,12 @@ namespace Application.UseCase
                 DNI = cliente.DNI,
                 Nombre = cliente.Nombre,
                 Apellido= cliente.Apellido,
+                Domicilio= cliente.Domicilio,
+                Localidad= cliente.Localidad,
+                Provincia= cliente.Provincia,
+                Telefono= cliente.Telefono,
+                Email= cliente.Email,
+
             };
 
             return clienteResponse;

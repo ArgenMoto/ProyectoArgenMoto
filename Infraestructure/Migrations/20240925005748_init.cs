@@ -19,9 +19,14 @@ namespace Infraestructure.Migrations
                 {
                     ClienteId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DNI = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DNI = table.Column<int>(type: "int", nullable: false),
                     Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Apellido = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Apellido = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Domicilio = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Localidad = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Provincia = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Telefono = table.Column<int>(type: "int", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -236,14 +241,14 @@ namespace Infraestructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "Cliente",
-                columns: new[] { "ClienteId", "Apellido", "DNI", "Nombre" },
+                columns: new[] { "ClienteId", "Apellido", "DNI", "Nombre", "Domicilio", "Localidad","Provincia","Telefono","Email" },
                 values: new object[,]
                 {
-                    { 1, "Pérez", "12345678", "Juan" },
-                    { 2, "García", "23456789", "Ana" },
-                    { 3, "Martínez", "34567890", "Luis" },
-                    { 4, "Lopez", "45678901", "Marta" },
-                    { 5, "Fernández", "56789012", "Carlos" }
+                    { 1, "Pérez", 12345678, "Juan","Calle 30 214","Quilmes","Buenos Aires",422589654,"carlos@gmail.com" },
+                    { 2, "García", 23456789, "Ana","Calle 30 231","Florencio Varela","Buenos Aires",45678932,"garciana@gmail.com" },
+                    { 3, "Martínez", 34567890, "Luis" ,"Calle 12 1024","Berazategui", "Buenos Aires",1124568935,"luis@gmail.com"},
+                    { 4, "Lopez", 45678901, "Marta","Calle 28 1235","Berazategui","Buenos Aires",1124567835,"marta@yahoo.com" },
+                    { 5, "Fernández", 56789012, "Carlos","Mitre 1234","Quilmes","Buenos Aires",1145623789,"carlitos@yahoo.com" }
                 });
 
             migrationBuilder.InsertData(

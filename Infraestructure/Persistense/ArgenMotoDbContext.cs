@@ -123,11 +123,11 @@ namespace Infraestructure.Persistense
                );
 
                 modelBuilder.Entity<Cliente>().HasData(
-                    new Cliente { ClienteId = 1, DNI = "12345678", Nombre = "Juan", Apellido = "Pérez" },
-                    new Cliente { ClienteId = 2, DNI = "23456789", Nombre = "Ana", Apellido = "García" },
-                    new Cliente { ClienteId = 3, DNI = "34567890", Nombre = "Luis", Apellido = "Martínez" },
-                    new Cliente { ClienteId = 4, DNI = "45678901", Nombre = "Marta", Apellido = "Lopez" },
-                    new Cliente { ClienteId = 5, DNI = "56789012", Nombre = "Carlos", Apellido = "Fernández" }
+                    new Cliente { ClienteId = 1, DNI = 12345678, Nombre = "Juan", Apellido = "Pérez", Domicilio = "Calle 30 214", Localidad = "Quilmes", Provincia = "Buenos Aires", Telefono = 422589654, Email = "carlos@gmail.com" },
+                    new Cliente { ClienteId = 2, DNI = 23456789, Nombre = "Ana", Apellido = "García",Domicilio = "Calle 30 231",Localidad = "Florencio Varela", Provincia = "Buenos Aires",Telefono = 45678932,Email = "garciana@gmail.com"},
+                    new Cliente { ClienteId = 3, DNI = 34567890, Nombre = "Luis", Apellido = "Martínez",Domicilio = "Calle 12 1024",Localidad = "Berazategui", Provincia = "Buenos Aires",Telefono = 1124568935,Email = "luis@gmail.com" },
+                    new Cliente { ClienteId = 4, DNI = 45678901, Nombre = "Marta", Apellido = "Lopez",Domicilio = "Calle 28 1235",Localidad = "Berazategui",Provincia = "Buenos Aires",Telefono = 1124567835, Email = "marta@yahoo.com"},
+                    new Cliente { ClienteId = 5, DNI = 56789012, Nombre = "Carlos", Apellido = "Fernández",Domicilio = "Mitre 1234", Localidad = "Quilmes", Provincia = "Buenos Aires", Telefono = 1145623789,Email = "carlitos@yahoo.com"}
                 );
 
                 modelBuilder.Entity<Proveedor>().HasData(

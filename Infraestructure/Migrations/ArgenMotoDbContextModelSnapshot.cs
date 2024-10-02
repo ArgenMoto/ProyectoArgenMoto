@@ -34,11 +34,31 @@ namespace Infraestructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("DNI")
+                    b.Property<int>("DNI")
+                        .IsRequired()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Nombre")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Nombre")
+                    b.Property<string>("Domicilio")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Localidad")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Provincia")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Telefono")
+                        .IsRequired()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -52,35 +72,61 @@ namespace Infraestructure.Migrations
                             ClienteId = 1,
                             Apellido = "Pérez",
                             DNI = "12345678",
-                            Nombre = "Juan"
+                            Nombre = "Juan",
+                            Domicilio="Calle 30 214",
+                            Localidad="Quilmes",
+                            Provincia="Buenos Aires",
+                            Telefono=422589654,
+                            Email="carlos@gmail.com"
+
                         },
                         new
                         {
                             ClienteId = 2,
                             Apellido = "García",
                             DNI = "23456789",
-                            Nombre = "Ana"
+                            Nombre = "Ana",
+                            Domicilio="Calle 30 231",
+                            Localidad="Florencio Varela",
+                            Provincia="Buenos Aires",
+                            Telefono=45678932,
+                            Email="garciana@gmail.com"
                         },
                         new
                         {
                             ClienteId = 3,
                             Apellido = "Martínez",
                             DNI = "34567890",
-                            Nombre = "Luis"
+                            Nombre = "Luis",
+                            Domicilio="Calle 12 1024",
+                            Localidad="Berazategui",
+                            Provincia="Buenos Aires",
+                            Telefono=1124568935,
+                            Email="luis@gmail.com"
                         },
                         new
                         {
                             ClienteId = 4,
                             Apellido = "Lopez",
                             DNI = "45678901",
-                            Nombre = "Marta"
+                            Nombre = "Marta",
+                            Domicilio="Calle 28 1235",
+                            Localidad="Berazategui",
+                            Provincia="Buenos Aires",
+                            Telefono=1124567835,
+                            Email="marta@yahoo.com"
                         },
                         new
                         {
                             ClienteId = 5,
                             Apellido = "Fernández",
                             DNI = "56789012",
-                            Nombre = "Carlos"
+                            Nombre = "Carlos",
+                            Domicilio="Mitre 1234",
+                            Localidad="Quilmes",
+                            Provincia="Buenos Aires",
+                            Telefono=1145623789,
+                            Email="carlitos@yahoo.com"
                         });
                 });
 
