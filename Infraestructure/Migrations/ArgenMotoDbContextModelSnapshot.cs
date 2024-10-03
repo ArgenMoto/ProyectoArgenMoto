@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 #nullable disable
 
@@ -530,7 +531,27 @@ namespace Infraestructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProveedorId"));
 
+                    b.Property<string>("Cuit")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+                    
+                    b.Property<string>("RazonSocial")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)"); 
+                    
                     b.Property<string>("Direccion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Localidad")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Provincia")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Apellido")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -538,7 +559,11 @@ namespace Infraestructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Telefono")
+                    b.Property<int>("Telefono")
+                        .IsRequired()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -550,37 +575,68 @@ namespace Infraestructure.Migrations
                         new
                         {
                             ProveedorId = 1,
-                            Direccion = "Av. Libertador 1234",
-                            Nombre = "Moto Parts Ltd.",
-                            Telefono = "011-12345678"
+                            Cuit="20234567897",
+                            RazonSocial="Moto Parts Ltd.",
+                            Direccion="Av. Libertador 1234",
+                            Localidad="Capital Federal",
+                            Provincia="Buenos Aires", 
+                            Apellido="Perez",
+                            Nombre="Juan", 
+                            Telefono=01112345678,
+                            Email="juan@gmail.com" 
                         },
                         new
                         {
                             ProveedorId = 2,
-                            Direccion = "Calle Falsa 5678",
-                            Nombre = "Moto Accessories S.A.",
-                            Telefono = "011-23456789"
+                            Cuit="20234567899", 
+                            RazonSocial="Moto Accessories S.A.",
+                            Direccion="Calle Falsa 5678",
+                            Localidad="Quilmes",
+                            Provincia="Buenos Aires",
+                            Apellido="Torres",
+                            Nombre="Gabriel",
+                            Telefono=01123456789,
+                            Email="torres@yahoo,com" 
                         },
                         new
                         {
                             ProveedorId = 3,
-                            Direccion = "Avenida Rivadavia 4321",
-                            Nombre = "Motorcycle World",
-                            Telefono = "011-34567890"
+                            Cuit="23415689741",
+                            RazonSocial="Motorcycle World",
+                            Direccion="Avenida Rivadavia 4321",
+                            Localidad="Florencio Varela",
+                            Provincia="Buenos Aires",
+                            Apellido="Sanchez",
+                            Nombre="Ramon",
+                            Telefono=0114567890,
+                            Email="ramon@gmail.com"
+                        
                         },
                         new
                         {
                             ProveedorId = 4,
-                            Direccion = "Calle Moreno 8765",
-                            Nombre = "Bike Gear Co.",
-                            Telefono = "011-45678901"
+                            Cuit="20356457899",
+                            RazonSocial="Bike Gear Co.",
+                            Domicilio="Calle Moreno 8765",
+                            Localidad="Capital Federal",
+                            Provincia="Buenos Aires",
+                            Apellido="Cuello",
+                            Nombre="Marcos",
+                            Telefono = 01145678901,
+                            Email="marcos@gmail.com"
                         },
                         new
                         {
                             ProveedorId = 5,
-                            Direccion = "Calle Alem 9876",
-                            Nombre = "Moto Supplies Inc.",
-                            Telefono = "011-56789012"
+                            Cuit="23367894567",
+                            RazonSocial="Moto Supplies Inc.",
+                            Direccion="Calle Alem 9876",
+                            Localidad="La Plata",
+                            Provincia="Buenos Aires",
+                            Apellido="Bernis",
+                            Nomnre="Jose",
+                            Telefono=01156789012,
+                            Email="bernis@hotmail.com"
                         });
                 });
 

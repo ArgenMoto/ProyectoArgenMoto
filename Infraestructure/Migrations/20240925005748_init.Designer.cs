@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 #nullable disable
 
@@ -75,35 +76,60 @@ namespace Infraestructure.Migrations
                             ClienteId = 1,
                             Apellido = "Pérez",
                             DNI = "12345678",
-                            Nombre = "Juan"
+                            Nombre = "Juan",
+                            Domicilio = "Calle 30 214",
+                            Localidad = "Quilmes",
+                            Provincia = "Buenos Aires",
+                            Telefono = 422589654,
+                            Email = "carlos@gmail.com"
                         },
                         new
                         {
                             ClienteId = 2,
                             Apellido = "García",
                             DNI = "23456789",
-                            Nombre = "Ana"
+                            Nombre = "Ana",
+                            Domicilio = "Calle 30 231",
+                            Localidad = "Florencio Varela",
+                            Provincia = "Buenos Aires",
+                            Telefono = 45678932,
+                            Email = "garciana@gmail.com"
                         },
                         new
                         {
                             ClienteId = 3,
                             Apellido = "Martínez",
                             DNI = "34567890",
-                            Nombre = "Luis"
+                            Nombre = "Luis",
+                            Domicilio = "Calle 12 1024",
+                            Localidad = "Berazategui",
+                            Provincia = "Buenos Aires",
+                            Telefono = 1124568935,
+                            Email = "luis@gmail.com"
                         },
                         new
                         {
                             ClienteId = 4,
                             Apellido = "Lopez",
                             DNI = "45678901",
-                            Nombre = "Marta"
+                            Nombre = "Marta",
+                            Domicilio = "Calle 28 1235",
+                            Localidad = "Berazategui",
+                            Provincia = "Buenos Aires",
+                            Telefono = 1124567835,
+                            Email = "marta@yahoo.com"
                         },
                         new
                         {
                             ClienteId = 5,
                             Apellido = "Fernández",
                             DNI = "56789012",
-                            Nombre = "Carlos"
+                            Nombre = "Carlos",
+                            Domicilio = "Mitre 1234",
+                            Localidad = "Quilmes",
+                            Provincia = "Buenos Aires",
+                            Telefono = 1145623789,
+                            Email = "carlitos@yahoo.com"
                         });
                 });
 
@@ -507,7 +533,27 @@ namespace Infraestructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProveedorId"));
 
+                    b.Property<string>("Cuit")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RazonSocial")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Direccion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Localidad")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Provincia")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Apellido")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -515,7 +561,11 @@ namespace Infraestructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Telefono")
+                    b.Property<int>("Telefono")
+                        .IsRequired()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -527,37 +577,67 @@ namespace Infraestructure.Migrations
                         new
                         {
                             ProveedorId = 1,
+                            Cuit = 20234567897,
+                            RazonSocial = "Moto Parts Ltd.",
                             Direccion = "Av. Libertador 1234",
-                            Nombre = "Moto Parts Ltd.",
-                            Telefono = "011-12345678"
+                            Localidad = "Capital Federal",
+                            Provincia = "Buenos Aires",
+                            Apellido = "Perez",
+                            Nombre = "Juan",
+                            Telefono = 01112345678,
+                            Email = "juan@gmail.com"
                         },
                         new
                         {
                             ProveedorId = 2,
+                            Cuit = 20234567899,
+                            RazonSocial = "Moto Accessories S.A.",
                             Direccion = "Calle Falsa 5678",
-                            Nombre = "Moto Accessories S.A.",
-                            Telefono = "011-23456789"
+                            Localidad = "Quilmes",
+                            Provincia = "Buenos Aires",
+                            Apellido = "Torres",
+                            Nombre = "Gabriel",
+                            Telefono = 01123456789,
+                            Email = "torres@yahoo,com"
                         },
                         new
                         {
                             ProveedorId = 3,
+                            Cuit = 23415689741,
+                            RazonSocial = "Motorcycle World",
                             Direccion = "Avenida Rivadavia 4321",
-                            Nombre = "Motorcycle World",
-                            Telefono = "011-34567890"
+                            Localidad = "Florencio Varela",
+                            Provincia = "Buenos Aires",
+                            Apellido = "Sanchez",
+                            Nombre = "Ramon",
+                            Telefono = 0114567890,
+                            Email = "ramon@gmail.com"
                         },
                         new
                         {
                             ProveedorId = 4,
-                            Direccion = "Calle Moreno 8765",
-                            Nombre = "Bike Gear Co.",
-                            Telefono = "011-45678901"
+                            Cuit = 20356457899,
+                            RazonSocial = "Bike Gear Co.",
+                            Domicilio = "Calle Moreno 8765",
+                            Localidad = "Capital Federal",
+                            Provincia = "Buenos Aires",
+                            Apellido = "Cuello",
+                            Nombre = "Marcos",
+                            Telefono = 01145678901,
+                            Email = "marcos@gmail.com"
                         },
                         new
                         {
                             ProveedorId = 5,
+                            Cuit = 23367894567,
+                            RazonSocial = "Moto Supplies Inc.",
                             Direccion = "Calle Alem 9876",
-                            Nombre = "Moto Supplies Inc.",
-                            Telefono = "011-56789012"
+                            Localidad = "La Plata",
+                            Provincia = "Buenos Aires",
+                            Apellido = "Bernis",
+                            Nomnre = "Jose",
+                            Telefono = 01156789012,
+                            Email = "bernis@hotmail.com"
                         });
                 });
 
@@ -612,32 +692,67 @@ namespace Infraestructure.Migrations
                         new
                         {
                             VendedorId = 1,
-                            Nombre = "Pedro",
-                            Puesto = "Vendedor Principal"
+                            VendedorNombre = "Pedro",
+                            VendedorApellido = "Gomez",
+                            VendedorPuesto = "Vendedor Principal",
+                            VendedorDni = 33456789,
+                            VendedorDomicilio = "Calle 30 2659",
+                            VendedorLocalidad = "Berazategui",
+                            VendedorProvincia = "Buenos Aires",
+                            VendedorTelefono = 1523467895,
+                            VendedorEmail = "pedro@gmail.com"
                         },
                         new
                         {
                             VendedorId = 2,
-                            Nombre = "Laura",
-                            Puesto = "Vendedora"
+                            VendedorNombre = "Laura",
+                            VendedorApellido = "Rodriguez",
+                            VendedorPuesto = "Vendedora",
+                            VendedorDni = 40256897,
+                            VendedorDomicilio = "Calle 132 4567",
+                            VendedorLocalidad = "Berazategui",
+                            VendedorProvincia = "Buenos Aires",
+                            VendedorTelefono = 1547896321,
+                            VendedorEmail = "laura@gmail.com"
                         },
                         new
                         {
-                            VendedorId = 3,
-                            Nombre = "Andrés",
-                            Puesto = "Vendedor"
+                            VVendedorId = 3,
+                            VendedorNombre = "Andrés",
+                            VendedorApellido = "Gimenez",
+                            VendedorPuesto = "Vendedor",
+                            VendedorDni = 38526478,
+                            VendedorDomicilio = "Calle 145 5047",
+                            VendedorLocalidad = "Berazategui",
+                            VendedorProvincia = "Buenos Aires",
+                            VendedorTelefono = 1578451236,
+                            VendedorEmail = "andres@gmail.com"
                         },
                         new
                         {
                             VendedorId = 4,
-                            Nombre = "Sofía",
-                            Puesto = "Vendedora"
+                            VendedorNombre = "Sofía",
+                            VendedorApellido = "Saucedo",
+                            VendedorPuesto = "Vendedora",
+                            VendedorDni = 23456789,
+                            VendedorDomicilio = "Calle 38 4568",
+                            VendedorLocalidad = "Berazategui",
+                            VendedorProvincia = "Buenos Aires",
+                            VendedorTelefono = 1547526389,
+                            VendedorEmail = "sofia@gmail.com"
                         },
                         new
                         {
                             VendedorId = 5,
-                            Nombre = "Miguel",
-                            Puesto = "Vendedor"
+                            VendedorNombre = "Miguel",
+                            VendedorApellido = "Souto",
+                            VendedorPuesto = "Vendedor ",
+                            VendedorDni = 34568791,
+                            VendedorDomicilio = "Calle 33 2356",
+                            VendedorLocalidad = "Berazategui",
+                            VendedorProvincia = "Buenos Aires",
+                            VendedorTelefono = 1545678912,
+                            VendedorEmail = "miguel@gmail.com"
                         });
                 });
 

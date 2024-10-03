@@ -40,9 +40,15 @@ namespace Application.UseCase
 
             var _proveedor = new Proveedor
             {
+                Cuit=proveedor.Cuit,
+                RazonSocial=proveedor.RazonSocial,
+                Apellido=proveedor.Apellido,
                 Nombre = proveedor.Nombre,
                 Direccion = proveedor.Direccion,
+                Localidad=proveedor.Localidad,
+                Provincia=proveedor.Provincia,
                 Telefono = proveedor.Telefono,
+                Email=proveedor.Email,
             };
             _proveedorCommand.registrarProveedor(_proveedor);
             return _proveedor;
@@ -58,18 +64,30 @@ namespace Application.UseCase
 
                 throw new Exception("Proveedor no encontrado");
 
+            _proveedor.Cuit = proveedor.Cuit;
+            _proveedor.RazonSocial = proveedor.RazonSocial;
+            _proveedor.Apellido = proveedor.Apellido;
             _proveedor.Nombre = proveedor.Nombre;
             _proveedor.Direccion = proveedor.Direccion;
+            _proveedor.Localidad = proveedor.Localidad;
+            _proveedor.Provincia = proveedor.Provincia;
             _proveedor.Telefono = proveedor.Telefono;
+            _proveedor.Email = proveedor.Email;
 
             _proveedorCommand.ModificarProveedor(_proveedor);
 
             ProveedorResponse proveedorResponse = new ProveedorResponse
             {
                 Id = id,
+                Cuit = proveedor.Cuit,
+                RazonSocial = proveedor.RazonSocial,
+                Apellido = proveedor.Apellido,
                 Nombre = proveedor.Nombre,
                 Direccion = proveedor.Direccion,
+                Localidad = proveedor.Localidad,
+                Provincia = proveedor.Provincia,
                 Telefono = proveedor.Telefono,
+                Email = proveedor.Email,
             };
 
             return proveedorResponse;

@@ -131,11 +131,66 @@ namespace Infraestructure.Persistense
                 );
 
                 modelBuilder.Entity<Proveedor>().HasData(
-                    new Proveedor { ProveedorId = 1, Nombre = "Moto Parts Ltd.", Direccion = "Av. Libertador 1234", Telefono = "011-12345678" },
-                    new Proveedor { ProveedorId = 2, Nombre = "Moto Accessories S.A.", Direccion = "Calle Falsa 5678", Telefono = "011-23456789" },
-                    new Proveedor { ProveedorId = 3, Nombre = "Motorcycle World", Direccion = "Avenida Rivadavia 4321", Telefono = "011-34567890" },
-                    new Proveedor { ProveedorId = 4, Nombre = "Bike Gear Co.", Direccion = "Calle Moreno 8765", Telefono = "011-45678901" },
-                    new Proveedor { ProveedorId = 5, Nombre = "Moto Supplies Inc.", Direccion = "Calle Alem 9876", Telefono = "011-56789012" }
+                    new Proveedor {
+                        ProveedorId = 1,
+                        Cuit = "20234567897",
+                        RazonSocial = "Moto Parts Ltd.",
+                        Direccion = "Av. Libertador 1234",
+                        Localidad = "Capital Federal",
+                        Provincia = "Buenos Aires",
+                        Apellido = "Perez",
+                        Nombre = "Juan",
+                        Telefono = 01112345678,
+                        Email = "juan@gmail.com"
+                    },
+                    new Proveedor {
+                        ProveedorId = 2,
+                        Cuit = "20234567899",
+                        RazonSocial = "Moto Accessories S.A.",
+                        Direccion = "Calle Falsa 5678",
+                        Localidad = "Quilmes",
+                        Provincia = "Buenos Aires",
+                        Apellido = "Torres",
+                        Nombre = "Gabriel",
+                        Telefono = 01123456789,
+                        Email = "torres@yahoo,com"
+                    },
+                    new Proveedor {
+                        ProveedorId = 3,
+                        Cuit = "23415689741",
+                        RazonSocial = "Motorcycle World",
+                        Direccion = "Avenida Rivadavia 4321",
+                        Localidad = "Florencio Varela",
+                        Provincia = "Buenos Aires",
+                        Apellido = "Sanchez",
+                        Nombre = "Ramon",
+                        Telefono = 0114567890,
+                        Email = "ramon@gmail.com"
+                    },
+                    new Proveedor {
+                        ProveedorId = 4,
+                        Cuit = "20356457899",
+                        RazonSocial = "Bike Gear Co.",
+                        Direccion = "Calle Moreno 8765",
+                        Localidad = "Capital Federal",
+                        Provincia = "Buenos Aires",
+                        Apellido = "Cuello",
+                        Nombre = "Marcos",
+                        Telefono = 01145678901,
+                        Email = "marcos@gmail.com"
+                    },
+                    new Proveedor {
+                        ProveedorId = 5,
+                        Cuit = "23367894567",
+                        RazonSocial = "Moto Supplies Inc.",
+                        Direccion = "Calle Alem 9876",
+                        Localidad = "La Plata",
+                        Provincia = "Buenos Aires",
+                        Apellido = "Bernis",
+                        Nombre = "Jose",
+                        Telefono = 01156789012,
+                        Email = "bernis@hotmail.com"
+                    }
                 );
 
                 modelBuilder.Entity<Vendedor>().HasData(

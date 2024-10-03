@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 #nullable disable
 
@@ -91,9 +92,15 @@ namespace Infraestructure.Migrations
                 {
                     ProveedorId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Cuit = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RazonSocial = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Apellido = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Direccion = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Telefono = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Localidad = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Provincia = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Telefono = table.Column<int>(type: "int", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -294,14 +301,14 @@ namespace Infraestructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "Proveedor",
-                columns: new[] { "ProveedorId", "Direccion", "Nombre", "Telefono" },
+                columns: new[] { "ProveedorId","Cuit","RazonSocial", "Direccion","Localidad","Provincia","Apellido", "Nombre", "Telefono","Email" },
                 values: new object[,]
                 {
-                    { 1, "Av. Libertador 1234", "Moto Parts Ltd.", "011-12345678" },
-                    { 2, "Calle Falsa 5678", "Moto Accessories S.A.", "011-23456789" },
-                    { 3, "Avenida Rivadavia 4321", "Motorcycle World", "011-34567890" },
-                    { 4, "Calle Moreno 8765", "Bike Gear Co.", "011-45678901" },
-                    { 5, "Calle Alem 9876", "Moto Supplies Inc.", "011-56789012" }
+                    { 1,"20234567897","Moto Parts Ltd.", "Av. Libertador 1234","Capital Federal","Buenos Aires", "Perez","Juan", 01112345678,"juan@gmail.com" },
+                    { 2,"20234567899", "Moto Accessories S.A.", "Calle Falsa 5678","Quilmes","Buenos Aires","Torres","Gabriel",01123456789,"torres@yahoo,com" },
+                    { 3,"23415689741", "Motorcycle World", "Avenida Rivadavia 4321","Florencio Varela","Buenos Aires","Sanchez","Ramon",0114567890,"ramon@gmail.com" },
+                    { 4,"20356457899", "Bike Gear Co.", "Calle Moreno 8765","Capital Federal","Buenos Aires","Cuello","Marcos",01145678901,"marcos@gmail.com" },
+                    { 5,"23367894567", "Moto Supplies Inc.","Calle Alem 9876","La Plata" ,"Buenos Aires","Bernis","Jose", 01156789012,"bernis@hotmail.com" }
                 });
 
             migrationBuilder.InsertData(
