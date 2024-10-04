@@ -275,7 +275,8 @@ namespace Infraestructure.Persistense
                     new MedioPago { MedioPagoId = 2, Descripcion = "Tarjeta de Crédito" },
                     new MedioPago { MedioPagoId = 3, Descripcion = "Tarjeta de Débito" },
                     new MedioPago { MedioPagoId = 4, Descripcion = "Transferencia Bancaria" },
-                    new MedioPago { MedioPagoId = 5, Descripcion = "PayPal" }
+                    new MedioPago { MedioPagoId = 5, Descripcion = "PayPal" },
+                    new MedioPago { MedioPagoId = 6, Descripcion = "QR" }
                 );
             });
         }

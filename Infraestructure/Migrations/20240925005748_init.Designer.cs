@@ -288,6 +288,11 @@ namespace Infraestructure.Migrations
                         {
                             MedioPagoId = 5,
                             Descripcion = "PayPal"
+                        },
+                        new
+                        {
+                            MedioPagoId = 6,
+                            Descripcion = "QR"
                         });
                 });
 
