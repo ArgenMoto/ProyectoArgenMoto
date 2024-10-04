@@ -280,7 +280,8 @@ namespace Infraestructure.Migrations
                     { 2, "Tarjeta de Crédito" },
                     { 3, "Tarjeta de Débito" },
                     { 4, "Transferencia Bancaria" },
-                    { 5, "PayPal" }
+                    { 5, "PayPal" },
+                    { 6, "QR" }
                 });
 
             migrationBuilder.InsertData(
