@@ -47,6 +47,10 @@ builder.Services.AddScoped<IMedioPagoQuery, MedioPagoQuery>();
 builder.Services.AddScoped<IVentaCommand, VentaCommand>();
 builder.Services.AddScoped<IVentaService, VentaServices>();
 
+builder.Services.AddScoped<IMedioPagoQuery, MedioPagoQuery>();
+builder.Services.AddScoped<IMedioPagoCommand, MedioPagoCommand>();
+builder.Services.AddScoped<IMedioPagoService, MedioPagoServices>();
+
 // Habilitar CORS
 builder.Services.AddCors(options =>
 {
@@ -60,9 +64,7 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
-// Comentario de cambio
-// Estoy trabajando en mi rama Cliente
-// Estoy Trabajando en mi rama Producto
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

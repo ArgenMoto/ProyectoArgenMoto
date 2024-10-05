@@ -1,16 +1,17 @@
-﻿using Domain.Entities;
+﻿using Application.Models;
+using Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Interfaces.Queries
+namespace Application.Interfaces.Services
 {
-    public interface IMedioPagoQuery
+    public interface IMedioPagoService
     {
         Task<List<MedioPago>> ListaMedioPago();
         MedioPago MedioPagoPorId(int id);
-
+       
     }
 }
