@@ -90,6 +90,9 @@ namespace Infraestructure.Persistense
                 entity.Property(x => x.MedioPagoId)
                 .HasColumnName("MedioDePago");
 
+                entity.Property(x => x.Fecha)
+                .HasColumnType("date");
+
                 entity.HasOne(x => x.Documento).WithMany(a => a.Facturas).HasForeignKey(x => x.DocumentoId);
                 entity.HasOne(x => x.MedioPago).WithMany(a => a.Facturas).HasForeignKey(x => x.MedioPagoId);
 
@@ -105,6 +108,10 @@ namespace Infraestructure.Persistense
 
                 entity.Property(x => x.VendedorId)
                 .HasColumnName("Vendedor");
+
+                entity.Property(x => x.Fecha)
+                .HasColumnName("fecha")
+                .HasColumnType("datetime2(0)");
 
                 entity.HasOne(x => x.Cliente).WithMany(a => a.Ventas).HasForeignKey(x => x.ClienteId);
                 entity.HasOne(x => x.Vendedor).WithMany(a => a.Ventas).HasForeignKey(x => x.VendedorId);

@@ -8,6 +8,7 @@ namespace Application.Models
 {
     public class ItemResponse
     {
+        public int Id { get; set; }
         public int ProductoId { get; set; }
         public string ProductoNombre { get; set; }
         public int PrecioUnitario { get; set; }

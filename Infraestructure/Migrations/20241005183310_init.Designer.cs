@@ -6,14 +6,13 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 #nullable disable
 
 namespace Infraestructure.Migrations
 {
     [DbContext(typeof(ArgenMotoDbContext))]
-    [Migration("20240925005748_init")]
+    [Migration("20241005183310_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -39,18 +38,21 @@ namespace Infraestructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("DNI")
-                        .IsRequired()
                         .HasColumnType("int");
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Domicilio")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Localidad")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nombre")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -59,12 +61,7 @@ namespace Infraestructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Telefono")
-                        .IsRequired()
                         .HasColumnType("int");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ClienteId");
 
@@ -75,61 +72,61 @@ namespace Infraestructure.Migrations
                         {
                             ClienteId = 1,
                             Apellido = "Pérez",
-                            DNI = "12345678",
-                            Nombre = "Juan",
+                            DNI = 12345678,
                             Domicilio = "Calle 30 214",
+                            Email = "carlos@gmail.com",
                             Localidad = "Quilmes",
+                            Nombre = "Juan",
                             Provincia = "Buenos Aires",
-                            Telefono = 422589654,
-                            Email = "carlos@gmail.com"
+                            Telefono = 422589654
                         },
                         new
                         {
                             ClienteId = 2,
                             Apellido = "García",
-                            DNI = "23456789",
-                            Nombre = "Ana",
+                            DNI = 23456789,
                             Domicilio = "Calle 30 231",
+                            Email = "garciana@gmail.com",
                             Localidad = "Florencio Varela",
+                            Nombre = "Ana",
                             Provincia = "Buenos Aires",
-                            Telefono = 45678932,
-                            Email = "garciana@gmail.com"
+                            Telefono = 45678932
                         },
                         new
                         {
                             ClienteId = 3,
                             Apellido = "Martínez",
-                            DNI = "34567890",
-                            Nombre = "Luis",
+                            DNI = 34567890,
                             Domicilio = "Calle 12 1024",
+                            Email = "luis@gmail.com",
                             Localidad = "Berazategui",
+                            Nombre = "Luis",
                             Provincia = "Buenos Aires",
-                            Telefono = 1124568935,
-                            Email = "luis@gmail.com"
+                            Telefono = 1124568935
                         },
                         new
                         {
                             ClienteId = 4,
                             Apellido = "Lopez",
-                            DNI = "45678901",
-                            Nombre = "Marta",
+                            DNI = 45678901,
                             Domicilio = "Calle 28 1235",
+                            Email = "marta@yahoo.com",
                             Localidad = "Berazategui",
+                            Nombre = "Marta",
                             Provincia = "Buenos Aires",
-                            Telefono = 1124567835,
-                            Email = "marta@yahoo.com"
+                            Telefono = 1124567835
                         },
                         new
                         {
                             ClienteId = 5,
                             Apellido = "Fernández",
-                            DNI = "56789012",
-                            Nombre = "Carlos",
+                            DNI = 56789012,
                             Domicilio = "Mitre 1234",
+                            Email = "carlitos@yahoo.com",
                             Localidad = "Quilmes",
+                            Nombre = "Carlos",
                             Provincia = "Buenos Aires",
-                            Telefono = 1145623789,
-                            Email = "carlitos@yahoo.com"
+                            Telefono = 1145623789
                         });
                 });
 
@@ -184,15 +181,17 @@ namespace Infraestructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.Factura", b =>
                 {
-                    b.Property<Guid>("FacturaId")
+                    b.Property<int>("FacturaId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FacturaId"));
 
                     b.Property<int>("DocumentoId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Fecha")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("date");
 
                     b.Property<int>("MedioPagoId")
                         .HasColumnType("int")
@@ -336,15 +335,21 @@ namespace Infraestructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductoId"));
 
-                    b.Property<string>("Nombre")
-                           .IsRequired()
-                           .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Cilindro")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Marca")
+                    b.Property<string>("Descripcion")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Descripcion")
+                    b.Property<int>("Fecha")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Imagen")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Marca")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -352,182 +357,163 @@ namespace Infraestructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("NumeroMotor")
-                         .IsRequired()
-                        .HasColumnType("int");
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("NumeroChasis")
-                        .IsRequired()
                         .HasColumnType("int");
 
-                    b.Property<int>("Cilindro")
-                        .IsRequired()
+                    b.Property<int>("NumeroMotor")
                         .HasColumnType("int");
 
-                    b.Property<int>("Fecha")
-                        .IsRequired()
+                    b.Property<int>("PrecioUnitario")
                         .HasColumnType("int");
 
                     b.Property<string>("Rubro")
-                       .IsRequired()
-                       .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PrecioUnitario")
                         .IsRequired()
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("StockMinimo")
-                        .IsRequired()
+                    b.Property<int>("StockActual")
                         .HasColumnType("int");
 
                     b.Property<int>("StockMaximo")
-                        .IsRequired()
                         .HasColumnType("int");
 
-                    b.Property<int>("StockActual")
-                        .IsRequired()
+                    b.Property<int>("StockMinimo")
                         .HasColumnType("int");
-
-                    b.Property<string>("Imagen")
-                       .IsRequired()
-                       .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ProductoId");
 
                     b.ToTable("Producto", (string)null);
 
                     b.HasData(
-                       new
-                       {
-                           ProductoId = 1,
-                           Nombre = "Yamaha MT-07",
-                           Marca = "Yamaha",
-                           Descripcion = "Motocicleta deportiva ligera y ágil.",
-                           Modelo = "MT-07",
-                           NumeroMotor = 123456,
-                           NumeroChasis = 789012,
-                           Cilindro = 689,
-                           Fecha = 2024,
-                           Rubro = "Motocicleta",
-                           PrecioUnitario = 150000,
-                           StockMinimo = 3,
-                           StockMaximo = 100,
-                           StockActual = 6,
-                           Imagen = "https://i.postimg.cc/rpJWcK0L/2023-Yamaha-MT07-A-EU-Cyan-Storm-360-Degrees-001-03.jpg"
-                       },
-                       new
-                       {
-                           ProductoId = 2,
-                           Nombre = "Honda CB500F",
-                           Marca = "Honda",
-                           Descripcion = "Motocicleta naked para uso urbano y carretera.",
-                           Modelo = "CB500F",
-                           NumeroMotor = 223344,
-                           NumeroChasis = 334455,
-                           Cilindro = 500,
-                           Fecha = 2024,
-                           Rubro = "Motocicleta",
-                           PrecioUnitario = 180000,
-                           StockMinimo = 3,
-                           StockMaximo = 100,
-                           StockActual = 7,
-                           Imagen = "https://i.postimg.cc/50KCYTS7/honda-cb-500-f.jpg"
-                       },
-
-                      new
-                      {
-                          ProductoId = 3,
-                          Nombre = "Kawasaki Ninja 400",
-                          Marca = "Kawasaki",
-                          Descripcion = "Motocicleta deportiva de baja cilindrada.",
-                          Modelo = "Ninja 400",
-                          NumeroMotor = 556677,
-                          NumeroChasis = 889900,
-                          Cilindro = 399,
-                          Fecha = 2024,
-                          Rubro = "Motocicleta",
-                          PrecioUnitario = 200000,
-                          StockMinimo = 3,
-                          StockMaximo = 100,
-                          StockActual = 10,
-                          Imagen = "https://i.postimg.cc/tJVY1TTJ/ninja400-KRT-1-1.jpg"
-                      },
-
-                      new
-                      {
-                          ProductoId = 4,
-                          Nombre = "Suzuki V-Strom 650",
-                          Marca = "Suzuki",
-                          Descripcion = "Motocicleta adventure de media cilindrada.",
-                          Modelo = "V-Strom 650",
-                          NumeroMotor = 998877,
-                          NumeroChasis = 665544,
-                          Cilindro = 645,
-                          Fecha = 2024,
-                          Rubro = "Motocicleta",
-                          PrecioUnitario = 160000,
-                          StockMinimo = 3,
-                          StockMaximo = 100,
-                          StockActual = 8,
-                          Imagen = "https://i.postimg.cc/NjtkchJm/muo3kk8n0sjdherhbjzvqyytgylzz8hcmvkfdusy.jpg"
-                      },
-                      new
-                      {
-                          ProductoId = 5,
-                          Nombre = "BMW R 1250 GS",
-                          Marca = "BMW",
-                          Descripcion = "Motocicleta adventure de alta gama.",
-                          Modelo = "R 1250 GS",
-                          NumeroMotor = 554433,
-                          NumeroChasis = 223344,
-                          Cilindro = 1254,
-                          Fecha = 2024,
-                          Rubro = "Motocicleta",
-                          PrecioUnitario = 300000,
-                          StockMinimo = 3,
-                          StockMaximo = 100,
-                          StockActual = 4,
-                          Imagen = "https://i.postimg.cc/W4WGgd2w/image.jpg"
-                      },
-
-                      new
-                      {
-                          ProductoId = 6,
-                          Nombre = "Ducati Monster 821",
-                          Marca = "Ducati",
-                          Descripcion = "Motocicleta naked de alto rendimiento.",
-                          Modelo = "Monster 821",
-                          NumeroMotor = 112233,
-                          NumeroChasis = 445566,
-                          Cilindro = 821,
-                          Fecha = 2024,
-                          Rubro = "Motocicleta",
-                          PrecioUnitario = 250000,
-                          StockMinimo = 3,
-                          StockMaximo = 100,
-                          StockActual = 4,
-                          Imagen = "https://i.postimg.cc/RCn7JC2w/Monster-821-MY18-Red-01-Model-Preview-1050x650.png"
-                      },
-
-                      new
-                      {
-                          ProductoId = 7,
-                          Nombre = "Harley-Davidson Iron 883",
-                          Marca = "Harley-Davidson",
-                          Descripcion = "Motocicleta cruiser clásica.",
-                          Modelo = "Iron 883",
-                          NumeroMotor = 778899,
-                          NumeroChasis = 123456,
-                          Cilindro = 883,
-                          Fecha = 2024,
-                          Rubro = "Motocicleta",
-                          PrecioUnitario = 400000,
-                          StockMinimo = 3,
-                          StockMaximo = 100,
-                          StockActual = 5,
-                          Imagen = "https://i.postimg.cc/X7SwfS0m/54c33236a8ad91156a9e611375b4d973-a18dd478b82157f1.png"
-                      });
-
+                        new
+                        {
+                            ProductoId = 1,
+                            Cilindro = 689,
+                            Descripcion = "Motocicleta deportiva ligera y ágil.",
+                            Fecha = 2024,
+                            Imagen = "https://i.postimg.cc/rpJWcK0L/2023-Yamaha-MT07-A-EU-Cyan-Storm-360-Degrees-001-03.jpg",
+                            Marca = "Yamaha",
+                            Modelo = "MT-07",
+                            Nombre = "Yamaha MT-07",
+                            NumeroChasis = 789012,
+                            NumeroMotor = 123456,
+                            PrecioUnitario = 150000,
+                            Rubro = "Motocicleta",
+                            StockActual = 6,
+                            StockMaximo = 100,
+                            StockMinimo = 3
+                        },
+                        new
+                        {
+                            ProductoId = 2,
+                            Cilindro = 500,
+                            Descripcion = "Motocicleta naked para uso urbano y carretera.",
+                            Fecha = 2024,
+                            Imagen = "https://i.postimg.cc/50KCYTS7/honda-cb-500-f.jpg",
+                            Marca = "Honda",
+                            Modelo = "CB500F",
+                            Nombre = "Honda CB500F",
+                            NumeroChasis = 334455,
+                            NumeroMotor = 223344,
+                            PrecioUnitario = 180000,
+                            Rubro = "Motocicleta",
+                            StockActual = 7,
+                            StockMaximo = 100,
+                            StockMinimo = 3
+                        },
+                        new
+                        {
+                            ProductoId = 3,
+                            Cilindro = 399,
+                            Descripcion = "Motocicleta deportiva de baja cilindrada.",
+                            Fecha = 2024,
+                            Imagen = "https://i.postimg.cc/tJVY1TTJ/ninja400-KRT-1-1.jpg",
+                            Marca = "Kawasaki",
+                            Modelo = "Ninja 400",
+                            Nombre = "Kawasaki Ninja 400",
+                            NumeroChasis = 889900,
+                            NumeroMotor = 556677,
+                            PrecioUnitario = 200000,
+                            Rubro = "Motocicleta",
+                            StockActual = 10,
+                            StockMaximo = 100,
+                            StockMinimo = 3
+                        },
+                        new
+                        {
+                            ProductoId = 4,
+                            Cilindro = 645,
+                            Descripcion = "Motocicleta adventure de media cilindrada.",
+                            Fecha = 2024,
+                            Imagen = "https://i.postimg.cc/NjtkchJm/muo3kk8n0sjdherhbjzvqyytgylzz8hcmvkfdusy.jpg",
+                            Marca = "Suzuki",
+                            Modelo = "V-Strom 650",
+                            Nombre = "Suzuki V-Strom 650",
+                            NumeroChasis = 665544,
+                            NumeroMotor = 998877,
+                            PrecioUnitario = 160000,
+                            Rubro = "Motocicleta",
+                            StockActual = 8,
+                            StockMaximo = 100,
+                            StockMinimo = 3
+                        },
+                        new
+                        {
+                            ProductoId = 5,
+                            Cilindro = 1254,
+                            Descripcion = "Motocicleta adventure de alta gama.",
+                            Fecha = 2024,
+                            Imagen = "https://i.postimg.cc/W4WGgd2w/image.jpg",
+                            Marca = "BMW",
+                            Modelo = "R 1250 GS",
+                            Nombre = "BMW R 1250 GS",
+                            NumeroChasis = 223344,
+                            NumeroMotor = 554433,
+                            PrecioUnitario = 300000,
+                            Rubro = "Motocicleta",
+                            StockActual = 4,
+                            StockMaximo = 100,
+                            StockMinimo = 3
+                        },
+                        new
+                        {
+                            ProductoId = 6,
+                            Cilindro = 821,
+                            Descripcion = "Motocicleta naked de alto rendimiento.",
+                            Fecha = 2024,
+                            Imagen = "https://i.postimg.cc/RCn7JC2w/Monster-821-MY18-Red-01-Model-Preview-1050x650.png",
+                            Marca = "Ducati",
+                            Modelo = "Monster 821",
+                            Nombre = "Ducati Monster 821",
+                            NumeroChasis = 445566,
+                            NumeroMotor = 112233,
+                            PrecioUnitario = 250000,
+                            Rubro = "Motocicleta",
+                            StockActual = 4,
+                            StockMaximo = 100,
+                            StockMinimo = 3
+                        },
+                        new
+                        {
+                            ProductoId = 7,
+                            Cilindro = 883,
+                            Descripcion = "Motocicleta cruiser clásica.",
+                            Fecha = 2024,
+                            Imagen = "https://i.postimg.cc/X7SwfS0m/54c33236a8ad91156a9e611375b4d973-a18dd478b82157f1.png",
+                            Marca = "Harley-Davidson",
+                            Modelo = "Iron 883",
+                            Nombre = "Harley-Davidson Iron 883",
+                            NumeroChasis = 123456,
+                            NumeroMotor = 778899,
+                            PrecioUnitario = 400000,
+                            Rubro = "Motocicleta",
+                            StockActual = 5,
+                            StockMaximo = 100,
+                            StockMinimo = 3
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Proveedor", b =>
@@ -538,11 +524,11 @@ namespace Infraestructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProveedorId"));
 
-                    b.Property<string>("Cuit")
+                    b.Property<string>("Apellido")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RazonSocial")
+                    b.Property<string>("Cuit")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -550,15 +536,11 @@ namespace Infraestructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Localidad")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Provincia")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Apellido")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -566,13 +548,16 @@ namespace Infraestructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Telefono")
-                        .IsRequired()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Email")
+                    b.Property<string>("Provincia")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RazonSocial")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Telefono")
+                        .HasColumnType("int");
 
                     b.HasKey("ProveedorId");
 
@@ -582,67 +567,67 @@ namespace Infraestructure.Migrations
                         new
                         {
                             ProveedorId = 1,
-                            Cuit = 20234567897,
-                            RazonSocial = "Moto Parts Ltd.",
-                            Direccion = "Av. Libertador 1234",
-                            Localidad = "Capital Federal",
-                            Provincia = "Buenos Aires",
                             Apellido = "Perez",
+                            Cuit = "20234567897",
+                            Direccion = "Av. Libertador 1234",
+                            Email = "juan@gmail.com",
+                            Localidad = "Capital Federal",
                             Nombre = "Juan",
-                            Telefono = 01112345678,
-                            Email = "juan@gmail.com"
+                            Provincia = "Buenos Aires",
+                            RazonSocial = "Moto Parts Ltd.",
+                            Telefono = 1112345678
                         },
                         new
                         {
                             ProveedorId = 2,
-                            Cuit = 20234567899,
-                            RazonSocial = "Moto Accessories S.A.",
-                            Direccion = "Calle Falsa 5678",
-                            Localidad = "Quilmes",
-                            Provincia = "Buenos Aires",
                             Apellido = "Torres",
+                            Cuit = "20234567899",
+                            Direccion = "Calle Falsa 5678",
+                            Email = "torres@yahoo,com",
+                            Localidad = "Quilmes",
                             Nombre = "Gabriel",
-                            Telefono = 01123456789,
-                            Email = "torres@yahoo,com"
+                            Provincia = "Buenos Aires",
+                            RazonSocial = "Moto Accessories S.A.",
+                            Telefono = 1123456789
                         },
                         new
                         {
                             ProveedorId = 3,
-                            Cuit = 23415689741,
-                            RazonSocial = "Motorcycle World",
-                            Direccion = "Avenida Rivadavia 4321",
-                            Localidad = "Florencio Varela",
-                            Provincia = "Buenos Aires",
                             Apellido = "Sanchez",
+                            Cuit = "23415689741",
+                            Direccion = "Avenida Rivadavia 4321",
+                            Email = "ramon@gmail.com",
+                            Localidad = "Florencio Varela",
                             Nombre = "Ramon",
-                            Telefono = 0114567890,
-                            Email = "ramon@gmail.com"
+                            Provincia = "Buenos Aires",
+                            RazonSocial = "Motorcycle World",
+                            Telefono = 114567890
                         },
                         new
                         {
                             ProveedorId = 4,
-                            Cuit = 20356457899,
-                            RazonSocial = "Bike Gear Co.",
-                            Domicilio = "Calle Moreno 8765",
-                            Localidad = "Capital Federal",
-                            Provincia = "Buenos Aires",
                             Apellido = "Cuello",
+                            Cuit = "20356457899",
+                            Direccion = "Calle Moreno 8765",
+                            Email = "marcos@gmail.com",
+                            Localidad = "Capital Federal",
                             Nombre = "Marcos",
-                            Telefono = 01145678901,
-                            Email = "marcos@gmail.com"
+                            Provincia = "Buenos Aires",
+                            RazonSocial = "Bike Gear Co.",
+                            Telefono = 1145678901
                         },
                         new
                         {
                             ProveedorId = 5,
-                            Cuit = 23367894567,
-                            RazonSocial = "Moto Supplies Inc.",
-                            Direccion = "Calle Alem 9876",
-                            Localidad = "La Plata",
-                            Provincia = "Buenos Aires",
                             Apellido = "Bernis",
-                            Nomnre = "Jose",
-                            Telefono = 01156789012,
-                            Email = "bernis@hotmail.com"
+                            Cuit = "23367894567",
+                            Direccion = "Calle Alem 9876",
+                            Email = "bernis@hotmail.com",
+                            Localidad = "La Plata",
+                            Nombre = "Jose",
+                            Provincia = "Buenos Aires",
+                            RazonSocial = "Moto Supplies Inc.",
+                            Telefono = 1156789012
                         });
                 });
 
@@ -654,23 +639,18 @@ namespace Infraestructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VendedorId"));
 
-                    b.Property<string>("VendedorNombre")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("VendedorApellido")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("VendedorPuesto")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("VendedorDni")
-                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("VendedorDomicilio")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VendedorEmail")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -678,17 +658,21 @@ namespace Infraestructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("VendedorNombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("VendedorProvincia")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("VendedorTelefono")
-                        .IsRequired()
-                        .HasColumnType("int");
-
-                    b.Property<string>("VendedorEmail")
+                    b.Property<string>("VendedorPuesto")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("VendedorTelefono")
+                        .HasColumnType("int");
+
                     b.HasKey("VendedorId");
 
                     b.ToTable("Vendedor", (string)null);
@@ -697,67 +681,67 @@ namespace Infraestructure.Migrations
                         new
                         {
                             VendedorId = 1,
-                            VendedorNombre = "Pedro",
                             VendedorApellido = "Gomez",
-                            VendedorPuesto = "Vendedor Principal",
                             VendedorDni = 33456789,
                             VendedorDomicilio = "Calle 30 2659",
+                            VendedorEmail = "pedro@gmail.com",
                             VendedorLocalidad = "Berazategui",
+                            VendedorNombre = "Pedro",
                             VendedorProvincia = "Buenos Aires",
-                            VendedorTelefono = 1523467895,
-                            VendedorEmail = "pedro@gmail.com"
+                            VendedorPuesto = "Vendedor Principal",
+                            VendedorTelefono = 1523467895
                         },
                         new
                         {
                             VendedorId = 2,
-                            VendedorNombre = "Laura",
                             VendedorApellido = "Rodriguez",
-                            VendedorPuesto = "Vendedora",
                             VendedorDni = 40256897,
                             VendedorDomicilio = "Calle 132 4567",
+                            VendedorEmail = "laura@gmail.com",
                             VendedorLocalidad = "Berazategui",
+                            VendedorNombre = "Laura",
                             VendedorProvincia = "Buenos Aires",
-                            VendedorTelefono = 1547896321,
-                            VendedorEmail = "laura@gmail.com"
+                            VendedorPuesto = "Vendedora",
+                            VendedorTelefono = 1547896321
                         },
                         new
                         {
-                            VVendedorId = 3,
-                            VendedorNombre = "Andrés",
+                            VendedorId = 3,
                             VendedorApellido = "Gimenez",
-                            VendedorPuesto = "Vendedor",
                             VendedorDni = 38526478,
                             VendedorDomicilio = "Calle 145 5047",
+                            VendedorEmail = "andres@gmail.com",
                             VendedorLocalidad = "Berazategui",
+                            VendedorNombre = "Andrés",
                             VendedorProvincia = "Buenos Aires",
-                            VendedorTelefono = 1578451236,
-                            VendedorEmail = "andres@gmail.com"
+                            VendedorPuesto = "Vendedor",
+                            VendedorTelefono = 1578451236
                         },
                         new
                         {
                             VendedorId = 4,
-                            VendedorNombre = "Sofía",
                             VendedorApellido = "Saucedo",
-                            VendedorPuesto = "Vendedora",
                             VendedorDni = 23456789,
                             VendedorDomicilio = "Calle 38 4568",
+                            VendedorEmail = "sofia@gmail.com",
                             VendedorLocalidad = "Berazategui",
+                            VendedorNombre = "Sofía",
                             VendedorProvincia = "Buenos Aires",
-                            VendedorTelefono = 1547526389,
-                            VendedorEmail = "sofia@gmail.com"
+                            VendedorPuesto = "Vendedora",
+                            VendedorTelefono = 1547526389
                         },
                         new
                         {
                             VendedorId = 5,
-                            VendedorNombre = "Miguel",
                             VendedorApellido = "Souto",
-                            VendedorPuesto = "Vendedor ",
                             VendedorDni = 34568791,
                             VendedorDomicilio = "Calle 33 2356",
+                            VendedorEmail = "miguel@gmail.com",
                             VendedorLocalidad = "Berazategui",
+                            VendedorNombre = "Miguel",
                             VendedorProvincia = "Buenos Aires",
-                            VendedorTelefono = 1545678912,
-                            VendedorEmail = "miguel@gmail.com"
+                            VendedorPuesto = "Vendedor ",
+                            VendedorTelefono = 1545678912
                         });
                 });
 
@@ -772,7 +756,8 @@ namespace Infraestructure.Migrations
                         .HasColumnName("cliente");
 
                     b.Property<DateTime>("Fecha")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2(0)")
+                        .HasColumnName("fecha");
 
                     b.Property<int>("TotalVenta")
                         .HasColumnType("int");
