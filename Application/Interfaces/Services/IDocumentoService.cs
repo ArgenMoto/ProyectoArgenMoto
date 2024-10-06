@@ -5,11 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Interfaces.Queries
+namespace Application.Interfaces.Services
 {
-    public interface IDocumentoQuery
+    public interface IDocumentoService
     {
         Task<List<Documento>> ListaDocumento();
         Documento DocumentoPorId(int id);
+
     }
 }

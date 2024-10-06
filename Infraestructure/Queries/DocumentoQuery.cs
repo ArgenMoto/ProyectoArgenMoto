@@ -17,6 +17,13 @@ namespace Infraestructure.Queries
         {
             _context = context;
         }
+        public async Task<List<Documento>> ListaDocumento()
+        {
+            List<Documento> result = new List<Documento>();
+
+            var documento = await _context.Documento.ToListAsync();
+            return documento;
+        }
         public Documento DocumentoPorId(int id)
         {
             var documento = _context.Documento.Find(id);

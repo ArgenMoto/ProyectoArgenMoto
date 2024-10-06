@@ -19,7 +19,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<ArgenMotoDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection2"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection1"));
 });
 
 builder.Services.AddScoped<IProveedorQuery, ProveedorQuery>();
@@ -42,6 +42,7 @@ builder.Services.AddScoped<IItemCommand, ItemCommand>();
 builder.Services.AddScoped<IItemQuery, ItemQuery>();
 
 builder.Services.AddScoped<IDocumentoQuery, DocumentoQuery>();
+builder.Services.AddScoped<IDocumentoService, DocumentoServices>();
 builder.Services.AddScoped<IMedioPagoQuery, MedioPagoQuery>();
 
 builder.Services.AddScoped<IVentaCommand, VentaCommand>();
