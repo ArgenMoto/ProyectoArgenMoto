@@ -19,7 +19,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<ArgenMotoDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection4"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection2"));
 });
 
 builder.Services.AddScoped<IProveedorQuery, ProveedorQuery>();
@@ -39,7 +39,7 @@ builder.Services.AddScoped<IProductoService, ProductoServices>();
 builder.Services.AddScoped<IProductoCommand, ProductoCommand>();
 
 builder.Services.AddScoped<IItemCommand, ItemCommand>();
-builder.Services.AddScoped<IFacturaCommand, FacturaCommand>();
+builder.Services.AddScoped<IItemQuery, ItemQuery>();
 
 builder.Services.AddScoped<IDocumentoQuery, DocumentoQuery>();
 builder.Services.AddScoped<IMedioPagoQuery, MedioPagoQuery>();
@@ -50,6 +50,10 @@ builder.Services.AddScoped<IVentaService, VentaServices>();
 builder.Services.AddScoped<IMedioPagoQuery, MedioPagoQuery>();
 builder.Services.AddScoped<IMedioPagoCommand, MedioPagoCommand>();
 builder.Services.AddScoped<IMedioPagoService, MedioPagoServices>();
+
+builder.Services.AddScoped<IFacturaCommand, FacturaCommand>();
+builder.Services.AddScoped<IFacturaService, FacturaServices>();
+builder.Services.AddScoped<IFacturaQuery, FacturaQuery>();
 
 // Habilitar CORS
 builder.Services.AddCors(options =>

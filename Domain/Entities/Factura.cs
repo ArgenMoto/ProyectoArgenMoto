@@ -2,7 +2,7 @@
 {
     public class Factura
     {
-        public Guid FacturaId { get; set; }
+        public int FacturaId { get; set; }
         public Guid VentaId { get; set; }  // Relación con Venta
         public DateTime Fecha { get; set; }
         public int Total { get; set; }

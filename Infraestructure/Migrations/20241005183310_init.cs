@@ -1,6 +1,5 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 #nullable disable
 
@@ -70,7 +69,7 @@ namespace Infraestructure.Migrations
                     Marca = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Modelo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NumeroMotor = table.Column<string>(type: "int", nullable: false),
+                    NumeroMotor = table.Column<int>(type: "int", nullable: false),
                     NumeroChasis = table.Column<int>(type: "int", nullable: false),
                     Cilindro = table.Column<int>(type: "int", nullable: false),
                     Fecha = table.Column<int>(type: "int", nullable: false),
@@ -108,23 +107,22 @@ namespace Infraestructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                 name: "Vendedor",
-                 columns: table => new
-                 {
-                     VendedorId = table.Column<int>(type: "int", nullable: false)
-                         .Annotation("SqlServer:Identity", "1, 1"),
-                     VendedorNombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                     VendedorApellido = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                     VendedorPuesto = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                     VendedorDni = table.Column<int>(type: "int", nullable: false),
-                     VendedorDomicilio = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                     VendedorLocalidad = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                     VendedorProvincia = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                     VendedorTelefono = table.Column<int>(type: "int", nullable: false),
-                     VendedorEmail = table.Column<string>(type: "nvarchar(max)", nullable: false)
-
-                 },
-                 constraints: table =>
+                name: "Vendedor",
+                columns: table => new
+                {
+                    VendedorId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    VendedorNombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    VendedorApellido = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    VendedorPuesto = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    VendedorDni = table.Column<int>(type: "int", nullable: false),
+                    VendedorDomicilio = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    VendedorLocalidad = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    VendedorProvincia = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    VendedorTelefono = table.Column<int>(type: "int", nullable: false),
+                    VendedorEmail = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
                 {
                     table.PrimaryKey("PK_Vendedor", x => x.VendedorId);
                 });
@@ -162,7 +160,7 @@ namespace Infraestructure.Migrations
                 columns: table => new
                 {
                     VentaId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Fecha = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    fecha = table.Column<DateTime>(type: "datetime2(0)", nullable: false),
                     TotalVenta = table.Column<int>(type: "int", nullable: false),
                     cliente = table.Column<int>(type: "int", nullable: false),
                     Vendedor = table.Column<int>(type: "int", nullable: false)
@@ -188,9 +186,10 @@ namespace Infraestructure.Migrations
                 name: "Factura",
                 columns: table => new
                 {
-                    FacturaId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FacturaId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     VentaId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Fecha = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Fecha = table.Column<DateTime>(type: "date", nullable: false),
                     Total = table.Column<int>(type: "int", nullable: false),
                     DocumentoId = table.Column<int>(type: "int", nullable: false),
                     MedioDePago = table.Column<int>(type: "int", nullable: false)
@@ -248,14 +247,14 @@ namespace Infraestructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "Cliente",
-                columns: new[] { "ClienteId", "Apellido", "DNI", "Nombre", "Domicilio", "Localidad","Provincia","Telefono","Email" },
+                columns: new[] { "ClienteId", "Apellido", "DNI", "Domicilio", "Email", "Localidad", "Nombre", "Provincia", "Telefono" },
                 values: new object[,]
                 {
-                    { 1, "Pérez", 12345678, "Juan","Calle 30 214","Quilmes","Buenos Aires",422589654,"carlos@gmail.com" },
-                    { 2, "García", 23456789, "Ana","Calle 30 231","Florencio Varela","Buenos Aires",45678932,"garciana@gmail.com" },
-                    { 3, "Martínez", 34567890, "Luis" ,"Calle 12 1024","Berazategui", "Buenos Aires",1124568935,"luis@gmail.com"},
-                    { 4, "Lopez", 45678901, "Marta","Calle 28 1235","Berazategui","Buenos Aires",1124567835,"marta@yahoo.com" },
-                    { 5, "Fernández", 56789012, "Carlos","Mitre 1234","Quilmes","Buenos Aires",1145623789,"carlitos@yahoo.com" }
+                    { 1, "Pérez", 12345678, "Calle 30 214", "carlos@gmail.com", "Quilmes", "Juan", "Buenos Aires", 422589654 },
+                    { 2, "García", 23456789, "Calle 30 231", "garciana@gmail.com", "Florencio Varela", "Ana", "Buenos Aires", 45678932 },
+                    { 3, "Martínez", 34567890, "Calle 12 1024", "luis@gmail.com", "Berazategui", "Luis", "Buenos Aires", 1124568935 },
+                    { 4, "Lopez", 45678901, "Calle 28 1235", "marta@yahoo.com", "Berazategui", "Marta", "Buenos Aires", 1124567835 },
+                    { 5, "Fernández", 56789012, "Mitre 1234", "carlitos@yahoo.com", "Quilmes", "Carlos", "Buenos Aires", 1145623789 }
                 });
 
             migrationBuilder.InsertData(
@@ -286,42 +285,40 @@ namespace Infraestructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "Producto",
-                columns: new[] { "ProductoId", "Nombre", "Marca", "Descripcion", "Modelo", "NumeroMotor", "NumeroChasis", "Cilindro", "Fecha", "Rubro", "PrecioUnitario", "StockMinimo", "StockMaximo", "StockActual", "Imagen" },
+                columns: new[] { "ProductoId", "Cilindro", "Descripcion", "Fecha", "Imagen", "Marca", "Modelo", "Nombre", "NumeroChasis", "NumeroMotor", "PrecioUnitario", "Rubro", "StockActual", "StockMaximo", "StockMinimo" },
                 values: new object[,]
-                
                 {
-                    
-                    { 1, "Yamaha MT-07","Yamaha", "Motocicleta deportiva ligera y ágil.",  "MT-07", 123456, 789012, 689, 2024,"Motocicleta", 150000,  3, 100, 6,"https://i.postimg.cc/rpJWcK0L/2023-Yamaha-MT07-A-EU-Cyan-Storm-360-Degrees-001-03.jpg"},
-                    { 2, "Honda CB500F", "Honda", "Motocicleta naked para uso urbano y carretera.",  "CB500F", 223344, 334455, 500, 2024,"Motocicleta", 180000,  3, 100, 7, "https://i.postimg.cc/50KCYTS7/honda-cb-500-f.jpg"},
-                    { 3, "Kawasaki Ninja 400","Kawasaki", "Motocicleta deportiva de baja cilindrada.", "Ninja 400", 556677, 889900, 399, 2024, "Motocicleta",200000, 3, 100, 10 , "https://i.postimg.cc/tJVY1TTJ/ninja400-KRT-1-1.jpg"},
-                    { 4, "Suzuki V-Strom 650", "Suzuki", "Motocicleta adventure de media cilindrada.", "V-Strom 650", 998877, 665544, 645, 2024,"Motocicleta", 160000,  3, 100, 8, "https://i.postimg.cc/NjtkchJm/muo3kk8n0sjdherhbjzvqyytgylzz8hcmvkfdusy.jpg"},
-                    { 5, "BMW R 1250 GS", "BMW", "Motocicleta adventure de alta gama.", "R 1250 GS", 554433, 223344, 1254, 2024,"Motocicleta", 300000,  3, 100, 4 , "https://i.postimg.cc/W4WGgd2w/image.jpg"},
-                    { 6, "Ducati Monster 821", "Ducati","Motocicleta naked de alto rendimiento.", "Monster 821", 112233, 445566, 821, 2024,"Motocicleta", 250000, 3, 100, 4, "https://i.postimg.cc/RCn7JC2w/Monster-821-MY18-Red-01-Model-Preview-1050x650.png"},
-                    { 7, "Harley-Davidson Iron 883", "Harley-Davidson","Motocicleta cruiser clásica.",  "Iron 883", 778899, 123456, 883, 2024,"Motocicleta", 400000, 3, 100, 5 , "https://i.postimg.cc/X7SwfS0m/54c33236a8ad91156a9e611375b4d973-a18dd478b82157f1.png"}
+                    { 1, 689, "Motocicleta deportiva ligera y ágil.", 2024, "https://i.postimg.cc/rpJWcK0L/2023-Yamaha-MT07-A-EU-Cyan-Storm-360-Degrees-001-03.jpg", "Yamaha", "MT-07", "Yamaha MT-07", 789012, 123456, 150000, "Motocicleta", 6, 100, 3 },
+                    { 2, 500, "Motocicleta naked para uso urbano y carretera.", 2024, "https://i.postimg.cc/50KCYTS7/honda-cb-500-f.jpg", "Honda", "CB500F", "Honda CB500F", 334455, 223344, 180000, "Motocicleta", 7, 100, 3 },
+                    { 3, 399, "Motocicleta deportiva de baja cilindrada.", 2024, "https://i.postimg.cc/tJVY1TTJ/ninja400-KRT-1-1.jpg", "Kawasaki", "Ninja 400", "Kawasaki Ninja 400", 889900, 556677, 200000, "Motocicleta", 10, 100, 3 },
+                    { 4, 645, "Motocicleta adventure de media cilindrada.", 2024, "https://i.postimg.cc/NjtkchJm/muo3kk8n0sjdherhbjzvqyytgylzz8hcmvkfdusy.jpg", "Suzuki", "V-Strom 650", "Suzuki V-Strom 650", 665544, 998877, 160000, "Motocicleta", 8, 100, 3 },
+                    { 5, 1254, "Motocicleta adventure de alta gama.", 2024, "https://i.postimg.cc/W4WGgd2w/image.jpg", "BMW", "R 1250 GS", "BMW R 1250 GS", 223344, 554433, 300000, "Motocicleta", 4, 100, 3 },
+                    { 6, 821, "Motocicleta naked de alto rendimiento.", 2024, "https://i.postimg.cc/RCn7JC2w/Monster-821-MY18-Red-01-Model-Preview-1050x650.png", "Ducati", "Monster 821", "Ducati Monster 821", 445566, 112233, 250000, "Motocicleta", 4, 100, 3 },
+                    { 7, 883, "Motocicleta cruiser clásica.", 2024, "https://i.postimg.cc/X7SwfS0m/54c33236a8ad91156a9e611375b4d973-a18dd478b82157f1.png", "Harley-Davidson", "Iron 883", "Harley-Davidson Iron 883", 123456, 778899, 400000, "Motocicleta", 5, 100, 3 }
                 });
 
             migrationBuilder.InsertData(
                 table: "Proveedor",
-                columns: new[] { "ProveedorId","Cuit","RazonSocial", "Direccion","Localidad","Provincia","Apellido", "Nombre", "Telefono","Email" },
+                columns: new[] { "ProveedorId", "Apellido", "Cuit", "Direccion", "Email", "Localidad", "Nombre", "Provincia", "RazonSocial", "Telefono" },
                 values: new object[,]
                 {
-                    { 1,"20234567897","Moto Parts Ltd.", "Av. Libertador 1234","Capital Federal","Buenos Aires", "Perez","Juan", 01112345678,"juan@gmail.com" },
-                    { 2,"20234567899", "Moto Accessories S.A.", "Calle Falsa 5678","Quilmes","Buenos Aires","Torres","Gabriel",01123456789,"torres@yahoo,com" },
-                    { 3,"23415689741", "Motorcycle World", "Avenida Rivadavia 4321","Florencio Varela","Buenos Aires","Sanchez","Ramon",0114567890,"ramon@gmail.com" },
-                    { 4,"20356457899", "Bike Gear Co.", "Calle Moreno 8765","Capital Federal","Buenos Aires","Cuello","Marcos",01145678901,"marcos@gmail.com" },
-                    { 5,"23367894567", "Moto Supplies Inc.","Calle Alem 9876","La Plata" ,"Buenos Aires","Bernis","Jose", 01156789012,"bernis@hotmail.com" }
+                    { 1, "Perez", "20234567897", "Av. Libertador 1234", "juan@gmail.com", "Capital Federal", "Juan", "Buenos Aires", "Moto Parts Ltd.", 1112345678 },
+                    { 2, "Torres", "20234567899", "Calle Falsa 5678", "torres@yahoo,com", "Quilmes", "Gabriel", "Buenos Aires", "Moto Accessories S.A.", 1123456789 },
+                    { 3, "Sanchez", "23415689741", "Avenida Rivadavia 4321", "ramon@gmail.com", "Florencio Varela", "Ramon", "Buenos Aires", "Motorcycle World", 114567890 },
+                    { 4, "Cuello", "20356457899", "Calle Moreno 8765", "marcos@gmail.com", "Capital Federal", "Marcos", "Buenos Aires", "Bike Gear Co.", 1145678901 },
+                    { 5, "Bernis", "23367894567", "Calle Alem 9876", "bernis@hotmail.com", "La Plata", "Jose", "Buenos Aires", "Moto Supplies Inc.", 1156789012 }
                 });
 
             migrationBuilder.InsertData(
                 table: "Vendedor",
-                columns: new[] { "VendedorId", "VendedorNombre", "VendedorApellido", "VendedorPuesto", "VendedorDni", "VendedorDomicilio", "VendedorLocalidad", "VendedorProvincia", "VendedorTelefono", "VendedorEmail" },
+                columns: new[] { "VendedorId", "VendedorApellido", "VendedorDni", "VendedorDomicilio", "VendedorEmail", "VendedorLocalidad", "VendedorNombre", "VendedorProvincia", "VendedorPuesto", "VendedorTelefono" },
                 values: new object[,]
                 {
-                    {1,"Pedro", "Gomez","Vendedor Principal", 33456789, "Calle 30 2659", "Berazategui", "Buenos Aires", 1523467895, "pedro@gmail.com"},
-                    {2,"Laura","Rodriguez","Vendedora", 40256897,"Calle 132 4567", "Berazategui","Buenos Aires", 1547896321, "laura@gmail.com"},
-                    {3,"Andrés", "Gimenez","Vendedor", 38526478,"Calle 145 5047","Berazategui","Buenos Aires", 1578451236, "andres@gmail.com"},
-                    {4,"Sofía","Saucedo","Vendedora", 23456789,"Calle 38 4568", "Berazategui", "Buenos Aires", 1547526389, "sofia@gmail.com"},
-                    {5,"Miguel", "Souto","Vendedor ", 34568791,"Calle 33 2356", "Berazategui","Buenos Aires",1545678912, "miguel@gmail.com"}
+                    { 1, "Gomez", 33456789, "Calle 30 2659", "pedro@gmail.com", "Berazategui", "Pedro", "Buenos Aires", "Vendedor Principal", 1523467895 },
+                    { 2, "Rodriguez", 40256897, "Calle 132 4567", "laura@gmail.com", "Berazategui", "Laura", "Buenos Aires", "Vendedora", 1547896321 },
+                    { 3, "Gimenez", 38526478, "Calle 145 5047", "andres@gmail.com", "Berazategui", "Andrés", "Buenos Aires", "Vendedor", 1578451236 },
+                    { 4, "Saucedo", 23456789, "Calle 38 4568", "sofia@gmail.com", "Berazategui", "Sofía", "Buenos Aires", "Vendedora", 1547526389 },
+                    { 5, "Souto", 34568791, "Calle 33 2356", "miguel@gmail.com", "Berazategui", "Miguel", "Buenos Aires", "Vendedor ", 1545678912 }
                 });
 
             migrationBuilder.CreateIndex(

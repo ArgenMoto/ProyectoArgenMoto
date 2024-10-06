@@ -44,12 +44,27 @@ namespace Application.UseCase
             {
                 throw new Exception("Cliente no encontrado, debe registrarlo");
             }
-            //buscamos el vendedor
+            //validamos el vendedor
             var vendedor = _vendedorQuery.VendedoresPorId(venta.VendedorId);
             if (vendedor == null)
             {
                 throw new Exception("Vendedor no encontrado, debe registrarlo");
             }
+            //validamos el documento
+            var documento = _documentoQuery.DocumentoPorId(venta.DocumentoId);
+            if (documento == null)
+            {
+                throw new Exception("Documento no encontrado.");
+            }
+            //validamos el medio de pago
+            var medioPago = _medioPagoQuery.MedioPagoPorId(venta.MedioPagoId);
+            if (medioPago == null)
+            {
+                throw new Exception("Medio de pago no encontrado.");
+            }
+
+            int totalVenta = 0;
+            var itemsResponse = new List<ItemResponse>();
 
             // Validamos todos los productos y el stock antes de registrar en base de datos
             foreach (var itemReq in venta.Items)
@@ -63,30 +78,24 @@ namespace Application.UseCase
                 {
                     throw new StockInsuficienteException($"Stock insuficiente para el producto {producto.Nombre}.");
                 }
+
+                var precioTotalItem = itemReq.Cantidad * producto.PrecioUnitario;
+                totalVenta += precioTotalItem;                
             }
-
-            // Si todo esta validado, registramos en la base de datos. ¿porque? porque si falta
-            // stock de productos en la base de datos, no se completa la venta.
-
+            
             var _venta = new Venta
             {
                 ClienteId = cliente.ClienteId,
                 VendedorId = venta.VendedorId,
                 Fecha = DateTime.Now,
-                TotalVenta = 0
+                TotalVenta = totalVenta
             };
 
             _ventaCommand.registrarVenta(_venta);
 
-            int totalVenta = 0;
-            var itemsResponse = new List<ItemResponse>();
-
-            // Ahora registramos los ítems y ajustamos el stock
-
             foreach (var itemReq in venta.Items)
             {
                 var producto = _productoQuery.ProductoPorId(itemReq.ProductoId);
-
                 var precioTotalItem = itemReq.Cantidad * producto.PrecioUnitario;
 
                 var item = new Item
@@ -96,13 +105,13 @@ namespace Application.UseCase
                     Cantidad = itemReq.Cantidad,
                     PrecioTotalItem = precioTotalItem
                 };
-
-                totalVenta += precioTotalItem;
+    
                 _itemCommand.AgregarItem(item);
                 producto.StockActual -= itemReq.Cantidad;
 
                 itemsResponse.Add(new ItemResponse
                 {
+                    Id= item.ItemId,
                     ProductoId = itemReq.ProductoId,
                     ProductoNombre = producto.Nombre,
                     PrecioUnitario = producto.PrecioUnitario,
@@ -111,29 +120,10 @@ namespace Application.UseCase
                 });
             }
 
-            _venta.TotalVenta = totalVenta;
-            _ventaCommand.actualizarVenta(_venta);
-
-            var documento = _documentoQuery.DocumentoPorId(venta.DocumentoId);
-            if (documento == null)
-            {
-                throw new Exception("Documento no encontrado.");
-            }
-
-            var medioPago = _medioPagoQuery.MedioPagoPorId(venta.MedioPagoId);
-            if (medioPago == null)
-            {
-                throw new Exception("Medio de pago no encontrado.");
-            }
-
-            // Crear la factura automáticamente esto puede ser una api aparte preguntando desde el front
-            // desea generar la factura si da ok consultamos por ventaId y generamos la factura devolviendo 
-            // datos de la factura en una clase facturaResponse,que tenga adentro
-            // la ventaResponse. ¿ se puede hacer? si se puede hacer. Es viable? si es viable.
             var factura = new Factura
             {
                 VentaId = _venta.VentaId,
-                Fecha = DateTime.Now,
+                Fecha = DateTime.Today,
                 Total = totalVenta,
                 DocumentoId = documento.DocumentoId,
                 MedioPagoId = medioPago.MedioPagoId
@@ -141,15 +131,27 @@ namespace Application.UseCase
 
             _facturaCommand.registrarFactura(factura);
 
+            ClienteResponseVenta clienteResponse = new ClienteResponseVenta
+            {
+                DNI = cliente.DNI,
+                Nombre = cliente.Nombre,
+                Apellido = cliente.Apellido,
+                Domicilio = cliente.Domicilio
+            };
+
+            VendedorResponseVenta vendedorResponse = new VendedorResponseVenta
+            {
+                VendedorNombre = vendedor.VendedorNombre,
+                VendedorPuesto = vendedor.VendedorPuesto
+            };
+
             // Creaamos y devolvemos la venta
             VentaResponse ventaResponse = new VentaResponse
             {
                 VentaId = _venta.VentaId,
                 Fecha = _venta.Fecha,
-                ClienteId = cliente.ClienteId,
-                ClienteNombre = cliente.Nombre,
-                VendedorId = _venta.VendedorId,
-                VendedorNombre = vendedor.VendedorNombre,
+                Cliente = clienteResponse,
+                Vendedor = vendedorResponse,
                 Items = itemsResponse,
                 TotalVenta = totalVenta
             };
