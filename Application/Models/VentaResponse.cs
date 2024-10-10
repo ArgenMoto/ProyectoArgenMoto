@@ -9,6 +9,7 @@ namespace Application.Models
     public class VentaResponse
     {
         public Guid VentaId { get; set; }
+        public int FacturaId { get; set; }
         public DateTime Fecha { get; set; }
         public ClienteResponseVenta Cliente { get; set; }
         public VendedorResponseVenta Vendedor { get; set; }

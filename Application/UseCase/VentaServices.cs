@@ -149,6 +149,7 @@ namespace Application.UseCase
             VentaResponse ventaResponse = new VentaResponse
             {
                 VentaId = _venta.VentaId,
+                FacturaId= factura.FacturaId,
                 Fecha = _venta.Fecha,
                 Cliente = clienteResponse,
                 Vendedor = vendedorResponse,
