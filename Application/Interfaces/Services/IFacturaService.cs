@@ -11,6 +11,6 @@ namespace Application.Interfaces.Services
     public interface IFacturaService
     {
         List<FacturaResponse> ListaFacturas();
-        Factura FacturaPorId(int id);
+        FacturaResponse FacturaPorId(int id);
     }
 }
