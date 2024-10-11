@@ -22,6 +22,118 @@ namespace Infraestructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("Domain.Entities.ArticuloProveedor", b =>
+                {
+                    b.Property<int>("ArticuloProveedorId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ArticuloProveedorId"));
+
+                    b.Property<string>("Marca")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Modelo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PrecioUnitario")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductoId")
+                        .HasColumnType("int")
+                        .HasColumnName("Producto");
+
+                    b.Property<int>("ProveedorId")
+                        .HasColumnType("int")
+                        .HasColumnName("Proveedor");
+
+                    b.HasKey("ArticuloProveedorId");
+
+                    b.HasIndex("ProductoId");
+
+                    b.HasIndex("ProveedorId");
+
+                    b.ToTable("ArticulosProveedor", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            ArticuloProveedorId = 1,
+                            Marca = "Yamaha",
+                            Modelo = "MT-07",
+                            Nombre = "Yamaha MT-07",
+                            PrecioUnitario = 150000,
+                            ProductoId = 1,
+                            ProveedorId = 1
+                        },
+                        new
+                        {
+                            ArticuloProveedorId = 2,
+                            Marca = "Honda",
+                            Modelo = "CB500F",
+                            Nombre = "Honda CB500F",
+                            PrecioUnitario = 180000,
+                            ProductoId = 2,
+                            ProveedorId = 1
+                        },
+                        new
+                        {
+                            ArticuloProveedorId = 3,
+                            Marca = "Kawasaki",
+                            Modelo = "Ninja 400",
+                            Nombre = "Kawasaki Ninja 400",
+                            PrecioUnitario = 200000,
+                            ProductoId = 3,
+                            ProveedorId = 1
+                        },
+                        new
+                        {
+                            ArticuloProveedorId = 4,
+                            Marca = "Suzuki",
+                            Modelo = "V-Strom 650",
+                            Nombre = "Suzuki V-Strom 650",
+                            PrecioUnitario = 160000,
+                            ProductoId = 4,
+                            ProveedorId = 2
+                        },
+                        new
+                        {
+                            ArticuloProveedorId = 5,
+                            Marca = "BMW",
+                            Modelo = "R 1250 GS",
+                            Nombre = "BMW R 1250 GS",
+                            PrecioUnitario = 300000,
+                            ProductoId = 5,
+                            ProveedorId = 2
+                        },
+                        new
+                        {
+                            ArticuloProveedorId = 6,
+                            Marca = "Ducati",
+                            Modelo = "Monster 821",
+                            Nombre = "Ducati Monster 821",
+                            PrecioUnitario = 250000,
+                            ProductoId = 6,
+                            ProveedorId = 3
+                        },
+                        new
+                        {
+                            ArticuloProveedorId = 7,
+                            Marca = "Harley-Davidson",
+                            Modelo = "Iron 883",
+                            Nombre = "Harley-Davidson Iron 883",
+                            PrecioUnitario = 400000,
+                            ProductoId = 7,
+                            ProveedorId = 4
+                        });
+                });
+
             modelBuilder.Entity("Domain.Entities.Cliente", b =>
                 {
                     b.Property<int>("ClienteId")
@@ -294,34 +406,51 @@ namespace Infraestructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.OrdenDeCompra", b =>
                 {
-                    b.Property<Guid>("OrdenId")
+                    b.Property<int>("OrdenDeCompraId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrdenDeCompraId"));
+
+                    b.Property<DateTime>("Fecha")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("PrecioTotal")
+                        .HasColumnType("int");
+
+                    b.HasKey("OrdenDeCompraId");
+
+                    b.ToTable("OrdenDeCompra", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.Entities.OrdenDeCompraProducto", b =>
+                {
+                    b.Property<int>("OrdenDeCompraProductoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrdenDeCompraProductoId"));
+
+                    b.Property<int>("ArticuloProveedorId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Cantidad")
                         .HasColumnType("int");
 
-                    b.Property<int>("Precio")
+                    b.Property<int>("OrdenDeCompraId")
+                        .HasColumnType("int")
+                        .HasColumnName("OrdenDeCompra");
+
+                    b.Property<int>("TotalLinea")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProductoId")
-                        .HasColumnType("int")
-                        .HasColumnName("Producto");
+                    b.HasKey("OrdenDeCompraProductoId");
 
-                    b.Property<int>("ProveedorId")
-                        .HasColumnType("int")
-                        .HasColumnName("Proveedor");
+                    b.HasIndex("ArticuloProveedorId");
 
-                    b.Property<int>("Total")
-                        .HasColumnType("int");
+                    b.HasIndex("OrdenDeCompraId");
 
-                    b.HasKey("OrdenId");
-
-                    b.HasIndex("ProductoId");
-
-                    b.HasIndex("ProveedorId");
-
-                    b.ToTable("OrdenDeCompra", (string)null);
+                    b.ToTable("OrdenDeCompraProducto", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Producto", b =>
@@ -772,6 +901,25 @@ namespace Infraestructure.Migrations
                     b.ToTable("Venta", (string)null);
                 });
 
+            modelBuilder.Entity("Domain.Entities.ArticuloProveedor", b =>
+                {
+                    b.HasOne("Domain.Entities.Producto", "Producto")
+                        .WithMany("ArticuloProveedor")
+                        .HasForeignKey("ProductoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.Proveedor", "Proveedor")
+                        .WithMany("ArticuloProveedor")
+                        .HasForeignKey("ProveedorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Producto");
+
+                    b.Navigation("Proveedor");
+                });
+
             modelBuilder.Entity("Domain.Entities.Factura", b =>
                 {
                     b.HasOne("Domain.Entities.Documento", "Documento")
@@ -818,23 +966,23 @@ namespace Infraestructure.Migrations
                     b.Navigation("Venta");
                 });
 
-            modelBuilder.Entity("Domain.Entities.OrdenDeCompra", b =>
+            modelBuilder.Entity("Domain.Entities.OrdenDeCompraProducto", b =>
                 {
-                    b.HasOne("Domain.Entities.Producto", "Producto")
-                        .WithMany("OrdenesDeCompra")
-                        .HasForeignKey("ProductoId")
+                    b.HasOne("Domain.Entities.ArticuloProveedor", "ArticuloProveedor")
+                        .WithMany("OrdenDeCompraProducto")
+                        .HasForeignKey("ArticuloProveedorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Entities.Proveedor", "Proveedor")
-                        .WithMany("OrdenesDeCompra")
-                        .HasForeignKey("ProveedorId")
+                    b.HasOne("Domain.Entities.OrdenDeCompra", "OrdenDeCompra")
+                        .WithMany("OrdenDeCompraProducto")
+                        .HasForeignKey("OrdenDeCompraId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Producto");
+                    b.Navigation("ArticuloProveedor");
 
-                    b.Navigation("Proveedor");
+                    b.Navigation("OrdenDeCompra");
                 });
 
             modelBuilder.Entity("Domain.Entities.Venta", b =>
@@ -856,6 +1004,11 @@ namespace Infraestructure.Migrations
                     b.Navigation("Vendedor");
                 });
 
+            modelBuilder.Entity("Domain.Entities.ArticuloProveedor", b =>
+                {
+                    b.Navigation("OrdenDeCompraProducto");
+                });
+
             modelBuilder.Entity("Domain.Entities.Cliente", b =>
                 {
                     b.Navigation("Ventas");
@@ -871,16 +1024,21 @@ namespace Infraestructure.Migrations
                     b.Navigation("Facturas");
                 });
 
+            modelBuilder.Entity("Domain.Entities.OrdenDeCompra", b =>
+                {
+                    b.Navigation("OrdenDeCompraProducto");
+                });
+
             modelBuilder.Entity("Domain.Entities.Producto", b =>
                 {
-                    b.Navigation("Items");
+                    b.Navigation("ArticuloProveedor");
 
-                    b.Navigation("OrdenesDeCompra");
+                    b.Navigation("Items");
                 });
 
             modelBuilder.Entity("Domain.Entities.Proveedor", b =>
                 {
-                    b.Navigation("OrdenesDeCompra");
+                    b.Navigation("ArticuloProveedor");
                 });
 
             modelBuilder.Entity("Domain.Entities.Vendedor", b =>

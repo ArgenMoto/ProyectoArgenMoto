@@ -19,6 +19,6 @@
         public string Imagen { get; set; }
 
         public ICollection<Item> Items { get; set; }
-        public ICollection<OrdenDeCompra> OrdenesDeCompra { get; set; }
+        public ICollection<ArticuloProveedor> ArticuloProveedor { get; set; }
     }
 }
