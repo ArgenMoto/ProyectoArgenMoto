@@ -21,8 +21,24 @@ namespace ArgenMoto.Controllers
         [ProducesResponseType(typeof(List<FacturaResponse>), StatusCodes.Status200OK)]
         public IActionResult ListadoFacturas()
         {
-            var result = _service.ListaFacturas();  
-            return new JsonResult(result) { StatusCode = 200 };
+            try
+            {
+                var result = _service.ListaFacturas();
+                if (result.Count != 0)
+                {
+                    return new JsonResult(result) { StatusCode = 200 };
+                }
+                return new JsonResult(new ErrorResponse { message = "No hay facturas registradas" }) { StatusCode = 404 };
+
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message == "No hay facturas registradas")
+                {
+                    return new JsonResult(new ErrorResponse { message = ex.Message }) { StatusCode = 404 };
+                }
+                return new JsonResult(500, "internal server error");
+            }
         }
 
         [HttpGet("{id}")]
@@ -30,15 +46,26 @@ namespace ArgenMoto.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status404NotFound)]
         public IActionResult FacturaPorId(int id)
         {
-            var result = _service.FacturaPorId(id);
+            try
+            {
+                var result = _service.FacturaPorId(id);
 
-            if (result != null)
-            {
-                return new JsonResult(result) { StatusCode = 200 };
+                if (result != null)
+                {
+                    return new JsonResult(result) { StatusCode = 200 };
+                }
+                else
+                {
+                    return new JsonResult(new ErrorResponse { message = "Factura no encontrada" }) { StatusCode = 404 };
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return new JsonResult(new ErrorResponse { message = "Factura no encontrada." }) { StatusCode = 404 };
+                if (ex.Message == "Factura no encontrada")
+                {
+                    return new JsonResult(new ErrorResponse { message = ex.Message }) { StatusCode = 404 };
+                }
+                return new JsonResult(500, "internal server error");
             }
         }
     }
