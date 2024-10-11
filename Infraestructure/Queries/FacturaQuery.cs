@@ -33,7 +33,15 @@ namespace Infraestructure.Queries
         }
         public Factura FacturaPorId(int id)
         {
-            var factura = _context.Factura.Find(id);
+            var factura = _context.Factura
+            .Include(f => f.Venta)                    
+                .ThenInclude(v => v.Cliente)          
+            .Include(f => f.Venta.Vendedor)           
+            .Include(f => f.Venta.Items)              
+                .ThenInclude(i => i.Producto)         
+            .Include(f => f.MedioPago)                
+            .Include(f => f.Documento)               
+            .FirstOrDefault(f => f.FacturaId == id);  
 
             return factura;
         }

@@ -14,8 +14,7 @@ namespace Domain.Entities
         public string Provincia { get; set; }
         public int Telefono { get; set; }
         public string Email { get; set; }
-
-        public ICollection<OrdenDeCompra> OrdenesDeCompra { get; set; }
+        public ICollection<ArticuloProveedor> ArticuloProveedor { get; set; }
 
     }
 }

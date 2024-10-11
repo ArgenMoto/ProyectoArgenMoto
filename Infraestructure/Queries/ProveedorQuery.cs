@@ -22,7 +22,10 @@ namespace Infraestructure.Queries
 
         public Proveedor ProveedoresPorId(int id)
         {
-            var proveedor = _context.Proveedor.Find(id);
+            var proveedor = _context.Proveedor
+                           .Include(p => p.ArticuloProveedor)
+                           .ThenInclude(ap => ap.Producto) // Incluye los detalles del producto
+                           .FirstOrDefault(p => p.ProveedorId == id);
 
             return proveedor;
         }

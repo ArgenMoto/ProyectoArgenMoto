@@ -19,13 +19,15 @@ namespace Infraestructure.Persistense
         public DbSet<Documento> Documento { get; set; }
         public DbSet<Vendedor> Vendedor { get; set; }
         public DbSet<Item> Item { get; set; }
+        public DbSet<ArticuloProveedor> ArticuloProveedor { get; set; }
+        public DbSet<OrdenDeCompraProducto> OrdenDeCompraProducto { get; set; }
+       
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Producto>(entity =>
             {
                 entity.ToTable("Producto");
                 entity.HasKey(x => x.ProductoId);
-
             });
 
             modelBuilder.Entity<Proveedor>(entity =>
@@ -46,6 +48,13 @@ namespace Infraestructure.Persistense
                 entity.HasKey(x => x.ClienteId);
 
             });
+            modelBuilder.Entity<Documento>(entity =>
+            {
+                entity.ToTable("Documento");
+                entity.HasKey(x => x.DocumentoId);
+                ;
+            });
+
             modelBuilder.Entity<Item>(entity =>
             {
                 entity.ToTable("ItemDetalle");
@@ -60,26 +69,40 @@ namespace Infraestructure.Persistense
                 entity.HasOne(x => x.Venta).WithMany(a => a.Items).HasForeignKey(x => x.VentaId);
                 entity.HasOne(x => x.Producto).WithMany(a => a.Items).HasForeignKey(x => x.ProductoId);
             });
-            modelBuilder.Entity<Documento>(entity =>
+
+            modelBuilder.Entity<ArticuloProveedor>(entity =>
             {
-                entity.ToTable("Documento");
-                entity.HasKey(x => x.DocumentoId);
-                ;
+                entity.ToTable("ArticulosProveedor");
+                entity.HasKey(x => x.ArticuloProveedorId);
+
+                entity.Property(x => x.ProveedorId)
+                .HasColumnName("Proveedor");
+
+                entity.Property(x => x.ProductoId)
+                .HasColumnName("Producto");
+
+                entity.HasOne(x => x.Proveedor).WithMany(a => a.ArticuloProveedor).HasForeignKey(x => x.ProveedorId);
+                entity.HasOne(x => x.Producto).WithMany(a => a.ArticuloProveedor).HasForeignKey(x => x.ProductoId);
+            });
+
+            modelBuilder.Entity<OrdenDeCompraProducto>(entity =>
+            {
+                entity.ToTable("OrdenDeCompraProducto");
+                entity.HasKey(x => x.OrdenDeCompraProductoId);
+
+                entity.Property(x => x.OrdenDeCompraId)
+                .HasColumnName("OrdenDeCompra");
+
+                entity.HasOne(x => x.ArticuloProveedor).WithMany(a => a.OrdenDeCompraProducto).HasForeignKey(x => x.ArticuloProveedorId);
+                entity.HasOne(x => x.OrdenDeCompra).WithMany(a => a.OrdenDeCompraProducto).HasForeignKey(x => x.OrdenDeCompraId);
             });
             modelBuilder.Entity<OrdenDeCompra>(entity =>
             {
                 entity.ToTable("OrdenDeCompra");
 
-                entity.HasKey(x => x.OrdenId);
+                entity.HasKey(x => x.OrdenDeCompraId);
 
-                entity.Property(x => x.ProductoId)
-                .HasColumnName("Producto");
-
-                entity.Property(x => x.ProveedorId)
-                .HasColumnName("Proveedor");
-
-                entity.HasOne(x => x.Producto).WithMany(a => a.OrdenesDeCompra).HasForeignKey(x => x.ProductoId);
-                entity.HasOne(x => x.Proveedor).WithMany(a => a.OrdenesDeCompra).HasForeignKey(x => x.ProveedorId);
+                //entity.HasOne(x => x.Proveedor).WithMany(a => a.OrdenDeCompra).HasForeignKey(x => x.ProveedorId);
 
             });
             modelBuilder.Entity<Factura>(entity =>
@@ -285,6 +308,16 @@ namespace Infraestructure.Persistense
                     new MedioPago { MedioPagoId = 5, Descripcion = "PayPal" },
                     new MedioPago { MedioPagoId = 6, Descripcion = "QR" }
                 );
+
+                modelBuilder.Entity<ArticuloProveedor>().HasData(
+                    new ArticuloProveedor { ArticuloProveedorId = 1, Nombre = "Yamaha MT-07", Marca = "Yamaha", Modelo = "MT-07", ProductoId = 1, PrecioUnitario = 150000, ProveedorId = 1 },
+                    new ArticuloProveedor { ArticuloProveedorId = 2, Nombre = "Honda CB500F", Marca = "Honda", Modelo = "CB500F", ProductoId = 2, PrecioUnitario = 180000, ProveedorId = 1 },
+                    new ArticuloProveedor { ArticuloProveedorId = 3, Nombre = "Kawasaki Ninja 400", Marca = "Kawasaki", Modelo = "Ninja 400", ProductoId = 3, PrecioUnitario = 200000, ProveedorId = 1 },
+                    new ArticuloProveedor { ArticuloProveedorId = 4, Nombre = "Suzuki V-Strom 650", Marca = "Suzuki", Modelo = "V-Strom 650", ProductoId = 4, PrecioUnitario = 160000, ProveedorId = 2 },
+                    new ArticuloProveedor { ArticuloProveedorId = 5, Nombre = "BMW R 1250 GS", Marca = "BMW", Modelo = "R 1250 GS", ProductoId = 5, PrecioUnitario = 300000, ProveedorId = 2 },
+                    new ArticuloProveedor { ArticuloProveedorId = 6, Nombre = "Ducati Monster 821", Marca = "Ducati", Modelo = "Monster 821", ProductoId = 6, PrecioUnitario = 250000, ProveedorId = 3 },
+                    new ArticuloProveedor { ArticuloProveedorId = 7, Nombre = "Harley-Davidson Iron 883", Marca = "Harley-Davidson", Modelo = "Iron 883", ProductoId = 7, PrecioUnitario = 400000, ProveedorId = 4 }
+    );
             });
         }
     }

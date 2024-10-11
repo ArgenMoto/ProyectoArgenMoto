@@ -60,6 +60,20 @@ namespace Infraestructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "OrdenDeCompra",
+                columns: table => new
+                {
+                    OrdenDeCompraId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Fecha = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    PrecioTotal = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrdenDeCompra", x => x.OrdenDeCompraId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Producto",
                 columns: table => new
                 {
@@ -128,27 +142,29 @@ namespace Infraestructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "OrdenDeCompra",
+                name: "ArticulosProveedor",
                 columns: table => new
                 {
-                    OrdenId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Precio = table.Column<int>(type: "int", nullable: false),
-                    Cantidad = table.Column<int>(type: "int", nullable: false),
-                    Total = table.Column<int>(type: "int", nullable: false),
+                    ArticuloProveedorId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Marca = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Modelo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Producto = table.Column<int>(type: "int", nullable: false),
+                    PrecioUnitario = table.Column<int>(type: "int", nullable: false),
                     Proveedor = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrdenDeCompra", x => x.OrdenId);
+                    table.PrimaryKey("PK_ArticulosProveedor", x => x.ArticuloProveedorId);
                     table.ForeignKey(
-                        name: "FK_OrdenDeCompra_Producto_Producto",
+                        name: "FK_ArticulosProveedor_Producto_Producto",
                         column: x => x.Producto,
                         principalTable: "Producto",
                         principalColumn: "ProductoId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_OrdenDeCompra_Proveedor_Proveedor",
+                        name: "FK_ArticulosProveedor_Proveedor_Proveedor",
                         column: x => x.Proveedor,
                         principalTable: "Proveedor",
                         principalColumn: "ProveedorId",
@@ -179,6 +195,34 @@ namespace Infraestructure.Migrations
                         column: x => x.Vendedor,
                         principalTable: "Vendedor",
                         principalColumn: "VendedorId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OrdenDeCompraProducto",
+                columns: table => new
+                {
+                    OrdenDeCompraProductoId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    OrdenDeCompra = table.Column<int>(type: "int", nullable: false),
+                    ArticuloProveedorId = table.Column<int>(type: "int", nullable: false),
+                    Cantidad = table.Column<int>(type: "int", nullable: false),
+                    TotalLinea = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrdenDeCompraProducto", x => x.OrdenDeCompraProductoId);
+                    table.ForeignKey(
+                        name: "FK_OrdenDeCompraProducto_ArticulosProveedor_ArticuloProveedorId",
+                        column: x => x.ArticuloProveedorId,
+                        principalTable: "ArticulosProveedor",
+                        principalColumn: "ArticuloProveedorId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_OrdenDeCompraProducto_OrdenDeCompra_OrdenDeCompra",
+                        column: x => x.OrdenDeCompra,
+                        principalTable: "OrdenDeCompra",
+                        principalColumn: "OrdenDeCompraId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -321,6 +365,30 @@ namespace Infraestructure.Migrations
                     { 5, "Souto", 34568791, "Calle 33 2356", "miguel@gmail.com", "Berazategui", "Miguel", "Buenos Aires", "Vendedor ", 1545678912 }
                 });
 
+            migrationBuilder.InsertData(
+                table: "ArticulosProveedor",
+                columns: new[] { "ArticuloProveedorId", "Marca", "Modelo", "Nombre", "PrecioUnitario", "Producto", "Proveedor" },
+                values: new object[,]
+                {
+                    { 1, "Yamaha", "MT-07", "Yamaha MT-07", 150000, 1, 1 },
+                    { 2, "Honda", "CB500F", "Honda CB500F", 180000, 2, 1 },
+                    { 3, "Kawasaki", "Ninja 400", "Kawasaki Ninja 400", 200000, 3, 1 },
+                    { 4, "Suzuki", "V-Strom 650", "Suzuki V-Strom 650", 160000, 4, 2 },
+                    { 5, "BMW", "R 1250 GS", "BMW R 1250 GS", 300000, 5, 2 },
+                    { 6, "Ducati", "Monster 821", "Ducati Monster 821", 250000, 6, 3 },
+                    { 7, "Harley-Davidson", "Iron 883", "Harley-Davidson Iron 883", 400000, 7, 4 }
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ArticulosProveedor_Producto",
+                table: "ArticulosProveedor",
+                column: "Producto");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ArticulosProveedor_Proveedor",
+                table: "ArticulosProveedor",
+                column: "Proveedor");
+
             migrationBuilder.CreateIndex(
                 name: "IX_Factura_DocumentoId",
                 table: "Factura",
@@ -348,14 +416,14 @@ namespace Infraestructure.Migrations
                 column: "Venta");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrdenDeCompra_Producto",
-                table: "OrdenDeCompra",
-                column: "Producto");
+                name: "IX_OrdenDeCompraProducto_ArticuloProveedorId",
+                table: "OrdenDeCompraProducto",
+                column: "ArticuloProveedorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrdenDeCompra_Proveedor",
-                table: "OrdenDeCompra",
-                column: "Proveedor");
+                name: "IX_OrdenDeCompraProducto_OrdenDeCompra",
+                table: "OrdenDeCompraProducto",
+                column: "OrdenDeCompra");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Venta_cliente",
@@ -378,7 +446,7 @@ namespace Infraestructure.Migrations
                 name: "ItemDetalle");
 
             migrationBuilder.DropTable(
-                name: "OrdenDeCompra");
+                name: "OrdenDeCompraProducto");
 
             migrationBuilder.DropTable(
                 name: "Documento");
@@ -390,16 +458,22 @@ namespace Infraestructure.Migrations
                 name: "Venta");
 
             migrationBuilder.DropTable(
-                name: "Producto");
+                name: "ArticulosProveedor");
 
             migrationBuilder.DropTable(
-                name: "Proveedor");
+                name: "OrdenDeCompra");
 
             migrationBuilder.DropTable(
                 name: "Cliente");
 
             migrationBuilder.DropTable(
                 name: "Vendedor");
+
+            migrationBuilder.DropTable(
+                name: "Producto");
+
+            migrationBuilder.DropTable(
+                name: "Proveedor");
         }
     }
 }
