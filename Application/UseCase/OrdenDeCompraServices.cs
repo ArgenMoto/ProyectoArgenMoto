@@ -9,18 +9,18 @@ namespace Application.UseCase
     public class OrdenDeCompraServices : IOrdenDeCompraService
     {
         private readonly IOrdenDeCompraCommand _ordenDeCompraCommand;
-        private readonly IProveedorService _proveedorService;
+        private readonly IProveedorQuery _proveedorQuery;
         private readonly IArticuloQuery _articuloQuery;
         private readonly IOrdenDeCompraProductoCommand _ordenDeCompraProductoCommand;
         private readonly IProductoQuery _productoQuery;
         private readonly IProductoCommand _productoCommand;
         public OrdenDeCompraServices(IOrdenDeCompraCommand ordenDeCompraCommand, 
-            IProveedorService proveedorService, IArticuloQuery articuloQuery, 
+            IProveedorQuery proveedorQuery, IArticuloQuery articuloQuery, 
             IOrdenDeCompraProductoCommand ordenDeCompraProductoCommand, IProductoQuery productoQuery, 
             IProductoCommand productoCommand)
         {
             _ordenDeCompraCommand = ordenDeCompraCommand;
-            _proveedorService = proveedorService;
+            _proveedorQuery = proveedorQuery;
             _articuloQuery = articuloQuery;
             _ordenDeCompraProductoCommand = ordenDeCompraProductoCommand;
             _productoQuery = productoQuery;
@@ -28,7 +28,7 @@ namespace Application.UseCase
         }
         public OrdenDeCompraResponse IngresarOrdenDeCompra(OrdenDeCompraRequest ordenDeCompra)
         {
-            var proveedor = _proveedorService.ProveedoresPorId(ordenDeCompra.proveedorId);
+            var proveedor = _proveedorQuery.ProveedoresPorId(ordenDeCompra.proveedorId);
 
             List<OrdenDeCompraProductoRequest> ordenDeCompraProductoRequest = new List<OrdenDeCompraProductoRequest>();
 
