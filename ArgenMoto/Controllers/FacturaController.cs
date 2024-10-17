@@ -41,6 +41,27 @@ namespace ArgenMoto.Controllers
             }
         }
 
+        [HttpGet("cobrado/{cobrado}")]
+        [ProducesResponseType(typeof(List<FacturaResponse>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status404NotFound)]
+        public IActionResult ListadoFacturas(bool cobrado)
+        {
+            try
+            {
+                var result = _service.ListaFacturas(cobrado);
+                return new JsonResult(result) { StatusCode = 200 };
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message == "No hay facturas registradas")
+                {
+                    return new JsonResult(new ErrorResponse { message = ex.Message }) { StatusCode = 404 };
+                }
+
+                return new JsonResult(new ErrorResponse { message = "Internal server error" }) { StatusCode = 500 };
+            }
+        }
+
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(FacturaResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status404NotFound)]

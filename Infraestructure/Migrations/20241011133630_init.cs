@@ -235,8 +235,9 @@ namespace Infraestructure.Migrations
                     VentaId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Fecha = table.Column<DateTime>(type: "date", nullable: false),
                     Total = table.Column<int>(type: "int", nullable: false),
+                    Cobrado = table.Column<bool>(type: "bit", nullable: false),
                     DocumentoId = table.Column<int>(type: "int", nullable: false),
-                    MedioDePago = table.Column<int>(type: "int", nullable: false)
+                    MedioDePagoId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -249,7 +250,7 @@ namespace Infraestructure.Migrations
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Factura_MedioPago_MedioDePago",
-                        column: x => x.MedioDePago,
+                        column: x => x.MedioDePagoId,
                         principalTable: "MedioPago",
                         principalColumn: "MedioPagoId",
                         onDelete: ReferentialAction.Cascade);
@@ -300,7 +301,7 @@ namespace Infraestructure.Migrations
                     { 4, "Lopez", 45678901, "Calle 28 1235", "marta@yahoo.com", "Berazategui", "Marta", "Buenos Aires", 1124567835 },
                     { 5, "Fernández", 56789012, "Mitre 1234", "carlitos@yahoo.com", "Quilmes", "Carlos", "Buenos Aires", 1145623789 }
                 });
-
+         
             migrationBuilder.InsertData(
                 table: "Documento",
                 columns: new[] { "DocumentoId", "Descripcion" },

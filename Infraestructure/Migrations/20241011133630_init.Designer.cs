@@ -312,6 +312,9 @@ namespace Infraestructure.Migrations
                     b.Property<int>("Total")
                         .HasColumnType("int");
 
+                    b.Property<bool>("Cobrado")
+                       .HasColumnType("bit");
+
                     b.Property<Guid>("VentaId")
                         .HasColumnType("uniqueidentifier");
 

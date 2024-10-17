@@ -11,5 +11,6 @@ namespace Application.Interfaces.Commands
     public interface IOrdenDeCompraCommand
     {
         void IngresarOrdenDeCompra(OrdenDeCompra ordenDeCompra);
+        
     }
 }

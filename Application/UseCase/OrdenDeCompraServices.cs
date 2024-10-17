@@ -3,6 +3,7 @@ using Application.Interfaces.Queries;
 using Application.Interfaces.Services;
 using Application.Models;
 using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.UseCase
 {
@@ -14,10 +15,12 @@ namespace Application.UseCase
         private readonly IOrdenDeCompraProductoCommand _ordenDeCompraProductoCommand;
         private readonly IProductoQuery _productoQuery;
         private readonly IProductoCommand _productoCommand;
+        private readonly IOrdenDeCompraQuery _OrdenDeCompraQuery;
+        
         public OrdenDeCompraServices(IOrdenDeCompraCommand ordenDeCompraCommand, 
             IProveedorQuery proveedorQuery, IArticuloQuery articuloQuery, 
             IOrdenDeCompraProductoCommand ordenDeCompraProductoCommand, IProductoQuery productoQuery, 
-            IProductoCommand productoCommand)
+            IProductoCommand productoCommand, IOrdenDeCompraQuery OrdenDeCompraQuery)
         {
             _ordenDeCompraCommand = ordenDeCompraCommand;
             _proveedorQuery = proveedorQuery;
@@ -25,6 +28,7 @@ namespace Application.UseCase
             _ordenDeCompraProductoCommand = ordenDeCompraProductoCommand;
             _productoQuery = productoQuery;
             _productoCommand = productoCommand;
+            _OrdenDeCompraQuery = OrdenDeCompraQuery;
         }
         public OrdenDeCompraResponse IngresarOrdenDeCompra(OrdenDeCompraRequest ordenDeCompra)
         {
@@ -105,6 +109,12 @@ namespace Application.UseCase
                 Productos = ordenDeCompraProductoRequest,
                 Total = _ordenDeCompra.PrecioTotal
             };
+        }
+
+        public OrdenDeCompra OrdenDeCompraPorId(int id)
+        {
+            var ordenDeCompra = _OrdenDeCompraQuery.OrdenDeCompraPorId(id);
+            return ordenDeCompra;
         }
     }
 }

@@ -35,5 +35,27 @@ namespace ArgenMoto.Controllers
                 return StatusCode(500, "Internal Server Error");
             }
         }
+
+        [HttpGet("{id}")]
+        [ProducesResponseType(typeof(Application.Models.OrdenDeCompraResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status404NotFound)]
+        public IActionResult OrdenDeCompraPorId(int id)
+        {
+            try
+            {
+                var result = _service.OrdenDeCompraPorId(id);
+
+                if (result == null)
+                {
+                    return NotFound(new ErrorResponse { message = $"No existe una Orden de Compra con el Id: {id}" });
+                }
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
     }
 }

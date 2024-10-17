@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace Application.Interfaces.Queries
 {
-    public interface IFacturaQuery
+    public interface IOrdenDeCompraQuery
     {
-        List<Factura> ListaFacturas();
-        List<Factura> ListaFacturas(bool cobrado);
-        Factura FacturaPorId(int id);
+        OrdenDeCompra OrdenDeCompraPorId(int id);
+       
     }
 }

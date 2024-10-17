@@ -317,7 +317,8 @@ namespace Infraestructure.Persistense
                     new ArticuloProveedor { ArticuloProveedorId = 5, Nombre = "BMW R 1250 GS", Marca = "BMW", Modelo = "R 1250 GS", ProductoId = 5, PrecioUnitario = 300000, ProveedorId = 2 },
                     new ArticuloProveedor { ArticuloProveedorId = 6, Nombre = "Ducati Monster 821", Marca = "Ducati", Modelo = "Monster 821", ProductoId = 6, PrecioUnitario = 250000, ProveedorId = 3 },
                     new ArticuloProveedor { ArticuloProveedorId = 7, Nombre = "Harley-Davidson Iron 883", Marca = "Harley-Davidson", Modelo = "Iron 883", ProductoId = 7, PrecioUnitario = 400000, ProveedorId = 4 }
-    );
+                    
+                );
             });
         }
     }
