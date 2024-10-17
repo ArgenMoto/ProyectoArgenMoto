@@ -1,4 +1,5 @@
 ﻿using Application.Interfaces.Commands;
+using Application.Models;
 using Domain.Entities;
 using Infraestructure.Persistense;
 using System;

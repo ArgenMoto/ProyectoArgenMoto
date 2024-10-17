@@ -14,6 +14,7 @@ namespace Application.Models
         public string medioPago { get; set; }
         public Guid VentaId { get; set; }
         public string Fecha { get; set; }
+        public bool Cobrado { get; set; }
         public ClienteResponseVenta Cliente { get; set; }
         public VendedorResponseVenta Vendedor { get; set; }
         public List<ItemResponse> Items { get; set; }

@@ -125,6 +125,7 @@ namespace Application.UseCase
                 VentaId = _venta.VentaId,
                 Fecha = DateTime.Today,
                 Total = totalVenta,
+                Cobrado = false,
                 DocumentoId = documento.DocumentoId,
                 MedioPagoId = medioPago.MedioPagoId
             };
@@ -149,7 +150,7 @@ namespace Application.UseCase
             VentaResponse ventaResponse = new VentaResponse
             {
                 VentaId = _venta.VentaId,
-                FacturaId= factura.FacturaId,
+                FacturaId = factura.FacturaId,
                 Fecha = _venta.Fecha,
                 Cliente = clienteResponse,
                 Vendedor = vendedorResponse,

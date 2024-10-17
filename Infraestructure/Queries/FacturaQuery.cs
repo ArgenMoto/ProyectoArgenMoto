@@ -31,6 +31,21 @@ namespace Infraestructure.Queries
 
             return facturas;
         }
+        public List<Factura> ListaFacturas(bool cobrado)
+        {
+            var facturas = _context.Factura
+                .Include(f => f.Venta)                    // Incluye la Venta relacionada
+                    .ThenInclude(v => v.Cliente)          // Incluye el Cliente relacionado a la Venta
+                .Include(f => f.Venta.Vendedor)           // Incluye el Vendedor relacionado a la Venta
+                .Include(f => f.Venta.Items)              // Incluye los Items relacionados a la Venta
+                    .ThenInclude(i => i.Producto)         // Incluye el Producto relacionado a cada Item
+                .Include(f => f.MedioPago)                // Incluye el MedioPago relacionado a la Factura
+                .Include(f => f.Documento)                // Incluye el Documento relacionado a la Factura
+                .Where(f => f.Cobrado == cobrado)         // Filtra según el valor de Cobrado
+                .ToList();
+
+            return facturas;
+        }
         public Factura FacturaPorId(int id)
         {
             var factura = _context.Factura
