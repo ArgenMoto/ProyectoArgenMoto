@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace Application.Interfaces.Commands
 {
-    public interface IFacturaCommand
+    public interface IArticuloCommand
     {
-        void registrarFactura(Factura factura);
-        void cobrarFactura(Factura factura);
+        void RegistrarArticulo(ArticuloProveedor articulo);
     }
 }

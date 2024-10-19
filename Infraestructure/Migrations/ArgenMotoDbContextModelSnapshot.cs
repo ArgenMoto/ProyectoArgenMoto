@@ -296,6 +296,9 @@ namespace Infraestructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FacturaId"));
 
+                    b.Property<bool>("Cobrado")
+                        .HasColumnType("bit");
+
                     b.Property<int>("DocumentoId")
                         .HasColumnType("int");
 
@@ -308,9 +311,6 @@ namespace Infraestructure.Migrations
 
                     b.Property<int>("Total")
                         .HasColumnType("int");
-
-                    b.Property<bool>("Cobrado")
-                       .HasColumnType("bit");
 
                     b.Property<Guid>("VentaId")
                         .HasColumnType("uniqueidentifier");
@@ -325,30 +325,6 @@ namespace Infraestructure.Migrations
                         .IsUnique();
 
                     b.ToTable("Factura", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            FacturaId = 1,
-                            VentaId = 1,
-                            Fecha = "2024-10-17",
-                            Total = true,
-                            Cobrado = 200000,
-                            DocumentoId = 1,
-                            MedioPagoId = 1
-                            
-                        },
-                        
-                        new
-                        {
-                            FacturaId = 2,
-                            VentaId = 2,
-                            Fecha = "2024-10-17",
-                            Total = false,
-                            Cobrado = 200000,
-                            DocumentoId = 2,
-                            MedioPagoId = 2
-                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Item", b =>

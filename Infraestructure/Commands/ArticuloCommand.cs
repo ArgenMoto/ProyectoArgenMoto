@@ -9,23 +9,16 @@ using System.Threading.Tasks;
 
 namespace Infraestructure.Commands
 {
-    public class FacturaCommand :IFacturaCommand
+    public class ArticuloCommand : IArticuloCommand
     {
         private readonly ArgenMotoDbContext _context;
-        public FacturaCommand(ArgenMotoDbContext context)
+        public ArticuloCommand(ArgenMotoDbContext context)
         {
             _context = context;
         }
-
-        public void cobrarFactura(Factura factura)
+        public void RegistrarArticulo(ArticuloProveedor articulo)
         {
-            _context.Factura.Update(factura);
-            _context.SaveChanges();
-        }
-
-        public void registrarFactura(Factura factura)
-        {
-            _context.Factura.Add(factura);
+            _context.ArticuloProveedor.Add(articulo);
             _context.SaveChanges();
         }
     }
