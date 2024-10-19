@@ -11,5 +11,6 @@ namespace Application.Interfaces.Queries
     {
         List<Producto> ListaProductos();
         Producto ProductoPorId(int id);
+        Producto ProductoPorNombreMarcaModelo(string nombre, string marca,string modelo);
     }
 }

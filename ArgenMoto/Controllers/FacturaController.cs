@@ -61,7 +61,27 @@ namespace ArgenMoto.Controllers
                 return new JsonResult(new ErrorResponse { message = "Internal server error" }) { StatusCode = 500 };
             }
         }
+        [HttpPut("{id}")]
+        public IActionResult CobrarFactura(int id, bool cobrado)
+        {
+            try
+            {
+                var result = _service.CobrarFactura(id, cobrado);
 
+                if (result != null)
+                {
+                    return new JsonResult(result) { StatusCode = 200 };
+                }
+                else
+                {
+                    return new JsonResult(new { message = "Error al modificar el proveedor." }) { StatusCode = 400 };
+                }
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(500, "internal server error");
+            }
+        }
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(FacturaResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status404NotFound)]

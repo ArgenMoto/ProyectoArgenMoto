@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infraestructure.Migrations
 {
     [DbContext(typeof(ArgenMotoDbContext))]
-    [Migration("20241011133630_init")]
+    [Migration("20241019171721_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -299,6 +299,9 @@ namespace Infraestructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FacturaId"));
 
+                    b.Property<bool>("Cobrado")
+                        .HasColumnType("bit");
+
                     b.Property<int>("DocumentoId")
                         .HasColumnType("int");
 
@@ -311,9 +314,6 @@ namespace Infraestructure.Migrations
 
                     b.Property<int>("Total")
                         .HasColumnType("int");
-
-                    b.Property<bool>("Cobrado")
-                       .HasColumnType("bit");
 
                     b.Property<Guid>("VentaId")
                         .HasColumnType("uniqueidentifier");

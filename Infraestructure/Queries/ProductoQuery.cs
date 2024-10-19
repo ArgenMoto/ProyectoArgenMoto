@@ -24,5 +24,11 @@ namespace Infraestructure.Queries
 
             return producto;
         }
+
+        public Producto ProductoPorNombreMarcaModelo(string nombre, string marca, string modelo)
+        {
+            var producto= _context.Producto.Where(x => x.Nombre == nombre && x.Marca == marca && x.Modelo == modelo).FirstOrDefault();
+            return producto;
+        }
     }
 }

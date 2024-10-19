@@ -13,5 +13,6 @@ namespace Application.Interfaces.Services
         List<FacturaResponse> ListaFacturas();
         List<FacturaResponse> ListaFacturas(bool cobrado);
         FacturaResponse FacturaPorId(int id);
+        FacturaResponse CobrarFactura(int id, bool cobrado);
     }
 }

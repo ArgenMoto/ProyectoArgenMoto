@@ -19,7 +19,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<ArgenMotoDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection1"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection2"));
 });
 
 builder.Services.AddScoped<IProveedorQuery, ProveedorQuery>();
@@ -64,6 +64,7 @@ builder.Services.AddScoped<IOrdenDeCompraQuery, OrdenDeCompraQuery>();
 
 builder.Services.AddScoped<IArticuloQuery, ArticuloQuery>();
 builder.Services.AddScoped<IArticuloService, ArticuloServices>();
+builder.Services.AddScoped<IArticuloCommand, ArticuloCommand>();
 // Habilitar CORS
 builder.Services.AddCors(options =>
 {
