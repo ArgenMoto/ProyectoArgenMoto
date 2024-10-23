@@ -21,6 +21,7 @@ namespace Infraestructure.Persistense
         public DbSet<Item> Item { get; set; }
         public DbSet<ArticuloProveedor> ArticuloProveedor { get; set; }
         public DbSet<OrdenDeCompraProducto> OrdenDeCompraProducto { get; set; }
+        public DbSet<FacturaCompra> FacturaCompra { get; set; }
        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -102,6 +103,7 @@ namespace Infraestructure.Persistense
 
                 entity.HasKey(x => x.OrdenDeCompraId);
 
+                entity.HasOne<FacturaCompra>(x => x.FacturaCompra).WithOne(a => a.OrdenDeCompra).HasForeignKey<FacturaCompra>(x => x.OrdenDeCompraId);
                 //entity.HasOne(x => x.Proveedor).WithMany(a => a.OrdenDeCompra).HasForeignKey(x => x.ProveedorId);
 
             });
@@ -119,6 +121,11 @@ namespace Infraestructure.Persistense
                 entity.HasOne(x => x.Documento).WithMany(a => a.Facturas).HasForeignKey(x => x.DocumentoId);
                 entity.HasOne(x => x.MedioPago).WithMany(a => a.Facturas).HasForeignKey(x => x.MedioPagoId);
 
+            });
+            modelBuilder.Entity<FacturaCompra>(entity =>
+            {
+                entity.ToTable("FacturaCompra");
+                entity.HasKey(x => x.FacturaCompraId);
             });
             modelBuilder.Entity<Venta>(entity =>
             {

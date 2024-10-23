@@ -142,6 +142,28 @@ namespace Infraestructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "FacturaCompra",
+                columns: table => new
+                {
+                    FacturaCompraId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    OrdenDeCompraId = table.Column<int>(type: "int", nullable: false),
+                    FechaEmision = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    PrecioTotal = table.Column<int>(type: "int", nullable: false),
+                    Pagado = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FacturaCompra", x => x.FacturaCompraId);
+                    table.ForeignKey(
+                        name: "FK_FacturaCompra_OrdenDeCompra_OrdenDeCompraId",
+                        column: x => x.OrdenDeCompraId,
+                        principalTable: "OrdenDeCompra",
+                        principalColumn: "OrdenDeCompraId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ArticulosProveedor",
                 columns: table => new
                 {
@@ -407,6 +429,12 @@ namespace Infraestructure.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_FacturaCompra_OrdenDeCompraId",
+                table: "FacturaCompra",
+                column: "OrdenDeCompraId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ItemDetalle_Producto",
                 table: "ItemDetalle",
                 column: "Producto");
@@ -442,6 +470,9 @@ namespace Infraestructure.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Factura");
+
+            migrationBuilder.DropTable(
+                name: "FacturaCompra");
 
             migrationBuilder.DropTable(
                 name: "ItemDetalle");
