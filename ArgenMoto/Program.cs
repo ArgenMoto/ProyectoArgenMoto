@@ -65,6 +65,11 @@ builder.Services.AddScoped<IOrdenDeCompraQuery, OrdenDeCompraQuery>();
 builder.Services.AddScoped<IArticuloQuery, ArticuloQuery>();
 builder.Services.AddScoped<IArticuloService, ArticuloServices>();
 builder.Services.AddScoped<IArticuloCommand, ArticuloCommand>();
+
+builder.Services.AddScoped<IFacturaCompraCommand, FacturaCompraCommand>();
+builder.Services.AddScoped<IFacturaCompraService, FacturaCompraServices>();
+builder.Services.AddScoped<IFacturaCompraQuery, FacturaCompraQuery>();
+
 // Habilitar CORS
 builder.Services.AddCors(options =>
 {

@@ -5,6 +5,7 @@
         public int OrdenDeCompraId { get; set; }      
         public DateTime Fecha { get; set; } 
         public int PrecioTotal { get; set; }
+        public FacturaCompra FacturaCompra{ get; set; }
         public ICollection<OrdenDeCompraProducto> OrdenDeCompraProducto { get; set; }
     }
 }

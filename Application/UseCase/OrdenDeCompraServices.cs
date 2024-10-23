@@ -16,11 +16,13 @@ namespace Application.UseCase
         private readonly IProductoQuery _productoQuery;
         private readonly IProductoCommand _productoCommand;
         private readonly IOrdenDeCompraQuery _OrdenDeCompraQuery;
+        private readonly IFacturaCompraCommand _facturaCompraCommand;
         
         public OrdenDeCompraServices(IOrdenDeCompraCommand ordenDeCompraCommand, 
             IProveedorQuery proveedorQuery, IArticuloQuery articuloQuery, 
             IOrdenDeCompraProductoCommand ordenDeCompraProductoCommand, IProductoQuery productoQuery, 
-            IProductoCommand productoCommand, IOrdenDeCompraQuery OrdenDeCompraQuery)
+            IProductoCommand productoCommand, IOrdenDeCompraQuery OrdenDeCompraQuery,
+            IFacturaCompraCommand facturaCompraCommand)
         {
             _ordenDeCompraCommand = ordenDeCompraCommand;
             _proveedorQuery = proveedorQuery;
@@ -29,6 +31,7 @@ namespace Application.UseCase
             _productoQuery = productoQuery;
             _productoCommand = productoCommand;
             _OrdenDeCompraQuery = OrdenDeCompraQuery;
+            _facturaCompraCommand = facturaCompraCommand;
         }
         public OrdenDeCompraResponse IngresarOrdenDeCompra(OrdenDeCompraRequest ordenDeCompra)
         {
@@ -98,7 +101,18 @@ namespace Application.UseCase
                     Cantidad = item.Cantidad
                 };
                 ordenDeCompraProductoRequest.Add(_ordenDeCompraProducto);
+
+                FacturaCompra facturaCompra = new FacturaCompra
+                {
+                    OrdenDeCompraId = _ordenDeCompra.OrdenDeCompraId,
+                    FechaEmision = DateTime.Now,
+                    PrecioTotal = precioTotal,
+                    Pagado = false
+                };
+                _facturaCompraCommand.registrarFactura(facturaCompra);
             }
+           
+
 
             return new OrdenDeCompraResponse
             {

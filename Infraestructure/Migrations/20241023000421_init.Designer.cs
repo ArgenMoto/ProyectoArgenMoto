@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infraestructure.Migrations
 {
     [DbContext(typeof(ArgenMotoDbContext))]
-    [Migration("20241019171721_init")]
+    [Migration("20241023000421_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -328,6 +328,34 @@ namespace Infraestructure.Migrations
                         .IsUnique();
 
                     b.ToTable("Factura", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.Entities.FacturaCompra", b =>
+                {
+                    b.Property<int>("FacturaCompraId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FacturaCompraId"));
+
+                    b.Property<DateTime>("FechaEmision")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("OrdenDeCompraId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Pagado")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("PrecioTotal")
+                        .HasColumnType("int");
+
+                    b.HasKey("FacturaCompraId");
+
+                    b.HasIndex("OrdenDeCompraId")
+                        .IsUnique();
+
+                    b.ToTable("FacturaCompra", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Item", b =>
@@ -953,6 +981,17 @@ namespace Infraestructure.Migrations
                     b.Navigation("Venta");
                 });
 
+            modelBuilder.Entity("Domain.Entities.FacturaCompra", b =>
+                {
+                    b.HasOne("Domain.Entities.OrdenDeCompra", "OrdenDeCompra")
+                        .WithOne("FacturaCompra")
+                        .HasForeignKey("Domain.Entities.FacturaCompra", "OrdenDeCompraId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("OrdenDeCompra");
+                });
+
             modelBuilder.Entity("Domain.Entities.Item", b =>
                 {
                     b.HasOne("Domain.Entities.Producto", "Producto")
@@ -1032,6 +1071,9 @@ namespace Infraestructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.OrdenDeCompra", b =>
                 {
+                    b.Navigation("FacturaCompra")
+                        .IsRequired();
+
                     b.Navigation("OrdenDeCompraProducto");
                 });
 
