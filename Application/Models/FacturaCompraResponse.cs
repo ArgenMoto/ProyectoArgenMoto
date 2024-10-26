@@ -11,6 +11,8 @@ namespace Application.Models
         public int FacturaCompraId { get; set; }
         public int OrdenDeCompraId { get; set; }
         public DateTime FechaEmision { get; set; }
+
+        public List<ArticuloResponse> Articulos { get; set; }
         public int PrecioTotal { get; set; }
         public bool Pagado { get; set; }
     }

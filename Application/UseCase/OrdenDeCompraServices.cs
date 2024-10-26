@@ -117,6 +117,7 @@ namespace Application.UseCase
             return new OrdenDeCompraResponse
             {
                 NumeroOrdenDeCompra = _ordenDeCompra.OrdenDeCompraId,
+                FacturaCompraId= (_ordenDeCompra.FacturaCompra).FacturaCompraId,
                 ProveedorCuit = proveedor.Cuit,
                 ProveedorNombre = proveedor.RazonSocial,
                 Fecha = DateTime.Now,

@@ -17,14 +17,4 @@ namespace Application.Models
         public int ProductoId { get; set; }
         public int Cantidad { get; set; }
     }
-
-    public class OrdenDeCompraResponse
-    {
-        public int NumeroOrdenDeCompra { get; set; }
-        public string ProveedorCuit { get; set; }
-        public string ProveedorNombre { get; set; }
-        public DateTime Fecha { get; set; }
-        public List<OrdenDeCompraProductoRequest> Productos { get; set; }
-        public decimal Total { get; set; }
-    }
 }
