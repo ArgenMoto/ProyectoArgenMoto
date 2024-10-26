@@ -64,6 +64,9 @@ builder.Services.AddScoped<IOrdenDeCompraQuery, OrdenDeCompraQuery>();
 
 builder.Services.AddScoped<IArticuloQuery, ArticuloQuery>();
 builder.Services.AddScoped<IArticuloService, ArticuloServices>();
+
+builder.Services.AddScoped<IArticuloProveedorCommand, ArticuloProveedorCommand>();
+
 // Habilitar CORS
 builder.Services.AddCors(options =>
 {

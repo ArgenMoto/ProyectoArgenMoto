@@ -78,6 +78,7 @@ namespace ArgenMoto.Controllers
 
             }
         }
+
         [HttpPost]
 
         public IActionResult RegistrarProducto(ProductoRequest producto)
@@ -103,6 +104,7 @@ namespace ArgenMoto.Controllers
 
             }
         }
+
         [HttpPut("{id}")]
         public IActionResult UpdateProducto(int id, ProductoRequest Producto)
         {

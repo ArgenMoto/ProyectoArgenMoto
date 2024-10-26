@@ -1,6 +1,8 @@
-﻿using Application.Interfaces.Queries;
+﻿using Application.Interfaces.Commands;
+using Application.Interfaces.Queries;
 using Application.Interfaces.Services;
 using Application.Models;
+using Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +15,7 @@ namespace Application.UseCase
     {
         private readonly IArticuloQuery _articuloQuery;
         private readonly IProveedorQuery _proveedorQuery;
-
+        private readonly IArticuloProveedorCommand _articuloProveedorCommand;
         public ArticuloServices(IArticuloQuery articuloQuery, IProveedorQuery proveedorQuery)
         {
             _articuloQuery = articuloQuery;
@@ -47,5 +49,7 @@ namespace Application.UseCase
             }
             return articulosResponse;
         }
+       
+
     }
 }

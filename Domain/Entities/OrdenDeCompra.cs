@@ -8,3 +8,4 @@
         public ICollection<OrdenDeCompraProducto> OrdenDeCompraProducto { get; set; }
     }
 }
+ 
