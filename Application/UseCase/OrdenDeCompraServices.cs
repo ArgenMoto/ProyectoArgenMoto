@@ -53,16 +53,16 @@ namespace Application.UseCase
                 var precioTotalLinea= item.Cantidad * articulo.PrecioUnitario;
                 precioTotal += precioTotalLinea;
 
-                var producto = _productoQuery.ProductoPorId(item.ProductoId);
+                //var producto = _productoQuery.ProductoPorId(item.ProductoId);
 
-                if (producto == null)
-                {
-                    throw new Exception("El producto no existe");
-                }
+                //if (producto == null)
+                //{
+                 //   throw new Exception("El producto no existe");
+                //}
 
-                producto.StockActual += item.Cantidad; 
+                //producto.StockActual += item.Cantidad; 
 
-                _productoCommand.ModificarProducto(producto); 
+                //_productoCommand.ModificarProducto(producto); 
             }
 
         

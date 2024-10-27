@@ -15,12 +15,18 @@ namespace Application.UseCase
     {
         private readonly IFacturaCompraQuery _facturaCompraQuery;
         private readonly IFacturaCompraCommand _facturaCompraCommand;
+        private readonly IProductoQuery _productoQuery;
+        private readonly IProductoCommand _productoCommand;
+
         public FacturaCompraServices(IFacturaCompraQuery facturaCompraQuery,
-            IFacturaCompraCommand facturaCompraCommand)
+                                     IFacturaCompraCommand facturaCompraCommand,
+                                     IProductoQuery productoQuery,
+                                     IProductoCommand productoCommand)
         {
             _facturaCompraQuery = facturaCompraQuery;
             _facturaCompraCommand = facturaCompraCommand;
-
+            _productoQuery = productoQuery;
+            _productoCommand = productoCommand;
         }
         public FacturaCompraResponse PagarFactura(int id, bool cobrado)
         {
@@ -34,6 +40,7 @@ namespace Application.UseCase
             facturaCompra.Pagado = cobrado;
 
             _facturaCompraCommand.pagarFactura(facturaCompra);
+
 
             var OrdenDeCompra = facturaCompra.OrdenDeCompraId;
             var precio = facturaCompra.PrecioTotal;
@@ -49,7 +56,25 @@ namespace Application.UseCase
                     Modelo = articulo.ArticuloProveedor.Modelo,
                     ProductoId = articulo.ArticuloProveedor.ProductoId,
                     PrecioUnitario = articulo.ArticuloProveedor.PrecioUnitario
+
+                   
                 });
+
+                var producto = _productoQuery.ProductoPorId(articulo.ArticuloProveedor.ProductoId);
+
+                if (producto == null)
+                {
+                    throw new Exception("El producto no existe");
+                }
+
+                var productos = articulo.ArticuloProveedor.OrdenDeCompraProducto;
+                foreach (var produ in productos)
+                {
+                    if (produ.ArticuloProveedor == articulo.ArticuloProveedor) { }
+
+                    producto.StockActual += produ.Cantidad;//ACA
+                }
+                _productoCommand.ModificarProducto(producto);
             }
 
 
