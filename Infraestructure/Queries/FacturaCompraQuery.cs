@@ -28,5 +28,6 @@ namespace Infraestructure.Queries
 
             return facturaCompra;
         }
+
     }
 }
