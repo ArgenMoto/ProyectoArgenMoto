@@ -19,7 +19,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<ArgenMotoDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection3"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection2"));
 });
 
 builder.Services.AddScoped<IProveedorQuery, ProveedorQuery>();

@@ -10,5 +10,6 @@ namespace Application.Interfaces.Services
     public interface IFacturaCompraService
     {
         FacturaCompraResponse PagarFactura(int id, bool cobrado);
+        FacturaCompraResponse FacturaPorId(int id);
     }
 }
