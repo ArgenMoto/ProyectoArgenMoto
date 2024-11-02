@@ -121,6 +121,20 @@ namespace Infraestructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Usuario",
+                columns: table => new
+                {
+                    UsuarioId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Contrasena = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Usuario", x => x.UsuarioId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Vendedor",
                 columns: table => new
                 {
@@ -377,6 +391,19 @@ namespace Infraestructure.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Usuario",
+                columns: new[] { "UsuarioId", "Contrasena", "Nombre" },
+                values: new object[,]
+                {
+                    { 1, "Admin", "admin" },
+                    { 2, "1234", "Pedro" },
+                    { 3, "1234", "Laura" },
+                    { 4, "1234", "Andres" },
+                    { 5, "1234", "Sofia" },
+                    { 6, "1234", "Miguel" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Vendedor",
                 columns: new[] { "VendedorId", "VendedorApellido", "VendedorDni", "VendedorDomicilio", "VendedorEmail", "VendedorLocalidad", "VendedorNombre", "VendedorProvincia", "VendedorPuesto", "VendedorTelefono" },
                 values: new object[,]
@@ -479,6 +506,9 @@ namespace Infraestructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "OrdenDeCompraProducto");
+
+            migrationBuilder.DropTable(
+                name: "Usuario");
 
             migrationBuilder.DropTable(
                 name: "Documento");
