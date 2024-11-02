@@ -22,7 +22,8 @@ namespace Infraestructure.Persistense
         public DbSet<ArticuloProveedor> ArticuloProveedor { get; set; }
         public DbSet<OrdenDeCompraProducto> OrdenDeCompraProducto { get; set; }
         public DbSet<FacturaCompra> FacturaCompra { get; set; }
-       
+        public DbSet<Usuario> Usuario { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Producto>(entity =>
@@ -53,9 +54,14 @@ namespace Infraestructure.Persistense
             {
                 entity.ToTable("Documento");
                 entity.HasKey(x => x.DocumentoId);
-                ;
+                
             });
-
+            modelBuilder.Entity<Usuario>(entity =>
+            {
+                entity.ToTable("Usuario");
+                entity.HasKey(x => x.UsuarioId);
+                
+            });
             modelBuilder.Entity<Item>(entity =>
             {
                 entity.ToTable("ItemDetalle");
@@ -297,7 +303,15 @@ namespace Infraestructure.Persistense
                         VendedorEmail = "miguel@gmail.com"
                     }
                     );
+                modelBuilder.Entity<Usuario>().HasData(
+                    new Usuario { UsuarioId = 1, Nombre = "admin", Contrasena = "Admin" },
+                    new Usuario { UsuarioId = 2, Nombre = "Pedro", Contrasena = "1234" },
+                    new Usuario { UsuarioId = 3, Nombre = "Laura", Contrasena = "1234" },
+                    new Usuario { UsuarioId = 4, Nombre = "Andres", Contrasena = "1234" },
+                    new Usuario { UsuarioId = 5, Nombre = "Sofia", Contrasena = "1234" },
+                    new Usuario { UsuarioId = 6, Nombre = "Miguel", Contrasena = "1234" }
 
+                    );
                 modelBuilder.Entity<Documento>().HasData(
                     new Documento { DocumentoId = 1, Descripcion = "Factura A" },
                     new Documento { DocumentoId = 2, Descripcion = "Factura B" },

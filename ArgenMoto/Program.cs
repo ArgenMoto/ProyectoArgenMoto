@@ -70,6 +70,9 @@ builder.Services.AddScoped<IFacturaCompraCommand, FacturaCompraCommand>();
 builder.Services.AddScoped<IFacturaCompraService, FacturaCompraServices>();
 builder.Services.AddScoped<IFacturaCompraQuery, FacturaCompraQuery>();
 
+builder.Services.AddScoped<IUsuarioQuery, UsuarioQuery>();
+builder.Services.AddScoped<IUsuarioService, UsuarioServices>();
+
 // Habilitar CORS
 builder.Services.AddCors(options =>
 {

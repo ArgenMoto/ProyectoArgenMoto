@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infraestructure.Migrations
 {
     [DbContext(typeof(ArgenMotoDbContext))]
-    [Migration("20241023000421_init")]
+    [Migration("20241102034709_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -788,6 +788,65 @@ namespace Infraestructure.Migrations
                             Provincia = "Buenos Aires",
                             RazonSocial = "Moto Supplies Inc.",
                             Telefono = 1156789012
+                        });
+                });
+
+            modelBuilder.Entity("Domain.Entities.Usuario", b =>
+                {
+                    b.Property<int>("UsuarioId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UsuarioId"));
+
+                    b.Property<string>("Contrasena")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UsuarioId");
+
+                    b.ToTable("Usuario", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UsuarioId = 1,
+                            Contrasena = "Admin",
+                            Nombre = "admin"
+                        },
+                        new
+                        {
+                            UsuarioId = 2,
+                            Contrasena = "1234",
+                            Nombre = "Pedro"
+                        },
+                        new
+                        {
+                            UsuarioId = 3,
+                            Contrasena = "1234",
+                            Nombre = "Laura"
+                        },
+                        new
+                        {
+                            UsuarioId = 4,
+                            Contrasena = "1234",
+                            Nombre = "Andres"
+                        },
+                        new
+                        {
+                            UsuarioId = 5,
+                            Contrasena = "1234",
+                            Nombre = "Sofia"
+                        },
+                        new
+                        {
+                            UsuarioId = 6,
+                            Contrasena = "1234",
+                            Nombre = "Miguel"
                         });
                 });
 
