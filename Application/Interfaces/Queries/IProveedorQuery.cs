@@ -6,5 +6,6 @@ namespace Application.Interfaces.Queries
     {
         Task<List<Proveedor>> ListaProveedores();
         Proveedor ProveedoresPorId(int id);
+        Proveedor ProveedoresPorCuit(string cuit);
     }
 }

@@ -12,6 +12,7 @@ namespace Application.Interfaces.Services
     {
         List<Producto> ListaProductos();
         Producto ProductoPorId(int id);
+        Producto ProductoPorNumeroMotor(int nMotor);
         void EliminarProducto(int id);
         Producto RegistrarProducto(ProductoRequest Producto);
         ProductoResponse ModificarProducto(int id, ProductoRequest Producto);

@@ -29,12 +29,15 @@ namespace Application.UseCase
         {
             return _proveedorQuery.ListaProveedores();
         }
-
+        
         public Proveedor ProveedoresPorId(int id)
         {
             return _proveedorQuery.ProveedoresPorId(id);
         }
-
+        public Proveedor ProveedoresPorCuit(string cuit)
+        {
+            return _proveedorQuery.ProveedoresPorCuit(cuit);
+        }
         public Proveedor RegistrarProveedor(ProveedorRequest proveedor)
         {
 

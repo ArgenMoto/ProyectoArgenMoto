@@ -60,6 +60,27 @@ namespace ArgenMoto.Controllers
             }
         }
 
+        [HttpGet("numeroMotor/{numeroMotor}")]
+        public IActionResult GetProductoByNumeroMotor(int numeroMotor)
+        {
+            try
+            {
+                var result = _service.ProductoPorNumeroMotor(numeroMotor);
+
+                if (result != null)
+                {
+                    return new JsonResult(result) { StatusCode = 200 };
+                }
+
+                return new JsonResult(result) { StatusCode = 200 };
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+
         [HttpDelete("{id}")]
         public IActionResult DeleteProducto(int id)
         {

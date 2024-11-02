@@ -27,6 +27,11 @@ namespace Application.UseCase
             return _productoQuery.ProductoPorId(id);
         }
 
+        public Producto ProductoPorNumeroMotor(int nMotor)
+        {
+            return _productoQuery.ProductoPorNumeroMotor(nMotor);
+        }
+
         public void EliminarProducto(int id)
         {
             var producto = _productoQuery.ProductoPorId(id);

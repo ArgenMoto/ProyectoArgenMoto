@@ -57,6 +57,27 @@ namespace ArgenMoto.Controllers
             }
         }
 
+        [HttpGet("dni/{dni}")]
+        public IActionResult GetProveedorByDNI(int dni)
+        {
+            try
+            {
+                var result = _service.VendedoresPorDNI(dni);
+
+                if (result != null)
+                {
+                    return new JsonResult(result) { StatusCode = 200 };
+                }
+
+                return new JsonResult(result) { StatusCode = 200 };
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+
         [HttpDelete("{id}")]
         public IActionResult DeleteVendedor(int id)
         {

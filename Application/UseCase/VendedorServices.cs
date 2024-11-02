@@ -33,6 +33,10 @@ namespace Application.UseCase
         {
             return _vendedorQuery.VendedoresPorId(id);
         }
+        public Vendedor VendedoresPorDNI(int dni)
+        {
+            return _vendedorQuery.VendedoresPorDNI(dni);
+        }
 
         public Vendedor RegistrarVendedor(VendedorRequest vendedor)
         {

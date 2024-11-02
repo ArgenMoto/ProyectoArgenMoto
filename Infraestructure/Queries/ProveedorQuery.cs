@@ -29,5 +29,10 @@ namespace Infraestructure.Queries
 
             return proveedor;
         }
+
+        public Proveedor ProveedoresPorCuit(string cuit) { 
+             var proveedor = _context.Proveedor.FirstOrDefault(p => p.Cuit == cuit);
+            return proveedor;
+        }
     }
 }
