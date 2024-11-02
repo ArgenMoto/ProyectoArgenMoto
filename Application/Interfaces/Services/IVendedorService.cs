@@ -7,6 +7,7 @@ namespace Application.Interfaces.Services
     {
         Task<List<Vendedor>> ListaVendedores();
         Vendedor VendedoresPorId(int id);
+        Vendedor VendedoresPorDNI(int dni);
         void EliminarVendedor(int id);
         Vendedor RegistrarVendedor(VendedorRequest vendedor);
         VendedorResponse UpdateVendedor(int id, VendedorRequest vendedor);

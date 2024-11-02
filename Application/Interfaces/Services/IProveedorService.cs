@@ -7,6 +7,7 @@ namespace Application.Interfaces.Services
     {
         Task<List<Proveedor>> ListaProveedores();
         Proveedor ProveedoresPorId(int id);
+        Proveedor ProveedoresPorCuit(string cuit);
         void EliminarProveedor(int id);
         Proveedor RegistrarProveedor(ProveedorRequest proveedor);
         ProveedorResponse UpdateProveedor(int id, ProveedorRequest proveedor);

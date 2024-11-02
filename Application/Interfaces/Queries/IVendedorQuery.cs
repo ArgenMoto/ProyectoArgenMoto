@@ -6,6 +6,6 @@ namespace Application.Interfaces.Queries
     {
         Task<List<Vendedor>> ListaVendedores();
         Vendedor VendedoresPorId(int id);
-
+        Vendedor VendedoresPorDNI(int dni);
     }
 }

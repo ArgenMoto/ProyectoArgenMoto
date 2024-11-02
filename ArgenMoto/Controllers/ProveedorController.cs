@@ -57,6 +57,27 @@ namespace ArgenMoto.Controllers
             }
         }
 
+        [HttpGet("cuit/{cuit}")]
+        public IActionResult GetProveedorByCuit(string cuit)
+        {
+            try
+            {
+                var result = _service.ProveedoresPorCuit(cuit);
+
+                if (result != null)
+                {
+                    return new JsonResult(result) { StatusCode = 200 };
+                }
+
+                return new JsonResult(result) { StatusCode = 200 };
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+
         [HttpDelete("{id}")]
         public IActionResult DeleteProveedor(int id)
         {

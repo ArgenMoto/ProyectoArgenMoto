@@ -26,5 +26,11 @@ namespace Infraestructure.Queries
 
             return vendedor;
         }
+        
+        public Vendedor VendedoresPorDNI(int dni)
+        {
+            var vendedor = _context.Vendedor.FirstOrDefault(v => v.VendedorDni == dni);
+            return vendedor;
+        }
     }
 }
