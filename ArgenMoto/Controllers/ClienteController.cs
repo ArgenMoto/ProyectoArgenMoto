@@ -106,7 +106,7 @@ namespace ArgenMoto.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetProveedorById(int id)
+        public IActionResult GetClientesById(int id)
         {
             try
             {
@@ -126,7 +126,7 @@ namespace ArgenMoto.Controllers
             }
         }
         [HttpGet("dni/{dni}")]
-        public IActionResult GetProveedorByDNI(int dni)
+        public IActionResult GetClientesByDNI(int dni)
         {
             try
             {
