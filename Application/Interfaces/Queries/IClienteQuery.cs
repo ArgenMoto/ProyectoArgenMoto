@@ -11,5 +11,6 @@ namespace Application.Interfaces.Queries
     {
         Task<List<Cliente>> ListaClientes();
         Cliente ClientesPorId(int id);
+        Cliente ClientesPorDNI(int dni);
     }
 }

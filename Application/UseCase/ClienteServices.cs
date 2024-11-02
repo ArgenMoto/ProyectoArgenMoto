@@ -26,7 +26,10 @@ namespace Application.UseCase
         {
             return _clienteQuery.ClientesPorId(id);
         }
-
+        public Cliente ClientesPorDNI(int dni)
+        {
+            return _clienteQuery.ClientesPorDNI(dni);
+        }
         public void EliminarCliente(int id)
         {
             var cliente = _clienteQuery.ClientesPorId(id);
