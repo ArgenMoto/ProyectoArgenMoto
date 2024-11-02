@@ -26,5 +26,11 @@ namespace Infraestructure.Queries
 
             return cliente;
         }
+
+        public Cliente ClientesPorDNI(int dni)
+        {
+            var cliente = _context.Cliente.FirstOrDefault(c => c.DNI == dni);
+            return cliente;
+        }
     }
 }

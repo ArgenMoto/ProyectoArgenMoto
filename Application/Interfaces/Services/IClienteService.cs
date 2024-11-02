@@ -12,6 +12,7 @@ namespace Application.Interfaces.Services
     {
         Task<List<Cliente>> ListaClientes();
         Cliente ClientesPorId(int id);
+        Cliente ClientesPorDNI(int dni);
         void EliminarCliente(int id);
         Cliente RegistrarCliente(ClienteRequest cliente);
         ClienteResponse ModificarCliente(int id, ClienteRequest cliente);

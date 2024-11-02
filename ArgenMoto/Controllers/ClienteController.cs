@@ -125,6 +125,26 @@ namespace ArgenMoto.Controllers
                 return StatusCode(500, "Internal Server Error");
             }
         }
+        [HttpGet("dni/{dni}")]
+        public IActionResult GetProveedorByDNI(int dni)
+        {
+            try
+            {
+                var result = _service.ClientesPorDNI(dni);
+
+                if (result != null)
+                {
+                    return new JsonResult(result) { StatusCode = 200 };
+                }
+
+                return new JsonResult(result) { StatusCode = 200 };
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
 
     }
 
