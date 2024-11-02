@@ -58,7 +58,7 @@ namespace ArgenMoto.Controllers
         }
 
         [HttpGet("dni/{dni}")]
-        public IActionResult GetProveedorByDNI(int dni)
+        public IActionResult GetVendedorByDNI(int dni)
         {
             try
             {
