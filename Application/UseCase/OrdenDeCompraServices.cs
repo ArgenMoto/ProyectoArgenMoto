@@ -102,22 +102,25 @@ namespace Application.UseCase
                 };
                 ordenDeCompraProductoRequest.Add(_ordenDeCompraProducto);
 
+            }
                 FacturaCompra facturaCompra = new FacturaCompra
                 {
+                    FacturaCompraId= _ordenDeCompra.OrdenDeCompraId,
                     OrdenDeCompraId = _ordenDeCompra.OrdenDeCompraId,
                     FechaEmision = DateTime.Now,
                     PrecioTotal = precioTotal,
                     Pagado = false
                 };
                 _facturaCompraCommand.registrarFactura(facturaCompra);
-            }
+            
            
 
 
             return new OrdenDeCompraResponse
             {
                 NumeroOrdenDeCompra = _ordenDeCompra.OrdenDeCompraId,
-                FacturaCompraId= (_ordenDeCompra.FacturaCompra).FacturaCompraId,
+                FacturaCompraId= facturaCompra.FacturaCompraId,
+                //(_ordenDeCompra.FacturaCompra).FacturaCompraId,
                 ProveedorCuit = proveedor.Cuit,
                 ProveedorNombre = proveedor.RazonSocial,
                 Fecha = DateTime.Now,

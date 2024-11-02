@@ -159,8 +159,9 @@ namespace Infraestructure.Migrations
                 name: "FacturaCompra",
                 columns: table => new
                 {
-                    FacturaCompraId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FacturaCompraId = table.Column<int>(type: "int", nullable: false),
+                    //FacturaCompraId = table.Column<int>(type: "int", nullable: false)
+                      //  .Annotation("SqlServer:Identity", "1, 1"),
                     OrdenDeCompraId = table.Column<int>(type: "int", nullable: false),
                     FechaEmision = table.Column<DateTime>(type: "datetime2", nullable: false),
                     PrecioTotal = table.Column<int>(type: "int", nullable: false),

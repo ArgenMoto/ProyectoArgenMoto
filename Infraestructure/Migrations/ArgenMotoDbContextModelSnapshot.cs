@@ -350,7 +350,7 @@ namespace Infraestructure.Migrations
                     b.HasKey("FacturaCompraId");
 
                     b.HasIndex("OrdenDeCompraId")
-                        .IsUnique();
+                      .IsUnique();
 
                     b.ToTable("FacturaCompra", (string)null);
                 });
