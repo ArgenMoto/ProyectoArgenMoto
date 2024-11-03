@@ -25,6 +25,14 @@ namespace Application.UseCase
 
         }
 
+        public void EliminarProveedorCuit(string cuit)
+        {
+            var proveedor = _proveedorQuery.ProveedoresPorCuit(cuit);
+
+            _proveedorCommand.EliminarProveedorCuit(proveedor);
+
+        }
+
         public Task<List<Proveedor>> ListaProveedores()
         {
             return _proveedorQuery.ListaProveedores();
@@ -82,6 +90,44 @@ namespace Application.UseCase
             ProveedorResponse proveedorResponse = new ProveedorResponse
             {
                 Id = id,
+                Cuit = proveedor.Cuit,
+                RazonSocial = proveedor.RazonSocial,
+                Apellido = proveedor.Apellido,
+                Nombre = proveedor.Nombre,
+                Direccion = proveedor.Direccion,
+                Localidad = proveedor.Localidad,
+                Provincia = proveedor.Provincia,
+                Telefono = proveedor.Telefono,
+                Email = proveedor.Email,
+            };
+
+            return proveedorResponse;
+
+        }
+
+        public ProveedorResponse ModificarProveedorCuit(string cuit, ProveedorRequest proveedor)
+        {
+            var _proveedor = _proveedorQuery.ProveedoresPorCuit(cuit);
+
+            if (_proveedor == null)
+
+                throw new Exception("Proveedor no encontrado");
+
+            _proveedor.Cuit = proveedor.Cuit;
+            _proveedor.RazonSocial = proveedor.RazonSocial;
+            _proveedor.Apellido = proveedor.Apellido;
+            _proveedor.Nombre = proveedor.Nombre;
+            _proveedor.Direccion = proveedor.Direccion;
+            _proveedor.Localidad = proveedor.Localidad;
+            _proveedor.Provincia = proveedor.Provincia;
+            _proveedor.Telefono = proveedor.Telefono;
+            _proveedor.Email = proveedor.Email;
+
+            _proveedorCommand.ModificarProveedorCuit(_proveedor);
+
+            ProveedorResponse proveedorResponse = new ProveedorResponse
+            {
+                Id = _proveedor.ProveedorId,
                 Cuit = proveedor.Cuit,
                 RazonSocial = proveedor.RazonSocial,
                 Apellido = proveedor.Apellido,

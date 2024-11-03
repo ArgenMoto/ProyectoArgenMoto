@@ -13,5 +13,8 @@ namespace Application.Interfaces.Commands
         void EliminarProducto(Producto producto);
         Producto RegistrarProducto(Producto producto);
         void ModificarProducto(Producto producto);
+
+        void EliminarProductoNMotor(Producto producto);
+        void ModificarProductoNMotor(Producto producto);
     }
 }

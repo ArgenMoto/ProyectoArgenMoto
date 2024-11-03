@@ -57,26 +57,7 @@ namespace ArgenMoto.Controllers
             }
         }
 
-        [HttpGet("cuit/{cuit}")]
-        public IActionResult GetProveedorByCuit(string cuit)
-        {
-            try
-            {
-                var result = _service.ProveedoresPorCuit(cuit);
-
-                if (result != null)
-                {
-                    return new JsonResult(result) { StatusCode = 200 };
-                }
-
-                return new JsonResult(result) { StatusCode = 200 };
-
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, "Internal Server Error");
-            }
-        }
+        
 
         [HttpDelete("{id}")]
         public IActionResult DeleteProveedor(int id)
@@ -140,6 +121,67 @@ namespace ArgenMoto.Controllers
             catch (Exception ex)
             {
                 return new JsonResult(500, "internal server error");
+            }
+        }
+
+        [HttpGet("cuit/{cuit}")]
+        public IActionResult GetProveedorByCuit(string cuit)
+        {
+            try
+            {
+                var result = _service.ProveedoresPorCuit(cuit);
+
+                if (result != null)
+                {
+                    return new JsonResult(result) { StatusCode = 200 };
+                }
+
+                return new JsonResult(result) { StatusCode = 200 };
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+
+        [HttpPut("cuit/{cuit}")]
+        public IActionResult ModificarProveedorCuit(string cuit, ProveedorRequest mercaderia)
+        {
+            try
+            {
+                var result = _service.ModificarProveedorCuit(cuit, mercaderia);
+
+                if (result != null)
+                {
+                    return new JsonResult(result) { StatusCode = 200 };
+                }
+                else
+                {
+                    return new JsonResult(new { message = "Error al modificar el proveedor." }) { StatusCode = 400 };
+                }
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(500, "internal server error");
+            }
+        }
+        [HttpDelete("cuit/{cuit}")]
+        public IActionResult EliminarProveedorCuit(string cuit)
+        {
+            try
+            {
+                _service.EliminarProveedorCuit(cuit);
+
+
+                return Ok();
+
+            }
+            catch (Exception ex)
+            {
+
+                return new JsonResult(500, "internal server error");
+
             }
         }
     }

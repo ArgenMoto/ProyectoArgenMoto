@@ -25,6 +25,19 @@ namespace Infraestructure.Commands
 
         }
 
+        public void EliminarProveedorCuit(Proveedor proveedor)
+        {
+            _context.Proveedor.Remove(proveedor);
+            _context.SaveChanges();
+        }
+
+        public void ModificarProveedorCuit(Proveedor proveedor)
+        {
+            _context.Proveedor.Update(proveedor);
+            _context.SaveChanges();
+
+        }
+
         public Proveedor registrarProveedor(Proveedor proveedor)
         {
             _context.Proveedor.Add(proveedor);

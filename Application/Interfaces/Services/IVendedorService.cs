@@ -9,7 +9,9 @@ namespace Application.Interfaces.Services
         Vendedor VendedoresPorId(int id);
         Vendedor VendedoresPorDNI(int dni);
         void EliminarVendedor(int id);
+        void EliminarVendedorDNI(int dni);
         Vendedor RegistrarVendedor(VendedorRequest vendedor);
         VendedorResponse UpdateVendedor(int id, VendedorRequest vendedor);
+        VendedorResponse ModificarVendedorDNI(int dni, VendedorRequest vendedor);
     }
 }

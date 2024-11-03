@@ -29,6 +29,18 @@ namespace Infraestructure.Commands
             _context.SaveChanges();
 
         }
+        public void EliminarProductoNMotor(Producto producto)
+        {
+            _context.Producto.Remove(producto);
+            _context.SaveChanges();
+        }
+
+        public void ModificarProductoNMotor(Producto producto)
+        {
+            _context.Producto.Update(producto);
+            _context.SaveChanges();
+
+        }
 
         public Producto RegistrarProducto(Producto producto)
         {

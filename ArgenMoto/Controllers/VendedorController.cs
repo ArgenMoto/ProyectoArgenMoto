@@ -57,26 +57,6 @@ namespace ArgenMoto.Controllers
             }
         }
 
-        [HttpGet("dni/{dni}")]
-        public IActionResult GetVendedorByDNI(int dni)
-        {
-            try
-            {
-                var result = _service.VendedoresPorDNI(dni);
-
-                if (result != null)
-                {
-                    return new JsonResult(result) { StatusCode = 200 };
-                }
-
-                return new JsonResult(result) { StatusCode = 200 };
-
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, "Internal Server Error");
-            }
-        }
 
         [HttpDelete("{id}")]
         public IActionResult DeleteVendedor(int id)
@@ -142,5 +122,65 @@ namespace ArgenMoto.Controllers
                 return new JsonResult(500, "internal server error");
             }
         }
+        [HttpGet("dni/{dni}")]
+        public IActionResult GetVendedorByDNI(int dni)
+        {
+            try
+            {
+                var result = _service.VendedoresPorDNI(dni);
+
+                if (result != null)
+                {
+                    return new JsonResult(result) { StatusCode = 200 };
+                }
+
+                return new JsonResult(result) { StatusCode = 200 };
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+        [HttpPut("dni/{dni}")]
+        public IActionResult ModificarVendedorDNI(int dni, VendedorRequest vendedor)
+        {
+            try
+            {
+                var result = _service.ModificarVendedorDNI(dni, vendedor);
+
+                if (result != null)
+                {
+                    return new JsonResult(result) { StatusCode = 200 };
+                }
+                else
+                {
+                    return new JsonResult(new { message = "Error al modificar el vendedor." }) { StatusCode = 400 };
+                }
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(500, "internal server error");
+            }
+        }
+        [HttpDelete("dni/{dni}")]
+        public IActionResult EliminarVendedorDNI(int dni)
+        {
+            try
+            {
+                _service.EliminarVendedorDNI(dni);
+
+
+                return Ok();
+
+            }
+            catch (Exception ex)
+            {
+
+                return new JsonResult(500, "internal server error");
+
+            }
+        }
+
     }
 }

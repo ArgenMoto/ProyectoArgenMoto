@@ -13,6 +13,8 @@ namespace Application.Interfaces.Commands
         void EliminarCliente(Cliente cliente);
         Cliente RegistrarCliente(Cliente cliente);
         void ModificarCliente(Cliente cliente);
+        void EliminarClienteDNI(Cliente cliente);
+        void ModificarClienteDNI(Cliente cliente);
 
     }
 }

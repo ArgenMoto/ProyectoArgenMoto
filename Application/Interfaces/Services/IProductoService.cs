@@ -14,7 +14,9 @@ namespace Application.Interfaces.Services
         Producto ProductoPorId(int id);
         Producto ProductoPorNumeroMotor(int nMotor);
         void EliminarProducto(int id);
+        void EliminarProductoNMotor(int nmotor);
         Producto RegistrarProducto(ProductoRequest Producto);
         ProductoResponse ModificarProducto(int id, ProductoRequest Producto);
+        ProductoResponse ModificarProductoNMotor(int nmotor, ProductoRequest Producto);
     }
 }

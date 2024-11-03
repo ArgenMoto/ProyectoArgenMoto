@@ -36,6 +36,12 @@ namespace Application.UseCase
 
             _clienteCommand.EliminarCliente(cliente);
         }
+        public void EliminarClienteDNI(int dni)
+        {
+            var cliente = _clienteQuery.ClientesPorDNI(dni);
+
+            _clienteCommand.EliminarClienteDNI(cliente);
+        }
 
         public Task<List<Cliente>> ListaClientes()
         {
@@ -93,6 +99,41 @@ namespace Application.UseCase
                 Telefono= cliente.Telefono,
                 Email= cliente.Email,
 
+            };
+
+            return clienteResponse;
+        }
+
+        public ClienteResponse ModificarClienteDNI(int dni, ClienteRequest cliente)
+        {
+            var _cliente = _clienteQuery.ClientesPorDNI(dni);
+
+            if (_cliente == null)
+
+                throw new Exception("Cliente no encontrado");
+
+            _cliente.DNI = cliente.DNI;
+            _cliente.Nombre = cliente.Nombre;
+            _cliente.Apellido = cliente.Apellido;
+            _cliente.Domicilio = cliente.Domicilio;
+            _cliente.Localidad = cliente.Localidad;
+            _cliente.Provincia = cliente.Provincia;
+            _cliente.Telefono = cliente.Telefono;
+            _cliente.Email = cliente.Email;
+
+            _clienteCommand.ModificarClienteDNI(_cliente);
+
+            ClienteResponse clienteResponse = new ClienteResponse
+            {
+                Id = _cliente.ClienteId,
+                DNI = cliente.DNI,
+                Nombre = cliente.Nombre,
+                Apellido = cliente.Apellido,
+                Domicilio = cliente.Domicilio,
+                Localidad = cliente.Localidad,
+                Provincia = cliente.Provincia,
+                Telefono = cliente.Telefono,
+                Email = cliente.Email,
             };
 
             return clienteResponse;

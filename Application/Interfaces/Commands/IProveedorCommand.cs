@@ -13,6 +13,8 @@ namespace Application.Interfaces.Commands
         void DeleteProveedor(Proveedor proveedor);
         Proveedor registrarProveedor(Proveedor proveedor);
         void ModificarProveedor(Proveedor proveedor);
+        void EliminarProveedorCuit(Proveedor proveedor);
+        void ModificarProveedorCuit(Proveedor proveedor);
 
     }
 }
