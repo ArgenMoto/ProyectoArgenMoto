@@ -23,8 +23,17 @@ namespace Infraestructure.Commands
             _context.Cliente.Remove(cliente);
             _context.SaveChanges();
         }
-
+        public void EliminarClienteDNI(Cliente cliente)
+        {
+            _context.Cliente.Remove(cliente);
+            _context.SaveChanges();
+        }
         public void ModificarCliente(Cliente cliente)
+        {
+            _context.Cliente.Update(cliente);
+            _context.SaveChanges();
+        }
+        public void ModificarClienteDNI(Cliente cliente)
         {
             _context.Cliente.Update(cliente);
             _context.SaveChanges();

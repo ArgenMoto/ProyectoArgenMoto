@@ -24,6 +24,18 @@ namespace Infraestructure.Commands
             _context.SaveChanges();
 
         }
+        public void EliminarVendedorDNI(Vendedor vendedor)
+        {
+            _context.Vendedor.Remove(vendedor);
+            _context.SaveChanges();
+        }
+
+        public void ModificarVendedorDNI(Vendedor vendedor)
+        {
+            _context.Vendedor.Update(vendedor);
+            _context.SaveChanges();
+
+        }
 
         public Vendedor registrarVendedor(Vendedor vendedor)
         {

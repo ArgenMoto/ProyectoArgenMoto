@@ -14,7 +14,9 @@ namespace Application.Interfaces.Services
         Cliente ClientesPorId(int id);
         Cliente ClientesPorDNI(int dni);
         void EliminarCliente(int id);
+        void EliminarClienteDNI(int dni);
         Cliente RegistrarCliente(ClienteRequest cliente);
         ClienteResponse ModificarCliente(int id, ClienteRequest cliente);
+        ClienteResponse ModificarClienteDNI(int dni, ClienteRequest cliente);
     }
 }
