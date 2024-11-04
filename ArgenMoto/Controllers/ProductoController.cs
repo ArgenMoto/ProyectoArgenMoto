@@ -60,26 +60,6 @@ namespace ArgenMoto.Controllers
             }
         }
 
-        [HttpGet("numeroMotor/{numeroMotor}")]
-        public IActionResult GetProductoByNumeroMotor(int numeroMotor)
-        {
-            try
-            {
-                var result = _service.ProductoPorNumeroMotor(numeroMotor);
-
-                if (result != null)
-                {
-                    return new JsonResult(result) { StatusCode = 200 };
-                }
-
-                return new JsonResult(result) { StatusCode = 200 };
-
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, "Internal Server Error");
-            }
-        }
 
         [HttpDelete("{id}")]
         public IActionResult DeleteProducto(int id)
@@ -145,6 +125,71 @@ namespace ArgenMoto.Controllers
                 return new JsonResult(500, "internal server error");
             }
         }
+
+
+        [HttpGet("numeroMotor/{numeroMotor}")]
+        public IActionResult GetProductoByNumeroMotor(int numeroMotor)
+        {
+            try
+            {
+                var result = _service.ProductoPorNumeroMotor(numeroMotor);
+
+                if (result != null)
+                {
+                    return new JsonResult(result) { StatusCode = 200 };
+                }
+
+                return new JsonResult(result) { StatusCode = 200 };
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+
+        [HttpPut("numeroMotor/{numeroMotor}")]
+        public IActionResult ModificarProductoNMotor(int numeroMotor, ProductoRequest Producto)
+        {
+            try
+            {
+                var result = _service.ModificarProductoNMotor(numeroMotor, Producto);
+
+                if (result != null)
+                {
+                    return new JsonResult(result) { StatusCode = 200 };
+                }
+                else
+                {
+                    return new JsonResult(new { message = "Error al modificar el proveedor." }) { StatusCode = 400 };
+                }
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(500, "internal server error");
+            }
+        }
+
+        [HttpDelete("numeroMotor/{numeroMotor}")]
+        public IActionResult EliminarProductoNMotor(int numeroMotor)
+        {
+            try
+            {
+                _service.EliminarProductoNMotor(numeroMotor);
+
+
+                return Ok();
+
+            }
+            catch (Exception ex)
+            {
+
+                return new JsonResult(500, "internal server error");
+
+            }
+        }
+
+
     }
 }
 

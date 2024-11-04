@@ -29,6 +29,13 @@ namespace Application.UseCase
             _vendedorCommand.DeleteVendedor(vendedor);
 
         }
+        public void EliminarVendedorDNI(int dni)
+        {
+            var vendedor = _vendedorQuery.VendedoresPorDNI(dni);
+
+            _vendedorCommand.EliminarVendedorDNI(vendedor);
+
+        }
         public Vendedor VendedoresPorId(int id)
         {
             return _vendedorQuery.VendedoresPorId(id);
@@ -80,6 +87,44 @@ namespace Application.UseCase
             VendedorResponse vendedorResponse = new VendedorResponse
             {
                 VendedorId = id,
+                VendedorNombre = vendedor.VendedorNombre,
+                VendedorApellido = vendedor.VendedorApellido,
+                VendedorPuesto = vendedor.VendedorPuesto,
+                VendedorDni = vendedor.VendedorDni,
+                VendedorDomicilio = vendedor.VendedorDomicilio,
+                VendedorLocalidad = vendedor.VendedorLocalidad,
+                VendedorProvincia = vendedor.VendedorProvincia,
+                VendedorTelefono = vendedor.VendedorTelefono,
+                VendedorEmail = vendedor.VendedorEmail
+            };
+
+            return vendedorResponse;
+
+        }
+
+        public VendedorResponse ModificarVendedorDNI(int dni, VendedorRequest vendedor)
+        {
+            var _vendedor = _vendedorQuery.VendedoresPorDNI(dni);
+
+            if (_vendedor == null)
+
+                throw new Exception("Vendedor no encontrado");
+
+            _vendedor.VendedorNombre = vendedor.VendedorNombre;
+            _vendedor.VendedorApellido = vendedor.VendedorApellido;
+            _vendedor.VendedorPuesto = vendedor.VendedorPuesto;
+            _vendedor.VendedorDni = vendedor.VendedorDni;
+            _vendedor.VendedorDomicilio = vendedor.VendedorDomicilio;
+            _vendedor.VendedorLocalidad = vendedor.VendedorLocalidad;
+            _vendedor.VendedorProvincia = vendedor.VendedorProvincia;
+            _vendedor.VendedorTelefono = vendedor.VendedorTelefono;
+            _vendedor.VendedorEmail = vendedor.VendedorEmail;
+
+            _vendedorCommand.ModificarVendedorDNI(_vendedor);
+
+            VendedorResponse vendedorResponse = new VendedorResponse
+            {
+                VendedorId = _vendedor.VendedorId,
                 VendedorNombre = vendedor.VendedorNombre,
                 VendedorApellido = vendedor.VendedorApellido,
                 VendedorPuesto = vendedor.VendedorPuesto,

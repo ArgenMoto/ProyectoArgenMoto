@@ -145,6 +145,46 @@ namespace ArgenMoto.Controllers
                 return StatusCode(500, "Internal Server Error");
             }
         }
+        [HttpPut("dni/{dni}")]
+        public IActionResult ModificarClienteDNI(int dni, ClienteRequest cliente)
+        {
+            try
+            {
+                var result = _service.ModificarClienteDNI(dni, cliente);
+
+                if (result != null)
+                {
+                    return new JsonResult(result) { StatusCode = 200 };
+                }
+                else
+                {
+                    return new JsonResult(new { message = "Error al modificar el Cliente." }) { StatusCode = 400 };
+                }
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(500, "internal server error");
+            }
+        }
+
+        [HttpDelete("dni/{dni}")]
+        public IActionResult EliminarClientedDNI(int dni)
+        {
+            try
+            {
+                _service.EliminarClienteDNI(dni);
+
+
+                return Ok();
+
+            }
+            catch (Exception ex)
+            {
+
+                return new JsonResult(500, "internal server error");
+
+            }
+        }
 
     }
 
