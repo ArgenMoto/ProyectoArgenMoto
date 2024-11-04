@@ -132,13 +132,19 @@ namespace Application.UseCase
         public OrdenDeCompraResponse OrdenDeCompraPorId(int id)
         {
             var ordenDeCompra = _OrdenDeCompraQuery.OrdenDeCompraPorId(id);
-            var proveedor = _proveedorQuery.ProveedoresPorId(ordenDeCompra.OrdenDeCompraId);
 
 
             if (ordenDeCompra == null)
             {
                 throw new Exception("Factura no encontrada");
             }
+
+            var proveedor = _proveedorQuery.ProveedoresPorId(ordenDeCompra.OrdenDeCompraId);//acaaaa
+            if (proveedor == null)
+            {
+                throw new Exception("Factura no encontrada");
+            }
+
             var ordenDeCompraId = ordenDeCompra.OrdenDeCompraId;
             var facturaCompra = ordenDeCompra.FacturaCompra.FacturaCompraId;
             

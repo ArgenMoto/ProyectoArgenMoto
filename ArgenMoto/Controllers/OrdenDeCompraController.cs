@@ -54,7 +54,11 @@ namespace ArgenMoto.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, "Internal Server Error");
+                if (ex.Message == "Factura no encontrada")
+                {
+                    return new JsonResult(new ErrorResponse { message = ex.Message }) { StatusCode = 404 };
+                }
+                return new JsonResult(500, "internal server error");
             }
         }
     }
