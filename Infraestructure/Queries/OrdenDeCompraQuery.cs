@@ -19,7 +19,24 @@ namespace Infraestructure.Queries
         }
         public OrdenDeCompra OrdenDeCompraPorId(int id)
         {
-            var ordenDeCompra = _context.OrdenDeCompra.Find(id);
+            //var ordenDeCompra = _context.OrdenDeCompra.Find(id)
+            var ordenDeCompra = _context.OrdenDeCompra
+           //    .Include(f => f.OrdenDeCompraId)
+               .Include(f => f.FacturaCompra)
+          /*     .Include(f => f.OrdenDeCompraProducto)
+                   .ThenInclude(i => i.ArticuloProveedor.Proveedor.Cuit)
+                .Include(f => f.OrdenDeCompraProducto)
+                   .ThenInclude(i => i.ArticuloProveedor.Proveedor.Nombre)*/
+          //     .Include(f => f.Fecha)
+              // .Include(f => f.OrdenDeCompraProducto)
+              //     .ThenInclude(i => i.ArticuloProveedorId)
+
+               .Include(f => f.OrdenDeCompraProducto)
+//                   .ThenInclude(i => i.Cantidad)
+
+            //   .Include(f => f.PrecioTotal)
+
+           .FirstOrDefault(f => f.OrdenDeCompraId == id);
 
             return ordenDeCompra;
         }

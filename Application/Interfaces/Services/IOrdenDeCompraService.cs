@@ -11,6 +11,6 @@ namespace Application.Interfaces.Services
     public interface IOrdenDeCompraService
     {
         OrdenDeCompraResponse IngresarOrdenDeCompra(OrdenDeCompraRequest ordenDeCompra);
-        OrdenDeCompra OrdenDeCompraPorId(int id);
+        OrdenDeCompraResponse OrdenDeCompraPorId(int id);
     }
 }

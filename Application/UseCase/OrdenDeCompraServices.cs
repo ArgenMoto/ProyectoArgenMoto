@@ -129,10 +129,46 @@ namespace Application.UseCase
             };
         }
 
-        public OrdenDeCompra OrdenDeCompraPorId(int id)
+        public OrdenDeCompraResponse OrdenDeCompraPorId(int id)
         {
             var ordenDeCompra = _OrdenDeCompraQuery.OrdenDeCompraPorId(id);
-            return ordenDeCompra;
+            var proveedor = _proveedorQuery.ProveedoresPorId(ordenDeCompra.OrdenDeCompraId);
+
+
+            if (ordenDeCompra == null)
+            {
+                throw new Exception("Factura no encontrada");
+            }
+            var ordenDeCompraId = ordenDeCompra.OrdenDeCompraId;
+            var facturaCompra = ordenDeCompra.FacturaCompra.FacturaCompraId;
+            
+            var cuit = proveedor.Cuit;
+            var nombre = proveedor.Nombre;
+            var fecha = ordenDeCompra.Fecha;
+            var productos = ordenDeCompra.OrdenDeCompraProducto;
+            var total = ordenDeCompra.PrecioTotal;
+
+            List<OrdenDeCompraProductoRequest> itemResponse = new List<OrdenDeCompraProductoRequest>();
+
+            foreach (var produc in productos)
+            {
+                itemResponse.Add(new OrdenDeCompraProductoRequest
+                {
+                    ProductoId = produc.ArticuloProveedorId,
+                    Cantidad = produc.Cantidad
+                });
+                
+            }
+            OrdenDeCompraResponse ordenDeCompraResponse = new OrdenDeCompraResponse {
+                NumeroOrdenDeCompra = ordenDeCompraId,
+                FacturaCompraId = facturaCompra,
+                ProveedorCuit = cuit,
+                ProveedorNombre = nombre,
+                Fecha = fecha,
+                Productos = itemResponse,
+                Total = total
+            };
+            return ordenDeCompraResponse;
         }
     }
 }
